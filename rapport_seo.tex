@@ -245,21 +245,7 @@
     arc=4pt,
 }
 
-\newcommand{\level}[1]{%
-    \medskip\noindent
-    \colorbox{gray!20}{\makebox[0.12\textwidth][c]{\sffamily\bfseries\small Niveau}}%
-    \hspace{0.5em}%
-    \ifnum#1=1
-        \colorbox{googlegreen!30}{\sffamily\bfseries\small D\'ebutant}
-    \fi
-    \ifnum#1=2
-        \colorbox{googleyellow!40}{\sffamily\bfseries\small Interm\'ediaire}
-    \fi
-    \ifnum#1=3
-        \colorbox{googlered!30}{\sffamily\bfseries\small Avanc\'e}
-    \fi
-    \bigskip
-}
+\newcommand{\level}[1]{\medskip\bigskip}
 
 % ========== DOCUMENT BEGIN ==========
 \begin{document}
