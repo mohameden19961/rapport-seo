@@ -98,6 +98,7 @@ Audit SEO complet · Plan d'action stratégique · SEO et Intelligence Artificie
 | Support | Fichier | Détails |
 |---------|---------|---------|
 | **Rapport complet** | `Guide_Complet_Formation_SEO_Indexation_Referencement.pdf` | 36 chapitres, 8 parties, 5095 lignes LaTeX |
+| **QCM** | `QCM_Combine.pdf` | 1 800 questions à choix multiples (50 par chapitre) |
 | **Présentation** | `Presentation_Formation_SEO_30_Diapositives.pptx` | 30 slides, design moderne, scripts Python |
 
 ### Travaux Dirigés (TD)
@@ -208,10 +209,13 @@ code TP/TP01_*.md
 | Exercices de TD | **~50** |
 | Séances de TP | **5** |
 | Exercices de TP | **~40** |
+| Questions QCM | **1 800** |
+| Pages QCM | **278** |
 | Exercices total | **~100+** |
 | Pages TD combinés | **38** |
 | Pages TP combinés | **35** |
-| Lignes LaTeX | **5 095** |
+| Lignes LaTeX (cours) | **5 095** |
+| Lignes LaTeX (QCM) | **16 488** |
 | Lignes Python (slides) | **~1 500** |
 
 ---
@@ -250,15 +254,9 @@ code TP/TP01_*.md
 
 ## 📄 Licence
 
-Ce projet est mis à disposition sous licence **Creative Commons Attribution - Pas d'Utilisation Commerciale 4.0 International (CC BY-NC 4.0)**.
+Tous droits réservés — Institut Supérieur du Numérique (SupNum), Nouakchott, Mauritanie.
 
-Vous êtes libre de :
-- **Partager** — copier, distribuer et communiquer le matériel par tous moyens et sous tous formats
-- **Adapter** — remixer, transformer et créer à partir du matériel
-
-Selon les conditions suivantes :
-- **Attribution** — Vous devez créditer l'œuvre, intégrer un lien vers la licence et indiquer si des modifications ont été effectuées
-- **Pas d'Utilisation Commerciale** — Vous n'êtes pas autorisé à faire un usage commercial de cette œuvre
+Ce document est un support pédagogique interne. Toute reproduction, distribution ou utilisation sans autorisation écrite préalable est interdite.
 
 ---
 
