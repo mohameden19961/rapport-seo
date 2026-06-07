@@ -13,5 +13,4 @@
 *.fls
 *.fdb_latexmk
 *.bak
-*.pdf
 test-*
