@@ -13,4 +13,5 @@
 *.fls
 *.fdb_latexmk
 *.bak
+*.py
 test-*
