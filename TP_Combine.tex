@@ -1,0 +1,1842 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{textcomp}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+
+\geometry{margin=2.5cm}
+
+\lstset{
+    basicstyle=\footnotesize\ttfamily,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=
+        {é}{{\'e}}1
+        {è}{{\`e}}1
+        {ê}{{\^e}}1
+        {ë}{{\"e}}1
+        {à}{{\`a}}1
+        {â}{{\^a}}1
+        {ä}{{\"a}}1
+        {ù}{{\`u}}1
+        {û}{{\^u}}1
+        {ü}{{\"u}}1
+        {ô}{{\^o}}1
+        {ö}{{\"o}}1
+        {î}{{\^i}}1
+        {ï}{{\"i}}1
+        {ç}{{\c c}}1
+        {É}{{\'E}}1
+        {È}{{\`E}}1
+        {Ê}{{\^E}}1
+        {À}{{\`A}}1
+        {Ç}{{\c C}}1
+        {€}{{\texteuro}}1
+        {—}{{---}}1
+        {→}{{$\rightarrow$}}1
+        {←}{{$\leftarrow$}}1
+        {─}{{-}}1
+        {┌}{{+}}1
+        {├}{{+}}1
+        {┼}{{+}}1
+        {└}{{+}}1
+}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\vspace*{5cm}
+{\Huge \textbf{Travaux Pratiques}}\\[1cm]
+{\LARGE SEO Expert}\\[2cm]
+\rule{\textwidth}{0.5pt}\\[1cm]
+{\large Document regroupant l'ensemble des travaux pratiques}\\
+{\large pour la formation SEO Expert}\\[2cm]
+\rule{\textwidth}{0.5pt}\\[2cm]
+{\large \today}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{TP 01 --- Audit SEO Complet d'un Site Web}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Objectifs}
+\begin{itemize}
+\item Réaliser un audit SEO technique complet
+\item Utiliser les outils professionnels (Screaming Frog, Google Search Console, Lighthouse)
+\item Produire un rapport d'audit avec préconisations actionnables
+\end{itemize}
+
+\section{Outils nécessaires}
+\begin{itemize}
+\item \href{https://www.screamingfrog.co.uk/seo-spider/}{Screaming Frog SEO Spider} (version gratuite)
+\item Google Search Console (ou rapport de démonstration fourni)
+\item Google PageSpeed Insights / Lighthouse
+\item Mobile-Friendly Test
+\item Extension Web Developer Toolbar
+\end{itemize}
+
+\section{Exercice 1 --- Crawl du site avec Screaming Frog (40 min)}
+
+\textbf{Consigne :} Lancez Screaming Frog sur un site de votre choix (votre propre site ou un site fictif fourni par le formateur).
+
+\textbf{Étapes :}
+\begin{enumerate}
+\item Configurer le crawl : agents user-agent ``Googlebot'', respecter robots.txt
+\item Lancer le crawl (limitez à 500 URLs pour la version gratuite)
+\item Exporter les résultats
+\end{enumerate}
+
+\textbf{À analyser :}
+
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Métrique} & \textbf{Valeur} & \textbf{Diagnostic} \\
+\hline
+Nombre total d'URLs crawlées & & \\
+\hline
+URLs OK (200) & & \\
+\hline
+URLs 301 (redirections) & & \\
+\hline
+URLs 404 (non trouvées) & & \\
+\hline
+URLs 5XX (erreurs serveur) & & \\
+\hline
+URLs avec meta robots noindex & & \\
+\hline
+URLs avec canonical & & \\
+\hline
+URLs avec title dupliqués & & \\
+\hline
+URLs sans title & & \\
+\hline
+URLs sans meta description & & \\
+\hline
+Temps de réponse moyen & & \\
+\hline
+\end{tabular}
+
+\textbf{Livrable :} Tableau récapitulatif avec les actions correctives pour chaque problème.
+
+\section{Exercice 2 --- Analyse des balises On-Page (30 min)}
+
+\textbf{Consigne :} Utilisez les exports de Screaming Frog pour analyser la qualité des balises.
+
+\textbf{1. Analyse des Title Tags :}
+\begin{itemize}
+\item Combien de pages ont un title $>$ 60 caractères ?
+\item Combien de pages ont un title $<$ 30 caractères ?
+\item Combien de titles sont dupliqués ?
+\item Proposez des corrections pour 5 titles problématiques.
+\end{itemize}
+
+\textbf{2. Analyse des Meta Descriptions :}
+\begin{itemize}
+\item Combien de pages ont une meta description $>$ 160 caractères ?
+\item Combien de pages n'ont pas de meta description ?
+\item Proposez 5 meta descriptions optimisées.
+\end{itemize}
+
+\textbf{3. Analyse des Headings :}
+\begin{itemize}
+\item Combien de pages ont plus d'un H1 ?
+\item Combien de pages n'ont pas de H1 ?
+\item La structure H1 $\rightarrow$ H2 $\rightarrow$ H3 est-elle logique sur les pages principales ?
+\end{itemize}
+
+\section{Exercice 3 --- Analyse des Core Web Vitals (30 min)}
+
+\textbf{Consigne :} Testez 5 pages du site avec Google PageSpeed Insights.
+
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Page} & \textbf{LCP} & \textbf{INP} & \textbf{CLS} & \textbf{Score Mobile} & \textbf{Score Desktop} \\
+\hline
+Accueil & & & & & \\
+\hline
+Catégorie & & & & & \\
+\hline
+Article & & & & & \\
+\hline
+Contact & & & & & \\
+\hline
+Produit & & & & & \\
+\hline
+\end{tabular}
+
+\textbf{Rendez-vous :}
+\begin{enumerate}
+\item Quelles sont les pages les plus lentes ? Pourquoi ?
+\item Quelles sont les recommandations de PageSpeed Insights ?
+\item Classez les corrections par priorité (rapides vs complexes).
+\item Quel est l'impact potentiel sur le classement SEO ?
+\end{enumerate}
+
+\section{Exercice 4 --- Analyse du maillage interne (25 min)}
+
+\textbf{Consigne :} Dans Screaming Frog, allez dans l'onglet ``Internal Links''.
+
+\begin{enumerate}
+\item Combien de pages ont moins de 3 liens internes entrants ?
+\item Identifiez les pages orphelines (0 liens internes entrants).
+\item Quelle est la profondeur de clics moyenne du site ?
+\item Quelles pages sont les plus liées (hubs) ?
+\item Proposez un plan de maillage interne pour corriger les problèmes.
+\end{enumerate}
+
+\textbf{Visualisation :} Utilisez la vue ``Force-Directed Graph'' de Screaming Frog (si disponible) pour visualiser le maillage.
+
+\section{Exercice 5 --- Vérification de l'indexation (20 min)}
+
+\textbf{Consigne :} Vérifiez l'indexation du site avec 3 méthodes différentes.
+
+\textbf{Méthode 1 --- Google Search Console :}
+\begin{itemize}
+\item Combien de pages sont indexées ?
+\item Y a-t-il des erreurs de couverture ?
+\item Quelles pages sont exclues et pourquoi ?
+\end{itemize}
+
+\textbf{Méthode 2 --- Commande site:}
+\begin{lstlisting}
+site:exemple.com
+\end{lstlisting}
+\begin{itemize}
+\item Combien de résultats Google retourne-t-il ?
+\item Comparez avec le nombre de pages crawlées par Screaming Frog.
+\end{itemize}
+
+\textbf{Méthode 3 --- URL Inspection Tool :}
+\begin{itemize}
+\item Testez 5 URLs spécifiques.
+\item Sont-elles indexées ? Si non, pourquoi ?
+\end{itemize}
+
+\section{Exercice 6 --- Analyse des concurrents (25 min)}
+
+\textbf{Consigne :} Analysez 3 concurrents directs et comparez avec le site audité.
+
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Critère} & \textbf{Site audité} & \textbf{Concurrent 1} & \textbf{Concurrent 2} & \textbf{Concurrent 3} \\
+\hline
+Pages indexées (site:) & & & & \\
+\hline
+Vitesse mobile & & & & \\
+\hline
+Balises title optimisées & & & & \\
+\hline
+Rich snippets & & & & \\
+\hline
+Backlinks (domaines) & & & & \\
+\hline
+Trafic estimé & & & & \\
+\hline
+Mots-clés positionnés & & & & \\
+\hline
+\end{tabular}
+
+\textbf{Outils recommandés :} Ubersuggest (gratuit), SimilarWeb, Wappalyzer.
+
+\section{Exercice 7 --- Rédaction du rapport d'audit (30 min)}
+
+\textbf{Consigne :} Rédigez un rapport d'audit SEO complet structuré comme suit :
+
+\begin{enumerate}
+\item \textbf{Résumé exécutif} (1 page max)
+   \begin{itemize}
+   \item Score global du site (A/B/C/D/E)
+   \item 3 problèmes critiques + 3 recommandations prioritaires
+   \item Estimation du gain de trafic potentiel
+   \end{itemize}
+
+\item \textbf{Audit technique} (Screaming Frog, GSC)
+   \begin{itemize}
+   \item Analyse du crawl et de l'indexation
+   \item Erreurs 4xx/5xx
+   \item Vitesse et Core Web Vitals
+   \item Mobile-friendliness
+   \end{itemize}
+
+\item \textbf{Audit On-Page}
+   \begin{itemize}
+   \item Analyse des balises
+   \item Qualité du contenu
+   \item Maillage interne
+   \end{itemize}
+
+\item \textbf{Audit Off-Page}
+   \begin{itemize}
+   \item Profil de backlinks
+   \item Présence dans les annuaires
+   \item E-E-A-T
+   \end{itemize}
+
+\item \textbf{Plan d'action}
+   \begin{itemize}
+   \item Priorité haute (urgent, corrigé sous 1 semaine)
+   \item Priorité moyenne (corrigé sous 1 mois)
+   \item Priorité basse (à planifier)
+   \item Estimation du temps et des ressources nécessaires
+   \end{itemize}
+\end{enumerate}
+
+\section{Exercice 8 --- Présentation orale (15 min par groupe)}
+
+\textbf{Consigne :} Présentez votre audit à la classe en 15 min :
+\begin{enumerate}
+\item Problèmes principaux (3 min)
+\item Recommandations clés (5 min)
+\item Plan d'action priorisé (5 min)
+\item Questions (2 min)
+\end{enumerate}
+
+\textbf{Critères d'évaluation :}
+\begin{itemize}
+\item Pertinence des problèmes identifiés
+\item Qualité des recommandations
+\item Priorisation des actions
+\item Clarté de la présentation
+\item Réponses aux questions
+\end{itemize}
+
+\section{Rendu final}
+
+\textbf{À rendre :}
+\begin{enumerate}
+\item Rapport d'audit PDF (5-10 pages)
+\item Présentation (5-10 slides)
+\item Données brutes (export Screaming Frog + captures d'écran)
+\end{enumerate}
+
+\textbf{Barème :}
+\begin{itemize}
+\item Rapport écrit : /20
+\item Présentation : /10
+\item Pertinence des préconisations : /10
+\item Total : /40
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{TP 02 --- Stratégie de Contenu et Keyword Research}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Objectifs}
+\begin{itemize}
+\item Réaliser une recherche de mots-clés complète avec des outils professionnels
+\item Créer un plan de contenu stratégique (topical clusters)
+\item Rédiger et optimiser un article de blog SEO
+\end{itemize}
+
+\section{Outils nécessaires}
+\begin{itemize}
+\item Google Keyword Planner (compte Google Ads requis)
+\item Ubersuggest (version gratuite)
+\item AnswerThePublic
+\item Google Trends
+\item SEMrush / Ahrefs (si disponible)
+\item Google Docs ou un CMS (WordPress, etc.)
+\end{itemize}
+
+\section{Exercice 1 --- Définition du persona et du parcours client (20 min)}
+
+\textbf{Consigne :} Définissez le client idéal pour votre site.
+
+\textbf{Persona :}
+\begin{itemize}
+\item Nom fictif : \_\_\_\_\_
+\item Âge : \_\_\_\_\_
+\item Profession : \_\_\_\_\_
+\item Niveau de connaissance en SEO : Débutant / Intermédiaire / Avancé
+\item Objectifs : \_\_\_\_\_
+\item Points de douleur : \_\_\_\_\_
+\item Supports de recherche favoris : \_\_\_\_\_
+\end{itemize}
+
+\textbf{Parcours client (User Journey) :}
+
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Étape} & \textbf{Intention} & \textbf{Question posée} & \textbf{Type de contenu} & \textbf{Canal} \\
+\hline
+Découverte & Informationnelle & & & \\
+\hline
+Considération & Commerciale & & & \\
+\hline
+Comparaison & Commerciale & & & \\
+\hline
+Décision & Transactionnelle & & & \\
+\hline
+Fidélisation & Informationnelle & & & \\
+\hline
+\end{tabular}
+
+\section{Exercice 2 --- Recherche de mots-clés : 200+ mots-clés (45 min)}
+
+\textbf{Consigne :} Générez une liste de 200 mots-clés minimum en utilisant les techniques suivantes.
+
+\textbf{Technique 1 --- Brainstorming (20 mots) :}
+\begin{lstlisting}
+[Listez 20 mots-cles de base en 5 min]
+\end{lstlisting}
+
+\textbf{Technique 2 --- Google Suggest (30 mots) :}
+\begin{itemize}
+\item Tapez vos mots-clés de base dans Google
+\item Notez les suggestions automatiques
+\item Utilisez les lettres A-Z après chaque mot-clé
+\end{itemize}
+
+\textbf{Technique 3 --- ``Questions'' (20 mots) :}
+\begin{itemize}
+\item Utilisez AnswerThePublic
+\item Notez les questions, prépositions, comparaisons
+\item Catégorisez par intention
+\end{itemize}
+
+\textbf{Technique 4 --- Google Keyword Planner (50+ mots) :}
+\begin{itemize}
+\item Utilisez le Keyword Planner
+\item Entrez vos 10 meilleurs mots-clés de base
+\item Exportez les suggestions + données de volume
+\end{itemize}
+
+\textbf{Technique 5 --- Ubersuggest / SEMrush (50+ mots) :}
+\begin{itemize}
+\item Entrez un domaine concurrent
+\item Récupérez les mots-clés de vos concurrents
+\item Identifiez les lacunes (gaps)
+\end{itemize}
+
+\textbf{Technique 6 --- Google Trends (30 mots) :}
+\begin{itemize}
+\item Comparez la saisonnalité des mots-clés
+\item Identifiez les tendances émergentes
+\item Notez les requêtes en hausse
+\end{itemize}
+
+\textbf{Livrable :} Un fichier CSV/Google Sheets avec :
+
+\begin{tabular}{|l|c|c|c|l|c|}
+\hline
+\textbf{Mot-clé} & \textbf{Volume mensuel} & \textbf{Difficulté} & \textbf{Intention} & \textbf{Page cible} & \textbf{Priorité} \\
+\hline
+ & & & & & \\
+\hline
+\end{tabular}
+
+\section{Exercice 3 --- Analyse de l'intention de recherche (25 min)}
+
+\textbf{Consigne :} Pour 10 mots-clés de votre liste, analysez l'intention via la SERP.
+
+\textbf{Méthode :} Tapez chaque mot-clé dans Google (navigation privée) et analysez les résultats.
+
+\begin{longtable}{|l|l|l|l|}
+\hline
+\textbf{Mot-clé} & \textbf{Type de résultats dominants (articles, produits, vidéos...)} & \textbf{Intention réelle} & \textbf{Est-ce que l'intention supposée était correcte ?} \\
+\hline
+1 & & & \\
+\hline
+2 & & & \\
+\hline
+3 & & & \\
+\hline
+4 & & & \\
+\hline
+5 & & & \\
+\hline
+6 & & & \\
+\hline
+7 & & & \\
+\hline
+8 & & & \\
+\hline
+9 & & & \\
+\hline
+10 & & & \\
+\hline
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+\item Quels mots-clés ont une intention mixte ?
+\item Comment adapter votre contenu pour les intentions mixtes ?
+\item Y a-t-il des featured snippets sur vos mots-clés ? Pour quel type de contenu ?
+\end{enumerate}
+
+\section{Exercice 4 --- Création d'un Topical Cluster (30 min)}
+
+\textbf{Consigne :} Créez une structure de Topical Cluster basée sur vos mots-clés.
+
+\textbf{Page pilier (pillar page) :}
+\begin{itemize}
+\item Sujet principal : \_\_\_\_\_
+\item URL cible : \_\_\_\_\_
+\item Mots-clés principaux : \_\_\_\_\_
+\item Structure H2/H3 de la page pilier :
+   \begin{itemize}
+   \item H2 : \_\_\_\_\_
+      \begin{itemize}
+      \item H3 : \_\_\_\_\_
+      \item H3 : \_\_\_\_\_
+      \end{itemize}
+   \item H2 : \_\_\_\_\_
+      \begin{itemize}
+      \item H3 : \_\_\_\_\_
+      \end{itemize}
+   \item H2 : \_\_\_\_\_
+   \end{itemize}
+\end{itemize}
+
+\textbf{Articles du cluster (10 articles minimum) :}
+
+\begin{longtable}{|l|l|c|c|l|l|}
+\hline
+\textbf{Article} & \textbf{Mot-clé cible} & \textbf{Volume} & \textbf{Intention} & \textbf{Lien vers pilier} & \textbf{Lien vers article suivant} \\
+\hline
+1 & & & & & \\
+\hline
+2 & & & & & \\
+\hline
+3 & & & & & \\
+\hline
+4 & & & & & \\
+\hline
+5 & & & & & \\
+\hline
+6 & & & & & \\
+\hline
+7 & & & & & \\
+\hline
+8 & & & & & \\
+\hline
+9 & & & & & \\
+\hline
+10 & & & & & \\
+\hline
+\end{longtable}
+
+\textbf{Schéma des liens :}
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+                    +-- Article 1
+                    +-- Article 2
+  Page Pilier ------+-- Article 3  <-> Article 4
+                    +-- Article 5
+                    +-- Article 6  <-> Article 7
+                    +-- ...
+                    +-- Article 10
+\end{lstlisting}
+
+\section{Exercice 5 --- Rédaction et Optimisation d'un Article SEO (50 min)}
+
+\textbf{Consigne :} Rédigez un article de blog complet (1500-2000 mots) optimisé SEO.
+
+\textbf{Structure imposée :}
+\begin{itemize}
+\item Title (50-60 caractères) : \_\_\_\_\_
+\item Meta description (150-160 caractères) : \_\_\_\_\_
+\item URL slug (3-5 mots) : \_\_\_\_\_
+\item H1 (contenant le mot-clé principal) : \_\_\_\_\_
+\item Introduction (100-150 mots, mot-clé dans les 100 premiers mots)
+\item 4-6 sections H2 (chacune avec mot-clé secondaire)
+\item Sous-sections H3 si nécessaire
+\item Conclusion (50-100 mots) avec appel à l'action
+\item 3-5 liens internes vers d'autres articles du cluster
+\item 2-3 liens externes vers des sources faisant autorité
+\item 1-2 images avec alt text optimisé
+\end{itemize}
+
+\textbf{Checklist d'optimisation :}
+
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Critère} & \textbf{OK} & \textbf{Remarque} \\
+\hline
+Mot-clé principal dans les 100 premiers mots & & \\
+\hline
+Mot-clé principal dans l'URL & & \\
+\hline
+Mot-clé principal dans le H1 & & \\
+\hline
+Mots-clés secondaires dans les H2 & & \\
+\hline
+Densité de mot-clé naturelle (pas de bourrage) & & \\
+\hline
+Balise title optimisée & & \\
+\hline
+Meta description optimisée & & \\
+\hline
+Images avec alt text & & \\
+\hline
+Liens internes ($\ge$3) & & \\
+\hline
+Liens externes ($\ge$2) & & \\
+\hline
+Article $\ge$ 1500 mots & & \\
+\hline
+Appel à l'action présent & & \\
+\hline
+Données structurées (Article) & & \\
+\hline
+Temps de lecture $<$ 15 min & & \\
+\hline
+\end{tabular}
+
+\section{Exercice 6 --- Analyse de la concurrence SERP (25 min)}
+
+\textbf{Consigne :} Analysez le top 5 des résultats Google pour votre mot-clé principal.
+
+\begin{longtable}{|c|l|l|c|c|c|c|l|l|}
+\hline
+\textbf{Position} & \textbf{URL} & \textbf{Title} & \textbf{Longueur} & \textbf{Mots-clés} & \textbf{Backlinks (domaines)} & \textbf{Âge domaine} & \textbf{Points forts} & \textbf{Points faibles} \\
+\hline
+1 & & & & & & & & \\
+\hline
+2 & & & & & & & & \\
+\hline
+3 & & & & & & & & \\
+\hline
+4 & & & & & & & & \\
+\hline
+5 & & & & & & & & \\
+\hline
+\end{longtable}
+
+\textbf{Analyse des lacunes (Content Gap) :}
+\begin{enumerate}
+\item Quels sujets les concurrents ne couvrent-ils pas ?
+\item Quels angles originaux pouvez-vous apporter ?
+\item Quel format (vidéo, infographie, étude de cas) manque dans la SERP ?
+\item Comment votre contenu sera-t-il meilleur que le \#1 actuel ?
+\end{enumerate}
+
+\section{Exercice 7 --- Création d'un Calendrier Éditorial (20 min)}
+
+\textbf{Consigne :} Planifiez 3 mois de contenu SEO.
+
+\begin{longtable}{|l|l|l|l|l|l|}
+\hline
+\textbf{Semaine} & \textbf{Date} & \textbf{Article} & \textbf{Mot-clé cible} & \textbf{Auteur} & \textbf{Statut} \\
+\hline
+S1 & & & & & \\
+\hline
+S2 & & & & & \\
+\hline
+S3 & & & & & \\
+\hline
+S4 & & & & & \\
+\hline
+S5 & & & & & \\
+\hline
+\ldots & & & & & \\
+\hline
+\end{longtable}
+
+\textbf{Objectifs du calendrier :}
+\begin{itemize}
+\item 2-3 articles par semaine minimum
+\item 1 page pilier par mois
+\item 1 mise à jour de contenu existant par mois
+\item 1 contenu ``Big Rock'' (étude de cas, guide ultime) par trimestre
+\end{itemize}
+
+\section{Exercice 8 --- Promotion de contenu (15 min)}
+
+\textbf{Consigne :} Planifiez la promotion de votre article.
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Canal} & \textbf{Action} & \textbf{Date} & \textbf{KPI} \\
+\hline
+Email (newsletter) & Envoyer aux abonnés & & Taux d'ouverture, clics \\
+\hline
+LinkedIn & Publier un post & & Impressions, engagement \\
+\hline
+Twitter/X & Publier un thread & & Vues, clics \\
+\hline
+Facebook & Partager dans les groupes & & Reach, clics \\
+\hline
+Pinterest & Épingler avec image & & Impressions \\
+\hline
+Forums (Reddit, Quora) & Répondre avec lien & & Upvotes, trafic \\
+\hline
+Backlinks & Outreach aux sites partenaires & & Liens obtenus \\
+\hline
+Webinar / Live & Présenter le sujet & & Participants \\
+\hline
+\end{tabular}
+
+\section{Rendu final}
+
+\textbf{À rendre :}
+\begin{enumerate}
+\item Fichier CSV des mots-clés (200+ entrées)
+\item Structure du topical cluster (schéma + pages)
+\item Article de blog complet optimisé (Google Doc ou HTML)
+\item Calendrier éditorial 3 mois
+\item Plan de promotion
+\end{enumerate}
+
+\textbf{Barème :}
+\begin{itemize}
+\item Recherche de mots-clés : /10
+\item Structure du cluster : /10
+\item Qualité de l'article : /20
+\item Calendrier + promotion : /10
+\item Total : /50
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{TP 03 --- Optimisation Technique et Performance Web}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Objectifs}
+\begin{itemize}
+\item Optimiser la vitesse et les Core Web Vitals d'un site web
+\item Mettre en place les données structurées (Schema Markup)
+\item Configurer robots.txt, sitemap XML et balises techniques
+\item Implémenter une stratégie de rendu optimisée pour le SEO
+\end{itemize}
+
+\section{Outils nécessaires}
+\begin{itemize}
+\item Serveur local (XAMPP, WAMP, ou environnement en ligne)
+\item Éditeur de code (VS Code)
+\item Google PageSpeed Insights / Lighthouse
+\item Schema Markup Validator (Google)
+\item Screaming Frog (ou équivalent)
+\end{itemize}
+
+\section{Exercice 1 --- Analyse de Performance Initiale (20 min)}
+
+\textbf{Consigne :} Avant toute optimisation, mesurez l'état initial du site.
+
+\textbf{PageSpeed Insights :}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Métrique} & \textbf{Valeur initiale} & \textbf{Objectif} & \textbf{Statut} \\
+\hline
+LCP & & $\le$ 2.5s & \\
+\hline
+INP & & $\le$ 200ms & \\
+\hline
+CLS & & $\le$ 0.1 & \\
+\hline
+FCP & & $\le$ 1.8s & \\
+\hline
+TTFB & & $\le$ 0.8s & \\
+\hline
+Score Mobile & & $\ge$ 90 & \\
+\hline
+Score Desktop & & $\ge$ 90 & \\
+\hline
+\end{tabular}
+
+\textbf{Lighthouse (audit complet) :}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Catégorie} & \textbf{Score} & \textbf{Problèmes principaux} \\
+\hline
+Performance & & \\
+\hline
+Accessibilité & & \\
+\hline
+Best Practices & & \\
+\hline
+SEO & & \\
+\hline
+PWA & & \\
+\hline
+\end{tabular}
+
+\textbf{Capture d'écran avant optimisation :} Prenez une capture de l'écran PageSpeed Insights.
+
+\section{Exercice 2 --- Optimisation des Images (30 min)}
+
+\textbf{Consigne :} Optimisez toutes les images du site.
+
+\textbf{Inventaire des images :}
+\begin{tabular}{|l|l|c|c|l|l|}
+\hline
+\textbf{Image} & \textbf{Format} & \textbf{Taille (Ko)} & \textbf{Dimensions} & \textbf{Alt text} & \textbf{Action} \\
+\hline
+ & & & & & \\
+\hline
+ & & & & & \\
+\hline
+\end{tabular}
+
+\textbf{Actions à réaliser :}
+\begin{enumerate}
+\item \textbf{Conversion en format moderne :} PNG/JPG $\rightarrow$ WebP ou AVIF
+\item \textbf{Compression :} Utilisez Squoosh, TinyPNG ou ImageOptim
+\item \textbf{Redimensionnement :} Ajustez aux dimensions d'affichage réelles
+\item \textbf{Lazy loading :} Ajoutez \texttt{loading="lazy"} sur les images hors écran
+\item \textbf{Responsive images :} Utilisez \texttt{srcset} et \texttt{sizes} pour les écrans Retina
+\item \textbf{Alt text :} Ajoutez des descriptions pertinentes pour chaque image
+\end{enumerate}
+
+\textbf{Code à générer :}
+\begin{lstlisting}[language=HTML]
+<!-- Exemple d'image responsive optimisee -->
+<img 
+  src="image-800w.webp"
+  srcset="image-400w.webp 400w, image-800w.webp 800w, image-1200w.webp 1200w"
+  sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
+  loading="lazy"
+  alt="Description SEO de l'image"
+  width="800"
+  height="600"
+  decoding="async"
+>
+\end{lstlisting}
+
+\section{Exercice 3 --- Optimisation du CSS et JavaScript (35 min)}
+
+\textbf{Consigne :} Optimisez le rendu du CSS et du JS.
+
+\textbf{1. Critical CSS :}
+Identifiez le CSS nécessaire au rendu initial (``above the fold'') :
+\begin{lstlisting}[language=HTML]
+<!-- Critical CSS en inline dans le <head> -->
+<style>
+  /* Styles critiques pour le rendu initial */
+  body { font-family: ... }
+  header { ... }
+  .hero { ... }
+</style>
+<!-- Chargement differe du CSS complet -->
+<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.css"></noscript>
+\end{lstlisting}
+
+\textbf{2. Minification :}
+\begin{itemize}
+\item CSS : Utilisez Clean-CSS ou cssnano
+\item JS : Utilisez Terser ou UglifyJS
+\item HTML : Utilisez html-minifier
+\end{itemize}
+
+\textbf{3. Code Splitting :}
+\begin{lstlisting}[language=JavaScript]
+// Exemple : chargement dynamique des modules JS
+import('heavy-module.js').then(module => {
+  module.init();
+});
+\end{lstlisting}
+
+\textbf{4. Suppression du render-blocking :}
+\begin{itemize}
+\item Déplacez les scripts non critiques en bas du \texttt{<body>}
+\item Ajoutez \texttt{async} ou \texttt{defer} sur les scripts
+\end{itemize}
+\begin{lstlisting}[language=HTML]
+<script src="analytics.js" async></script>
+<script src="app.js" defer></script>
+\end{lstlisting}
+
+\section{Exercice 4 --- Optimisation du Serveur (25 min)}
+
+\textbf{Consigne :} Configurez le serveur pour de meilleures performances.
+
+\textbf{1. Cache navigateur (fichier .htaccess pour Apache ou configuration Nginx) :}
+\begin{lstlisting}
+# Apache .htaccess
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+\end{lstlisting}
+
+\textbf{2. Compression Brotli / Gzip :}
+\begin{lstlisting}
+# Apache
+AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript
+AddOutputFilterByType DEFLATE text/html text/css application/javascript
+\end{lstlisting}
+
+\textbf{3. Headers de cache et sécurité :}
+\begin{lstlisting}
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Cache-Control pour les ressources statiques
+  Header set Cache-Control "public, max-age=31536000, immutable" "exprès:image/*"
+</IfModule>
+\end{lstlisting}
+
+\textbf{Questions :}
+\begin{enumerate}
+\item Quelle est la différence entre Gzip et Brotli ?
+\item Pourquoi les ressources statiques doivent-elles avoir un cache long ?
+\item Qu'est-ce que l'ETag et à quoi sert-il ?
+\end{enumerate}
+
+\section{Exercice 5 --- Mise en place des Données Structurées (35 min)}
+
+\textbf{Consigne :} Implémentez les données structurées JSON-LD sur le site.
+
+\textbf{1. Organisation :}
+\begin{lstlisting}[language=JSON]
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Nom de l'entreprise",
+  "url": "https://exemple.com",
+  "logo": "https://exemple.com/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33-1-23-45-67-89",
+    "contactType": "customer service"
+  },
+  "sameAs": [
+    "https://www.facebook.com/entreprise",
+    "https://www.linkedin.com/company/entreprise"
+  ]
+}
+\end{lstlisting}
+
+\textbf{2. Article / BlogPost :}
+Implémentez les données structurées pour un article :
+\begin{lstlisting}[language=JSON]
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Titre de l'article",
+  "description": "Description de l'article",
+  "author": {
+    "@type": "Person",
+    "name": "Nom de l'auteur"
+  },
+  "datePublished": "2026-01-15",
+  "dateModified": "2026-01-20",
+  "image": "https://exemple.com/image.jpg",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nom du site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://exemple.com/logo.png"
+    }
+  }
+}
+\end{lstlisting}
+
+\textbf{3. BreadcrumbList :}
+\begin{lstlisting}[language=JSON]
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://exemple.com" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://exemple.com/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Article SEO", "item": "https://exemple.com/blog/article-seo" }
+  ]
+}
+\end{lstlisting}
+
+\textbf{4. FAQPage :}
+\begin{lstlisting}[language=JSON]
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le SEO ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le SEO (Search Engine Optimization) est l'ensemble des techniques..."
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\textbf{Validation :} Testez chaque implémentation avec le \href{https://validator.schema.org/}{Schema Markup Validator} de Google.
+
+\section{Exercice 6 --- Configuration Technique du Site (30 min)}
+
+\textbf{Consigne :} Mettez en place les fichiers techniques essentiels.
+
+\textbf{1. Robots.txt :}
+\begin{lstlisting}
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Allow: /admin/public/
+
+Sitemap: https://exemple.com/sitemap.xml
+\end{lstlisting}
+
+\textbf{À faire :}
+\begin{itemize}
+\item Testez le robots.txt via Google Search Console
+\item Vérifiez que les pages importantes ne sont pas bloquées
+\end{itemize}
+
+\textbf{2. Sitemap XML :}
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://exemple.com/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Repeter pour chaque page -->
+</urlset>
+\end{lstlisting}
+
+\textbf{À faire :}
+\begin{itemize}
+\item Générez le sitemap dynamiquement ou avec un outil
+\item Soumettez-le via Google Search Console
+\item Vérifiez qu'il ne contient pas d'URLs bloquées par robots.txt
+\end{itemize}
+
+\textbf{3. Fichier .htaccess (redirections 301) :}
+\begin{lstlisting}
+# Redirection des URLs www vers non-www (ou inverse)
+RewriteCond %{HTTP_HOST} ^www\.exemple\.com [NC]
+RewriteRule ^(.*)$ https://exemple.com/$1 [L,R=301]
+
+# Redirection HTTP vers HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+\end{lstlisting}
+
+\section{Exercice 7 --- Optimisation Mobile (20 min)}
+
+\textbf{Consigne :} Assurez la compatibilité mobile du site.
+
+\textbf{Checklist Mobile-First :}
+\begin{itemize}
+\item[$\square$] Viewport meta tag présent : \texttt{<meta name="viewport" content="width=device-width, initial-scale=1">}
+\item[$\square$] Police de caractères $\ge$ 16px pour le texte
+\item[$\square$] Éléments cliquables $\ge$ 48$\times$48px
+\item[$\square$] Pas de contenu horizontal (scroll horizontal)
+\item[$\square$] Images responsives (srcset)
+\item[$\square$] Pas de popups intrusifs (interstitiels)
+\item[$\square$] Test Mobile-Friendly Google réussi
+\item[$\square$] Temps de chargement mobile $<$ 3s
+\end{itemize}
+
+\textbf{Test :}
+\begin{enumerate}
+\item Utilisez l'outil Mobile-Friendly Test de Google
+\item Testez la navigation mobile sur 5 pages
+\item Capturez les problèmes d'affichage
+\item Corrigez les problèmes identifiés
+\end{enumerate}
+
+\section{Exercice 8 --- Test Final et Comparaison (20 min)}
+
+\textbf{Consigne :} Après toutes les optimisations, re-mesurez les performances.
+
+\textbf{Comparatif avant/après :}
+
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Métrique} & \textbf{Avant} & \textbf{Après} & \textbf{Amélioration} \\
+\hline
+LCP & & & \\
+\hline
+INP & & & \\
+\hline
+CLS & & & \\
+\hline
+Score Mobile & & & \\
+\hline
+Score Desktop & & & \\
+\hline
+Taille page (Ko) & & & \\
+\hline
+Requêtes & & & \\
+\hline
+Temps chargement & & & \\
+\hline
+\end{tabular}
+
+\textbf{Rapport final :}
+\begin{enumerate}
+\item Quelles optimisations ont eu le plus d'impact ?
+\item Quel est le gain estimé en termes d'expérience utilisateur ?
+\item Quel serait l'impact SEO potentiel ?
+\item Quelles optimisations reste-t-il à faire (prochain sprint) ?
+\end{enumerate}
+
+\textbf{Livrable :} Fiche récapitulative des optimisations réalisées avec captures d'écran avant/après.
+
+\section{Rendu final}
+
+\textbf{À rendre :}
+\begin{enumerate}
+\item Rapport d'optimisation technique (avant/après avec captures d'écran)
+\item Fichiers de configuration produits (robots.txt, .htaccess, sitemap.xml)
+\item Code des données structurées JSON-LD
+\item Résultat PageSpeed Insights avant vs après
+\end{enumerate}
+
+\textbf{Barème :}
+\begin{itemize}
+\item Analyse initiale : /5
+\item Optimisation images et ressources : /10
+\item Optimisation serveur et cache : /10
+\item Données structurées : /10
+\item Configuration technique : /10
+\item Résultat final (amélioration mesurable) : /5
+\item Total : /50
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{TP 04 --- Projet Final : Campagne SEO Complète}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Objectifs}
+\begin{itemize}
+\item Mettre en œuvre une stratégie SEO complète de A à Z
+\item Appliquer l'ensemble des compétences acquises (technique, contenu, netlinking)
+\item Mesurer et optimiser les résultats sur la durée
+\end{itemize}
+
+\section{Présentation du Projet}
+
+Vous êtes consultant SEO en agence. Un nouveau client vous confie la mission d'optimiser son site web pour les moteurs de recherche. Vous avez 4 semaines pour réaliser un audit complet, déployer les optimisations et présenter les résultats.
+
+\textbf{Client fictif (au choix) :}
+\begin{itemize}
+\item \textbf{Option A :} E-commerce de produits bio (500 produits)
+\item \textbf{Option B :} Blog de voyage (200 articles)
+\item \textbf{Option C :} Site vitrine d'agence web (20 pages)
+\item \textbf{Option D :} Site institutionnel d'association (50 pages)
+\end{itemize}
+
+\section{Semaine 1 --- Audit et Diagnostic}
+
+\textbf{Jour 1-2 : Audit technique}
+\begin{itemize}
+\item[$\square$] Crawl complet avec Screaming Frog
+\item[$\square$] Analyse des erreurs 4xx, 5xx, 301
+\item[$\square$] Analyse des balises (title, meta, headings)
+\item[$\square$] Vérification de l'indexation (GSC + site:)
+\item[$\square$] Analyse de la vitesse (PageSpeed Insights)
+\item[$\square$] Vérification mobile-friendliness
+\end{itemize}
+
+\textbf{Jour 3-4 : Audit du contenu}
+\begin{itemize}
+\item[$\square$] Inventaire du contenu existant
+\item[$\square$] Identification des pages à faible performance
+\item[$\square$] Analyse des topical clusters existants
+\item[$\square$] Détection de contenu dupliqué
+\item[$\square$] Analyse des lacunes (content gaps)
+\end{itemize}
+
+\textbf{Jour 5 : Audit Off-Page}
+\begin{itemize}
+\item[$\square$] Analyse du profil de backlinks
+\item[$\square$] Identification des backlinks toxiques
+\item[$\square$] Analyse des concurrents (top 5)
+\item[$\square$] Évaluation E-E-A-T
+\end{itemize}
+
+\textbf{Livrable semaine 1 :}
+Rapport d'audit complet avec plan d'action priorisé (impact $\times$ effort).
+
+\section{Semaine 2 --- Optimisations Techniques}
+
+\textbf{Jour 1-2 : Corrections critiques}
+\begin{itemize}
+\item[$\square$] Correction des erreurs 404
+\item[$\square$] Mise en place des redirections 301
+\item[$\square$] Correction des boucles de redirection
+\item[$\square$] Correction des erreurs 5XX
+\end{itemize}
+
+\textbf{Jour 3-4 : Optimisation des performances}
+\begin{itemize}
+\item[$\square$] Optimisation des images (WebP, compression, lazy loading)
+\item[$\square$] Minification CSS/JS
+\item[$\square$] Mise en place du cache navigateur
+\item[$\square$] Optimisation du TTFB (hébergement, cache serveur)
+\end{itemize}
+
+\textbf{Jour 5 : Configuration technique}
+\begin{itemize}
+\item[$\square$] Robots.txt optimisé
+\item[$\square$] Sitemap XML généré et soumis
+\item[$\square$] Balises canonical mises en place
+\item[$\square$] Redirection www/non-www
+\item[$\square$] HTTPS vérifié
+\end{itemize}
+
+\textbf{Livrable semaine 2 :}
+Fiche des optimisations techniques réalisées + captures d'écran avant/après.
+
+\section{Semaine 3 --- Stratégie de Contenu}
+
+\textbf{Jour 1-2 : Recherche de mots-clés}
+\begin{itemize}
+\item[$\square$] 200+ mots-clés collectés
+\item[$\square$] Analyse de l'intention de recherche
+\item[$\square$] Analyse concurrentielle (SERP)
+\item[$\square$] Définition des pages piliers et des clusters
+\end{itemize}
+
+\textbf{Jour 3-4 : Production de contenu}
+\begin{itemize}
+\item[$\square$] Rédaction de la page pilier (2000+ mots)
+\item[$\square$] Rédaction de 5 articles de cluster (1500+ mots chacun)
+\item[$\square$] Optimisation On-Page de chaque article
+\item[$\square$] Maillage interne du cluster
+\end{itemize}
+
+\textbf{Jour 5 : Optimisation du contenu existant}
+\begin{itemize}
+\item[$\square$] Mise à jour des 10 pages les plus importantes
+\item[$\square$] Ajout de données structurées (Article, FAQ, Organisation)
+\item[$\square$] Optimisation des images (alt text)
+\item[$\square$] Ajout de liens internes
+\end{itemize}
+
+\textbf{Livrable semaine 3 :}
+Topical cluster complet + articles publiés + maillage interne.
+
+\section{Semaine 4 --- Netlinking, Suivi et Présentation}
+
+\textbf{Jour 1-2 : Stratégie de netlinking}
+\begin{itemize}
+\item[$\square$] Identification de 20 sites cibles pour les backlinks
+\item[$\square$] Création de contenu ``linkable'' (infographie, étude de cas)
+\item[$\square$] Outreach (10 emails envoyés)
+\item[$\square$] Guest blogging (1 article invité)
+\end{itemize}
+
+\textbf{Jour 3 : Mise en place du suivi}
+\begin{itemize}
+\item[$\square$] Google Search Console configuré
+\item[$\square$] Google Analytics 4 configuré
+\item[$\square$] Suivi des positions (rank tracker manuel ou Google Sheets)
+\item[$\square$] KPIs définis et dashboard créé
+\end{itemize}
+
+\textbf{Jour 4-5 : Rapport final et présentation}
+
+\textbf{Structure du rapport final :}
+
+\begin{enumerate}
+\item \textbf{Résumé exécutif} (1 page)
+   \begin{itemize}
+   \item Situation initiale
+   \item Actions menées
+   \item Résultats obtenus
+   \item Recommandations suite
+   \end{itemize}
+
+\item \textbf{Méthodologie} (1 page)
+   \begin{itemize}
+   \item Outils utilisés
+   \item Périmètre de la mission
+   \item Calendrier
+   \end{itemize}
+
+\item \textbf{Résultats techniques} (2 pages)
+   \begin{itemize}
+   \item Évolution des Core Web Vitals
+   \item Nombre de pages indexées
+   \item Erreurs corrigées
+   \item Score PageSpeed avant/après
+   \end{itemize}
+
+\item \textbf{Résultats contenu} (2 pages)
+   \begin{itemize}
+   \item Mots-clés ciblés
+   \item Contenu créé / optimisé
+   \item Évolution du trafic estimé
+   \item Topical clusters construits
+   \end{itemize}
+
+\item \textbf{Résultats netlinking} (1 page)
+   \begin{itemize}
+   \item Nouveaux backlinks obtenus
+   \item Domaines référents
+   \item Évolution du Trust Flow
+   \end{itemize}
+
+\item \textbf{KPIs et prochaines étapes} (1 page)
+   \begin{itemize}
+   \item Tableau de bord des KPIs
+   \item Recommandations prochain trimestre
+   \item Budget estimé
+   \end{itemize}
+\end{enumerate}
+
+\section{Exercices complémentaires}
+
+\subsection{Exercice 1 --- Calcul du ROI SEO}
+Calculez le retour sur investissement de la campagne :
+
+\begin{lstlisting}
+Cout mensuel de la mission : 2 500 EUR
+Trafic mensuel avant : 5 000 visites
+Trafic mensuel apres : 8 000 visites
+Taux de conversion : 2.5%
+Panier moyen : 80 EUR
+Marge : 40%
+
+1. Quel est le trafic supplementaire ?
+2. Combien de conversions supplementaires ?
+3. Quel est le chiffre d'affaires supplementaire ?
+4. Quelle est la marge supplementaire ?
+5. Quel est le ROI ?
+\end{lstlisting}
+
+\subsection{Exercice 2 --- Gestion de crise SEO}
+Vous recevez une alerte : le site a perdu 50\% de son trafic du jour au lendemain.
+
+\begin{enumerate}
+\item Quelles sont les causes possibles ? (listez-en 8 minimum)
+\item Quelles vérifications faites-vous en premier ? (ordonnées par priorité)
+\item À qui communiquez-vous et que dites-vous ?
+\item Quel est votre plan d'action pour les 72 prochaines heures ?
+\end{enumerate}
+
+\subsection{Exercice 3 --- Veille concurrentielle}
+Configurez un système de veille pour surveiller :
+
+\begin{enumerate}
+\item Les nouveaux contenus de vos 3 principaux concurrents
+\item Les nouveaux backlinks de vos concurrents
+\item Les évolutions de positions des mots-clés
+\item Les mises à jour de l'algorithme Google
+\item Les nouvelles fonctionnalités SERP (SGE, AI Overviews\ldots)
+\end{enumerate}
+
+\textbf{Outils à utiliser :}
+\begin{itemize}
+\item Google Alerts
+\item SEMrush / Ahrefs (alertes)
+\item Mention / Talkwalker
+\item Feedly / Inoreader (RSS)
+\item Twitter / LinkedIn (veille humaine)
+\end{itemize}
+
+\section{Grille d'évaluation du projet final}
+
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Critère} & \textbf{Poids} & \textbf{Note /10} & \textbf{Commentaire} \\
+\hline
+Qualité de l'audit initial & 15\% & & \\
+\hline
+Pertinence des recommandations & 15\% & & \\
+\hline
+Qualité des optimisations techniques & 15\% & & \\
+\hline
+Qualité du contenu produit & 15\% & & \\
+\hline
+Stratégie de netlinking & 10\% & & \\
+\hline
+Mesure et suivi des résultats & 10\% & & \\
+\hline
+Rapport final et présentation & 10\% & & \\
+\hline
+Gestion de projet et respect du planning & 5\% & & \\
+\hline
+Créativité et initiatives & 5\% & & \\
+\hline
+\textbf{Total} & \textbf{100\%} & \textbf{/10} & \\
+\hline
+\end{tabular}
+
+\section{Rendu final}
+
+\textbf{À rendre à la fin de la semaine 4 :}
+\begin{enumerate}
+\item Rapport de mission complet (10-20 pages)
+\item Présentation orale (10-15 slides, 20 min)
+\item Fichiers techniques (robots.txt, sitemap, schema, .htaccess)
+\item Dashboard de suivi des KPIs (Google Sheets ou Looker Studio)
+\item Plan d'action pour le trimestre suivant
+\end{enumerate}
+
+\textbf{Soutenance :}
+\begin{itemize}
+\item Présentation : 15 min
+\item Démonstration des résultats (avant/après) : 5 min
+\item Questions : 10 min
+\end{itemize}
+
+\textbf{Barème global :}
+\begin{itemize}
+\item Rapport écrit : /40
+\item Présentation orale : /30
+\item Résultats mesurables : /20
+\item Gestion de projet : /10
+\item \textbf{Total : /100}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{SEO Spécialisé : Local, E-commerce, Migration et A/B Testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Objectifs}
+\begin{itemize}
+\item Configurer et optimiser une fiche Google Business Profile
+\item Mettre en œuvre une migration SEO complète
+\item Optimiser un site e-commerce pour le SEO
+\item Réaliser des tests A/B SEO et mesurer l'impact
+\end{itemize}
+
+\section{Outils nécessaires}
+\begin{itemize}
+\item Google Business Profile (compte Google)
+\item Google Search Console
+\item Screaming Frog
+\item Google Optimize (ou équivalent A/B testing)
+\item Outil de suivi de position (Sheets ou rank tracker)
+\end{itemize}
+
+\section{Exercice 1 --- Configuration Google Business Profile (45 min)}
+
+\textbf{Consigne :} Créez une fiche Google Business Profile complète pour un commerce local.
+
+\subsection{Étape 1 --- Création de la fiche}
+Créez (ou simulez) une fiche GBP avec les informations suivantes :
+
+\textbf{Entreprise fictive :}
+\begin{itemize}
+\item Nom : Librairie Le Savoir
+\item Adresse : 25 Rue des Arts, 75001 Paris
+\item Téléphone : 01 42 00 00 00
+\item Site web : \url{https://librairie-le-savoir.fr}
+\item Catégorie principale : Librairie
+\item Catégories secondaires : Café littéraire, Salon de lecture
+\item Horaires : Lun-Sam 9h-19h, Fermé dimanche
+\end{itemize}
+
+\textbf{À compléter dans la fiche :}
+\begin{itemize}
+\item[$\square$] Description de l'entreprise (250 caractères max, avec mots-clés locaux)
+\item[$\square$] Horaires spéciaux (jours fériés)
+\item[$\square$] Attributs (WiFi gratuit, accessible PMR, livraison)
+\item[$\square$] Photos (logo, couverture, intérieur, extérieur, produits)
+\item[$\square$] Posts Google (3 posts : actualité, promotion, événement)
+\item[$\square$] Questions/Réponses (5 questions fréquentes avec réponses)
+\item[$\square$] Produits / Services (5 catégories)
+\item[$\square$] Attributs de confirmation (masque, distanciation\ldots)
+\end{itemize}
+
+\subsection{Étape 2 --- Optimisation locale}
+\begin{enumerate}
+\item Quels mots-clés locaux cibler dans la description ? (5 mots-clés)
+\item Comment choisir les catégories secondaires ?
+\item Quelle est la stratégie de photos (nombre, type, fréquence) ?
+\item Comment gérer les attributs ``Confirmé par le propriétaire'' ?
+\end{enumerate}
+
+\subsection{Étape 3 --- Stratégie d'avis}
+\begin{enumerate}
+\item Rédigez 3 réponses à des avis (1 positif, 1 neutre, 1 négatif)
+\item Proposez un processus pour obtenir 10 nouveaux avis par mois
+\item Comment répondre à un avis négatif sans se mettre en danger ?
+\item Quel est l'impact des réponses aux avis sur le classement local ?
+\end{enumerate}
+
+\section{Exercice 2 --- Migration SEO : Simulation complète (60 min)}
+
+\textbf{Consigne :} Vous migrez le site \url{https://ancien-site.com} vers \url{https://nouveau-site.com}.
+
+\subsection{Phase 1 --- Cartographie des URLs (15 min)}
+
+\textbf{Anciennes URLs $\rightarrow$ Nouvelles URLs :}
+
+\begin{longtable}{|l|l|c|}
+\hline
+\textbf{Ancienne URL} & \textbf{Nouvelle URL} & \textbf{Type (301/410)} \\
+\hline
+\verb|/index.php| & \verb|/| & \\
+\hline
+\verb|/article.php?id=1| & \verb|/blog/seo-guide| & \\
+\hline
+\verb|/produit.php?cat=5&id=12| & \verb|/produits/chaussures| & \\
+\hline
+\verb|/about-us.html| & \verb|/a-propos| & \\
+\hline
+\verb|/old-category/| & \verb|/categorie/| & \\
+\hline
+\verb|/blog/ancien-article-importants.html| & \verb|/blog/nouvel-article| & \\
+\hline
+\verb|/page-supprimee.html| & (supprimée) & \\
+\hline
+\verb|/tag/| & (supprimée) & \\
+\hline
+\end{longtable}
+
+\begin{enumerate}
+\item Complétez le tableau avec les types de redirection appropriés
+\item Quels sont les risques d'une redirection 302 au lieu de 301 ?
+\end{enumerate}
+
+\subsection{Phase 2 --- Implémentation technique (20 min)}
+
+\textbf{Règles de réécriture (Apache .htaccess) :}
+\begin{lstlisting}
+# Regles de redirection 301
+RewriteEngine On
+RewriteRule ^index\.php$ https://nouveau-site.com/ [L,R=301]
+RewriteRule ^article\.php\?id=1$ https://nouveau-site.com/blog/seo-guide [L,R=301]
+# Completez les regles manquantes...
+
+# Gestion des erreurs 404 personnalisees
+ErrorDocument 404 /404.html
+\end{lstlisting}
+
+\textbf{Questions :}
+\begin{enumerate}
+\item Comment gérer les paramètres d'URL (?session=, ?utm\_source=) ?
+\item Faut-il conserver l'ancien robots.txt ? Le modifier ?
+\item Comment mettre à jour le sitemap XML pendant la migration ?
+\end{enumerate}
+
+\subsection{Phase 3 --- Suivi post-migration (15 min)}
+
+\textbf{Checklist quotidienne (J+1 à J+30) :}
+
+\begin{longtable}{|l|l|l|}
+\hline
+\textbf{Jour} & \textbf{Action} & \textbf{Outil} \\
+\hline
+J+1 & & \\
+\hline
+J+2 & & \\
+\hline
+J+3 & & \\
+\hline
+J+7 & & \\
+\hline
+J+14 & & \\
+\hline
+J+30 & & \\
+\hline
+\end{longtable}
+
+\textbf{KPIs de suivi :}
+\begin{itemize}
+\item Trafic organique : \_\_\_\_\_ vs \_\_\_\_\_ (avant/après)
+\item Pages indexées : \_\_\_\_\_ vs \_\_\_\_\_
+\item Taux d'erreur 4xx : \_\_\_\_\_ vs \_\_\_\_\_
+\item Positions mots-clés principaux : \_\_\_\_\_ vs \_\_\_\_\_
+\end{itemize}
+
+\subsection{Phase 4 --- Gestion de crise (10 min)}
+
+\textbf{Consigne :} Vous recevez une alerte : 2 jours après la migration, le trafic a chuté de 60\%.
+
+\begin{enumerate}
+\item Quelles sont les 3 premières choses que vous vérifiez ?
+\item Quels outils utilisez-vous pour chaque vérification ?
+\item Quelles décisions prenez-vous à J+2 ?
+\item À quel moment décidez-vous de ``revenir en arrière'' ?
+\end{enumerate}
+
+\section{Exercice 3 --- Site E-commerce : Audit et Optimisation (60 min)}
+
+\textbf{Consigne :} Vous auditez et optimisez un site e-commerce de 500 produits.
+
+\subsection{Partie A --- Architecture du site}
+
+\textbf{Structure actuelle :}
+\begin{lstlisting}
+Accueil
++-- Categories (12)
+|   +-- Sous-categories (48)
+|   |   +-- Pages produits (500)
+|   |   +-- Pages variantes (2000)
++-- Blog (30 articles)
++-- Panier
++-- Compte
++-- Pages legales
+\end{lstlisting}
+
+\textbf{Questions :}
+\begin{enumerate}
+\item La profondeur de clics est-elle optimale ? (combien de clics pour un produit ?)
+\item Proposez une architecture plus plate (flat architecture).
+\item Comment gérer le contenu dupliqué entre les variantes (couleurs, tailles) ?
+\item Faut-il indexer les pages de sous-catégories vides ?
+\end{enumerate}
+
+\subsection{Partie B --- Filtres et facettes}
+
+Le site a des filtres : prix, couleur, taille, marque, matière.
+
+\textbf{Problème :} Chaque filtre crée une URL unique $\rightarrow$ 15 000 URLs générées.
+
+\begin{enumerate}
+\item Quelles sont les bonnes pratiques pour gérer les URLs de filtres ?
+\item Faut-il utiliser \texttt{noindex} ou \texttt{canonical} sur les pages de filtres ?
+\item Qu'est-ce que le ``contenu fin'' (thin content) des pages de filtres et comment l'éviter ?
+\item Proposez une stratégie de gestion des facettes SEO-friendly.
+\end{enumerate}
+
+\subsection{Partie C --- Page catégorie optimisée}
+
+Créez une page catégorie modèle pour la catégorie ``Chaussures de running''.
+
+\textbf{Éléments obligatoires :}
+\begin{itemize}
+\item[$\square$] Title tag optimisé (50-60 car.)
+\item[$\square$] Meta description (150-160 car.)
+\item[$\square$] H1 contenant le mot-clé principal
+\item[$\square$] Texte de catégorie (150-200 mots en haut de page)
+\item[$\square$] Grille produits avec balisage schema.org
+\item[$\square$] Fil d'Ariane (BreadcrumbList JSON-LD)
+\item[$\square$] Filtres avec gestion SEO
+\item[$\square$] Pagination avec \texttt{rel="next"/"prev"} (ou alternative)
+\item[$\square$] Liens vers sous-catégories
+\item[$\square$] Images catégorie optimisées
+\end{itemize}
+
+\subsection{Partie D --- Pages produits en masse}
+
+\begin{enumerate}
+\item Comment générer des descriptions uniques pour 500 produits sans créer de contenu dupliqué ?
+\item Quelle est la structure de données structurées (Product, Offer, AggregateRating) ?
+\item Comment gérer les produits hors stock ? Les supprimer ? Les noindexer ?
+\item Quel est l'impact des avis et du classement par note sur le SEO ?
+\end{enumerate}
+
+\section{Exercice 4 --- A/B Testing SEO (45 min)}
+
+\textbf{Consigne :} Concevez et analysez des tests A/B pour améliorer le SEO.
+
+\subsection{Test 1 --- Title Tag}
+
+\textbf{Hypothèse :} Un title plus long avec des mots-clés additionnels améliore le CTR.
+
+\begin{longtable}{|l|l|}
+\hline
+\textbf{Version} & \textbf{Title} \\
+\hline
+Contrôle (A) & \texttt{Chaussures de running Homme | RunTech} \\
+\hline
+Test (B) & \texttt{Chaussures de running Homme - RunTech Ultra-Grip Pro | Trail et Route} \\
+\hline
+\end{longtable}
+
+\textbf{Protocole :}
+\begin{enumerate}
+\item Combien de pages inclure dans le test ? (justifiez)
+\item Quelle est la durée minimale du test ?
+\item Quels KPIs mesurer ?
+\item À partir de quel seuil de significativité concluez-vous ?
+\end{enumerate}
+
+\subsection{Test 2 --- Meta Description}
+
+\textbf{Hypothèse :} Une meta description avec une question + appel à l'action améliore le CTR.
+
+\begin{longtable}{|l|l|}
+\hline
+\textbf{Version} & \textbf{Meta Description} \\
+\hline
+Contrôle (A) & \texttt{Découvrez nos chaussures de running Homme. Grande sélection de modèles RunTech. Livraison rapide.} \\
+\hline
+Test (B) & \texttt{Vous cherchez des chaussures de running ? Essayez l'Ultra-Grip Pro. Testée par 234 coureurs $\bigstar$ 4.7/5. Livraison offerte dès 99\texteuro{}.} \\
+\hline
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+\item Quels sont les risques du test A/B sur les meta descriptions ?
+\item Google réécrit les meta descriptions. Comment savoir si votre test est annulé par Google ?
+\item Comment segmenter les résultats par type de requête ?
+\end{enumerate}
+
+\subsection{Test 3 --- Structure de page}
+
+\textbf{Hypothèse :} Ajouter un sommaire interactif (Table of Contents) en haut de l'article réduit le taux de rebond et améliore le temps passé.
+
+\begin{enumerate}
+\item Concevez le protocole de test
+\item Quels sont les biais potentiels ?
+\item Comment mesurer l'impact SEO (pas seulement UX) ?
+\end{enumerate}
+
+\subsection{Analyse de résultats A/B}
+
+\begin{longtable}{|l|c|c|c|c|}
+\hline
+\textbf{Métrique} & \textbf{Contrôle (A)} & \textbf{Test (B)} & \textbf{Variation} & \textbf{Significatif ?} \\
+\hline
+Impressions & 12 500 & 13 200 & +5.6\% & p=0.12 \\
+\hline
+Clics & 375 & 468 & +24.8\% & p=0.03 \\
+\hline
+CTR & 3.0\% & 3.55\% & +18.3\% & p=0.02 \\
+\hline
+Position moyenne & 8.2 & 8.5 & $-0.3$ & p=0.45 \\
+\hline
+Taux de rebond & 62\% & 58\% & $-4$~pts & p=0.08 \\
+\hline
+Temps sur page & 2m15s & 2m45s & +22\% & p=0.04 \\
+\hline
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+\item Quelle est votre conclusion sur le test B ?
+\item Quels résultats sont statistiquement significatifs (p $<$ 0.05) ?
+\item La position moyenne baisse légèrement. Faut-il s'inquiéter ?
+\item Implémenteriez-vous la version B sur l'ensemble du site ? Pourquoi ?
+\item Quelles sont les limites de ce test ?
+\end{enumerate}
+
+\section{Exercice 5 --- SEO pour CMS : Configuration WordPress (30 min)}
+
+\textbf{Consigne :} Configurez WordPress pour un SEO optimal.
+
+\textbf{Installation neuve de WordPress. À configurer :}
+
+\subsection{Partie A --- Réglages WordPress}
+\begin{itemize}
+\item[$\square$] Permaliens : structure personnalisée \texttt{/\%postname\%/}
+\item[$\square$] Titre du site : optimisé SEO
+\item[$\square$] Slogan : pertinent ou masqué
+\item[$\square$] Visibilité : indexation autorisée
+\item[$\square$] Lecture : page d'accueil statique (page ``Accueil'')
+\item[$\square$] Discussion : fermer les commentaires après 30 jours
+\item[$\square$] Médias : organiser par dossiers (mois)
+\end{itemize}
+
+\subsection{Partie B --- Plugins SEO}
+
+\begin{longtable}{|l|l|l|}
+\hline
+\textbf{Plugin} & \textbf{Fonction} & \textbf{Configuration clé} \\
+\hline
+Yoast SEO / Rank Math & & \\
+\hline
+WP Rocket / W3 Total Cache & & \\
+\hline
+Smush / ShortPixel & & \\
+\hline
+Redirection & & \\
+\hline
+Wordfence / Sucuri & & \\
+\hline
+\end{longtable}
+
+\begin{enumerate}
+\item Complétez le tableau
+\item Quels plugins éviter (bloat, conflits, sécurité) ?
+\item Y a-t-il des plugins à ne JAMAIS installer ? Lesquels ?
+\end{enumerate}
+
+\subsection{Partie C --- Configuration avancée}
+\begin{enumerate}
+\item Générez et soumettez le sitemap XML
+\item Configurez les données structurées (Organization, Article, BreadcrumbList)
+\item Optimisez la base de données (requêtes, index, cache)
+\item Mettez en place un CDN (Cloudflare, etc.)
+\item Configurez la pagination (rel next/prev ou équivalent)
+\end{enumerate}
+
+\section{Exercice 6 --- Rapport d'audit SEO Spécialisé (30 min)}
+
+\textbf{Consigne :} Rédigez un rapport d'audit pour un site e-commerce local.
+
+\textbf{Données du site :}
+\begin{itemize}
+\item Site : \url{quincaillerie-en-ligne.fr}
+\item Type : E-commerce de quincaillerie (3 000 produits)
+\item Zone : France métropolitaine + Belgique
+\item Trafic mensuel : 18 000 visites
+\item Taux de conversion : 1.8\%
+\item Panier moyen : 65 \texteuro{}
+\end{itemize}
+
+\textbf{Structure du rapport :}
+
+\begin{enumerate}
+\item \textbf{SEO Local} (10 points)
+   \begin{itemize}
+   \item Fiche Google Business Profile
+   \item Citations et cohérence NAP
+   \item Avis clients
+   \item Pages locales (magasins)
+   \end{itemize}
+
+\item \textbf{SEO E-commerce} (10 points)
+   \begin{itemize}
+   \item Architecture du site
+   \item Pages catégories
+   \item Fiches produits
+   \item Gestion des variantes et filtres
+   \end{itemize}
+
+\item \textbf{SEO Technique} (10 points)
+   \begin{itemize}
+   \item Vitesse et Core Web Vitals
+   \item Mobile-friendliness
+   \item Données structurées
+   \item Internationalisation (France/Belgique)
+   \end{itemize}
+
+\item \textbf{Plan d'action priorisé} (10 actions)
+\end{enumerate}
+
+\section{Rendu final}
+
+\textbf{À rendre :}
+\begin{enumerate}
+\item Fiche Google Business Profile complète (PDF ou capture d'écran)
+\item Plan de migration SEO (avec mapping URLs + règles .htaccess)
+\item Audit e-commerce complet (checklist de 30 points)
+\item Protocole et résultats de test A/B
+\item Configuration WordPress optimisée
+\end{enumerate}
+
+\textbf{Barème :}
+\begin{itemize}
+\item Google Business Profile : /10
+\item Plan de migration : /10
+\item Audit e-commerce : /10
+\item A/B Testing : /10
+\item Configuration CMS : /10
+\item Total : /50
+\end{itemize}
+
+\end{document}

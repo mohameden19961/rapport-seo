@@ -1,0 +1,1342 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{amssymb}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    tabsize=2,
+    columns=fullflexible,
+    literate={→}{$\rightarrow$}{1},
+}
+
+
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{4cm}
+{\Huge \textbf{Travaux Dirigés}}\\
+\vspace{0.5cm}
+{\Huge \textbf{--- SEO Expert}}\\
+\vspace{2cm}
+{\Large Recueil d'exercices}\\
+\vspace{1cm}
+{\large Fondamentaux, Indexation, On-Page, Technique et Off-Page}
+\vfill
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% ======================================================================
+% TD 01
+% ======================================================================
+\chapter{TD 01 --- Fondamentaux des Moteurs de Recherche}
+
+\section{Objectifs}
+\begin{itemize}
+    \item Comprendre l'histoire et l'\'{e}volution des moteurs de recherche
+    \item Ma^{\^\i}triser les trois \'{e}tapes fondamentales (Crawl, Index, Rank)
+    \item Savoir expliquer le fonctionnement du PageRank et des algorithmes IA
+\end{itemize}
+
+\section{Exercice 1 --- Chronologie des moteurs de recherche (15 min)}
+
+\textbf{Consigne :} Classez les \'{e}v\'{e}nements suivants dans l'ordre chronologique et associez chaque date \`{a} l'\'{e}v\'{e}nement correspondant.
+
+\begin{longtable}{ll}
+\toprule
+Ann\'{e}e & \'{E}v\'{e}nement \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1990 & Cr\'{e}ation de Google par Larry Page et Sergey Brin \\
+1994 & Lancement du PageRank \\
+1996 & Premier moteur de recherche : Archie \\
+1998 & Lancement de Yahoo! Search \\
+2015 & Sortie de RankBrain (IA) \\
+2019 & Lancement de MUM (Multitask Unified Model) \\
+2021 & Sortie de BERT \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Quel \'{e}tait le principal d\'{e}faut des moteurs de recherche avant Google ?
+    \item En quoi le PageRank a-t-il r\'{e}volutionn\'{e} la recherche web ?
+    \item Quelle est la diff\'{e}rence fondamentale entre RankBrain, BERT et MUM ?
+\end{enumerate}
+
+\section{Exercice 2 --- Les trois \'{e}tapes du moteur de recherche (20 min)}
+
+\textbf{Consigne :} Pour chaque \'{e}tape ci-dessous, d\'{e}crivez le processus en 2-3 phrases et donnez un exemple concret.
+
+\begin{enumerate}
+    \item \textbf{Crawling} --- Comment Google d\'{e}couvre-t-il une nouvelle page web ?
+    \item \textbf{Indexation} --- Que se passe-t-il techniquement quand une page est index\'{e}e ?
+    \item \textbf{Ranking} --- Citez 5 crit\`{e}res de classement et expliquez chacun bri\`{e}vement.
+\end{enumerate}
+
+\textbf{Mise en situation :}\\
+Vous publiez un article sur un nouveau site web sans backlinks. En combien de temps peut-il appara^{\^\i}tre dans Google ? Quels facteurs acc\'{e}l\`{e}rent ou ralentissent ce processus ?
+
+\section{Exercice 3 --- Analyse du PageRank (20 min)}
+
+\textbf{Consigne :} Voici un mini-r\'{e}seau de pages web. Calculez la r\'{e}partition th\'{e}orique du PageRank.
+
+\begin{lstlisting}
+Page A -> Page B, Page C
+Page B -> Page C
+Page C -> Page A
+Page D -> Page A, Page B, Page C
+\end{lstlisting}
+
+\begin{enumerate}
+    \item Quelle page a le PageRank le plus \'{e}lev\'{e} selon vous ? Justifiez.
+    \item Si la Page D re\c{c}oit 100 liens entrants de qualit\'{e}, comment \'{e}volue le PR des autres pages ?
+    \item Qu'est-ce qu'un ``dangling link'' (lien mort) et quel est son impact ?
+    \item Expliquez le concept de ``damping factor'' (facteur d'amortissement).
+\end{enumerate}
+
+\section{Exercice 4 --- L'IA dans les moteurs de recherche (20 min)}
+
+\begin{longtable}{lllp{5cm}}
+\toprule
+Technologie & Ann\'{e}e & R\^{o}le principal & Impact sur le SEO \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+RankBrain & 2015 & & \\
+BERT & 2019 & & \\
+MUM & 2021 & & \\
+Search Generative Experience (SGE) & 2023 & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Compl\'{e}tez le tableau ci-dessus.
+    \item RankBrain traite 15\% des requ\^{e}tes jamais vues. Pourquoi est-ce important pour le SEO ?
+    \item Comment BERT a-t-il chang\'{e} la fa\c{c}on de r\'{e}diger du contenu SEO ?
+    \item MUM est multimodal. Quels types de contenu peut-il comprendre ? Quelles sont les implications SEO ?
+    \item \textbf{Discussion :} L'IA va-t-elle remplacer les moteurs de recherche traditionnels ? Pourquoi ?
+\end{enumerate}
+
+\section{Exercice 5 --- Parts de march\'{e} et enjeux (15 min)}
+
+\textbf{Consigne :} R\'{e}pondez aux questions suivantes.
+
+\begin{enumerate}
+    \item Quelle est la part de march\'{e} de Google en 2025 ? (mondiale et en France)
+    \item Citez 3 moteurs de recherche alternatifs et leur particularit\'{e}.
+    \item Qu'est-ce qu'un ``moteur de recherche priv\'{e}'' ? Donnez un exemple.
+    \item En Chine, quel moteur domine le march\'{e} ? Pourquoi ?
+    \item \textbf{D\'{e}bat :} La domination de Google est-elle une menace pour la neutralit\'{e} du web ?
+\end{enumerate}
+
+\section{Exercice 6 --- Crawl, Index, Rank : jeu de r\^{o}le (20 min)}
+
+\textbf{Consigne :} Par groupes de 3, simulez le parcours d'une page web \`{a} travers Google.
+
+\begin{itemize}
+    \item \textbf{R\^{o}le A (Crawler)} : D\'{e}crivez comment vous d\'{e}couvrez la page, suivez les liens, g\'{e}rez les erreurs.
+    \item \textbf{R\^{o}le B (Indexeur)} : Expliquez ce que vous stockez dans l'index, comment vous g\'{e}rez le contenu dupliqu\'{e}.
+    \item \textbf{R\^{o}le C (Ranker)} : Quels crit\`{e}res utilisez-vous pour classer la page ? Comment l'IA intervient-elle ?
+\end{itemize}
+
+\textbf{Production :} Chaque groupe pr\'{e}sente son sc\'{e}nario en 3 minutes.
+
+\section{Exercice 7 --- Questions Vrai/Faux (10 min)}
+
+\begin{longtable}{cp{5cm}cp{5cm}}
+\toprule
+\# & Affirmation & V/F & Correction \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & Google indexe toutes les pages qu'il crawl & & \\
+2 & Le PageRank est le seul crit\`{e}re de classement de Google & & \\
+3 & BERT comprend le contexte des mots dans une phrase & & \\
+4 & MUM peut analyser des vid\'{e}os et des images & & \\
+5 & Un site avec beaucoup de backlinks est toujours bien class\'{e} & & \\
+6 & RankBrain utilise l'apprentissage automatique & & \\
+7 & Yahoo! utilise le m\^{e}me index que Google & & \\
+8 & Le crawling consomme des ressources sur le serveur & & \\
+\bottomrule
+\end{longtable}
+
+\section{Pour aller plus loin}
+
+\begin{itemize}
+    \item \textbf{Recherche :} Comparez les positions des mots-cl\'{e}s ``meilleur restaurant Paris'' sur Google, Bing et Qwant. Quelles diff\'{e}rences observez-vous ?
+    \item \textbf{Lecture :} Lisez le chapitre ``Histoire et \'{e}volution'' du rapport et r\'{e}sumez-le en 10 lignes.
+    \item \textbf{Veille :} Trouvez un article r\'{e}cent (2025-2026) sur une mise \`{a} jour de l'algorithme Google et pr\'{e}sentez-le \`{a} la classe.
+\end{itemize}
+
+
+% ======================================================================
+% TD 02
+% ======================================================================
+\chapter{TD 02 --- Indexation et Technique SEO}
+
+\section{Objectifs}
+\begin{itemize}
+    \item Ma^{\^\i}triser le processus d'indexation technique
+    \item Savoir configurer robots.txt et sitemap XML
+    \item Comprendre et utiliser les balises meta robots et canonical
+    \item Optimiser le budget de crawl
+\end{itemize}
+
+\section{Exercice 1 --- Diagnostic d'indexation (25 min)}
+
+\textbf{Consigne :} Analysez les cas suivants et dites ce qui ne va pas.
+
+\paragraph{Cas A :} Un site e-commerce de 50\,000 produits. Google Search Console montre que seulement 12\,000 pages sont index\'{e}es.
+
+\begin{enumerate}
+    \item Quelles sont les causes possibles de cette faible indexation ?
+    \item Quels outils utiliser pour identifier les pages non index\'{e}es ?
+    \item Proposez un plan d'action en 5 \'{e}tapes.
+\end{enumerate}
+
+\paragraph{Cas B :} Un blog technique publie 3 articles par semaine. Les articles mettent en moyenne 3 semaines \`{a} \^{e}tre index\'{e}s.
+
+\begin{enumerate}
+    \item Est-ce normal ? Quels facteurs influencent la vitesse d'indexation ?
+    \item Comment acc\'{e}l\'{e}rer l'indexation des nouveaux articles ?
+    \item Que doit-on v\'{e}rifier en premier ?
+\end{enumerate}
+
+\paragraph{Cas C :} Un site vitrine voit ses pages d\'{e}-index\'{e}es du jour au lendemain.
+
+\begin{enumerate}
+    \item Quelles sont les causes possibles (charni\`{e}res, p\'{e}nalit\'{e}s, erreurs techniques) ?
+    \item Comment v\'{e}rifier la cause via Google Search Console ?
+    \item Quelle est la proc\'{e}dure de demande de r\'{e}-indexation ?
+\end{enumerate}
+
+\section{Exercice 2 --- R\'{e}daction d'un fichier \texttt{robots.txt} (20 min)}
+
+\textbf{Consigne :} \'{E}crivez le fichier \texttt{robots.txt} pour les sc\'{e}narios suivants.
+
+\paragraph{Sc\'{e}nario 1 --- Site e-commerce :}
+\begin{itemize}
+    \item Autoriser tous les crawlers
+    \item Bloquer l'acc\`{e}s au dossier \texttt{/admin/}
+    \item Bloquer l'acc\`{e}s au dossier \texttt{/panier/}
+    \item Bloquer les URLs avec param\`{e}tres de session (\texttt{?session=})
+    \item D\'{e}clarer l'emplacement du sitemap : \url{https://exemple.com/sitemap.xml}
+\end{itemize}
+
+\paragraph{Sc\'{e}nario 2 --- Site m\'{e}dia (actualit\'{e}s) :}
+\begin{itemize}
+    \item Autoriser Googlebot
+    \item Bloquer Bingbot du dossier \texttt{/prive/}
+    \item Autoriser compl\`{e}tement Googlebot News
+    \item Bloquer tous les autres crawlers
+    \item D\'{e}clarer le sitemap news
+\end{itemize}
+
+\paragraph{Sc\'{e}nario 3 --- Correction d'erreur :}\\
+Le fichier \texttt{robots.txt} suivant contient des erreurs. Corrigez-le.
+
+\begin{lstlisting}
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Sitemap: sitemap.xml
+User-agent: Googlebot
+Disallow:
+\end{lstlisting}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Quelle est la diff\'{e}rence entre une directive \texttt{Disallow:\`{}} vide et l'absence de \texttt{Disallow:} ?
+    \item Que se passe-t-il si le \texttt{robots.txt} est inaccessible (erreur 500) ?
+    \item Comment tester un fichier \texttt{robots.txt} dans Google Search Console ?
+    \item Le \texttt{robots.txt} emp\^{e}che-t-il l'indexation ? Expliquez.
+\end{enumerate}
+
+\section{Exercice 3 --- Cr\'{e}ation d'un Sitemap XML (20 min)}
+
+\textbf{Consigne :} Cr\'{e}ez le sitemap XML pour un site de 8 pages.
+
+Pages :
+\begin{enumerate}
+    \item \url{https://exemple.com/} (derni\`{e}re modif : 2025-12-01, priorit\'{e} 1.0, hebdomadaire)
+    \item \url{https://exemple.com/a-propos} (2025-11-15, priorit\'{e} 0.5, mensuelle)
+    \item \url{https://exemple.com/services} (2025-12-10, priorit\'{e} 0.8, hebdomadaire)
+    \item \url{https://exemple.com/blog/article-1} (2025-12-15, priorit\'{e} 0.6, hebdomadaire)
+    \item \url{https://exemple.com/blog/article-2} (2025-12-14, priorit\'{e} 0.6, hebdomadaire)
+    \item \url{https://exemple.com/contact} (2025-10-01, priorit\'{e} 0.3, mensuelle)
+    \item \url{https://exemple.com/mentions-legales} (2025-09-01, priorit\'{e} 0.1, annuelle)
+    \item \url{https://exemple.com/faq} (2025-12-01, priorit\'{e} 0.4, mensuelle)
+\end{enumerate}
+
+\textbf{Formation :} 50\,000 URLs max par sitemap. Que faire si le site en a 120\,000 ?\\
+\textbf{Index :} \'{E}crivez un sitemap index pour 3 sitemaps.
+
+\section{Exercice 4 --- Balises Meta Robots et Canonical (20 min)}
+
+\textbf{Consigne :} Pour chaque cas, indiquez la balise HTML appropri\'{e}e.
+
+\begin{longtable}{cp{8cm}}
+\toprule
+Cas & Solution \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1. Page de remerciement apr\`{e}s inscription (ne doit pas \^{e}tre index\'{e}e) & \\
+2. Page de filtres de recherche (contenu dupliqu\'{e}) & \\
+3. Article accessible via 2 URLs diff\'{e}rentes (\texttt{/article} et \texttt{/article?ref=email}) & \\
+4. Page d'impression (ne doit pas \^{e}tre index\'{e}e, ne pas suivre les liens) & \\
+5. Page de cat\'{e}gorie avec pagination (page 2, 3\ldots) & \\
+6. PDF h\'{e}berg\'{e} sur le site (doit \^{e}tre index\'{e} mais pas les liens) & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Quelle est la diff\'{e}rence entre \texttt{noindex} et \texttt{nofollow} ?
+    \item Peut-on utiliser \texttt{noindex} avec une balise \texttt{canonical} ? Pourquoi ?
+    \item Que se passe-t-il si deux pages ont une balise canonical pointant l'une vers l'autre ?
+    \item Comment Google choisit-il la page canonique si aucune balise n'est sp\'{e}cifi\'{e}e ?
+    \item \textbf{Erreur fr\'{e}quente :} Pourquoi ne doit-on pas mettre de canonical sur une pagination vers la page 1 ?
+\end{enumerate}
+
+\section{Exercice 5 --- Budget de Crawl : \'{e}tude de cas (25 min)}
+
+\textbf{Cas pratique :} Vous g\'{e}rez un site de 200\,000 pages avec les caract\'{e}ristiques suivantes :
+\begin{itemize}
+    \item 150\,000 pages sont de faible qualit\'{e} (contenu fin, pages vides, pages d'erreur)
+    \item Temps de r\'{e}ponse serveur moyen : 3 secondes
+    \item 15\% des pages retournent des erreurs 404
+    \item Le site a un PageRank moyen (domaine jeune de 2 ans)
+    \item 50 erreurs 500 par jour
+\end{itemize}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Calculez le ratio de pages de qualit\'{e} / pages totales. Quel diagnostic faites-vous ?
+    \item Quelles pages devez-vous supprimer ou noindexer en priorit\'{e} ?
+    \item Quel est l'impact du TTFB sur le crawl budget ?
+    \item Combien d'erreurs 500 sont acceptables par jour ? Justifiez.
+    \item Proposez un plan d'optimisation du crawl budget sur 3 mois.
+\end{enumerate}
+
+\textbf{Calcul :} Googlebot a un budget de 10\,000 requ\^{e}tes par jour pour ce site. Combien de pages de qualit\'{e} seront crawl\'{e}es par jour si 30\% du budget est gaspill\'{e} sur les pages inutiles ?
+
+\section{Exercice 6 --- Cas concrets d'indexation (15 min)}
+
+\textbf{Consigne :} R\'{e}pondez par \'{e}crit aux situations suivantes.
+
+\begin{enumerate}
+    \item \textbf{Site multilingue :} Comment g\'{e}rer l'indexation d'un site en fran\c{c}ais et en anglais ?
+    \item \textbf{Site One-Page :} Un site one-page avec 10 sections peut-il avoir 10 entr\'{e}es d'index ?
+    \item \textbf{JavaScript :} Une application React sans SSR est-elle bien index\'{e}e par Google ?
+    \item \textbf{PDF index\'{e}s :} Un site a 5000 PDF. Faut-il les indexer ? Comment les optimiser ?
+    \item \textbf{URSS :} Un site change de domaine. Comment \'{e}viter une perte d'indexation ?
+\end{enumerate}
+
+\section{Exercice 7 --- Mots-crois\'{e}s de l'indexation (15 min)}
+
+\begin{lstlisting}
+Horizontal :
+1. Fichier qui liste les pages a indexer (7 lettres)
+2. Balise pour eviter le contenu duplique (9 lettres)
+3. Premiere etape du pipeline Google (7 lettres)
+4. Budget de... (5 lettres)
+
+Vertical :
+5. Robot d'exploration Google (9 lettres)
+6. Directive pour ne pas indexer (7 lettres)
+7. Temps avant premiere reponse serveur (4 lettres)
+8. Outil Google pour surveiller l'indexation (6+7 lettres)
+\end{lstlisting}
+
+\section{Pour aller plus loin}
+
+\begin{itemize}
+    \item \textbf{Pratique :} Analysez le \texttt{robots.txt} et le sitemap de 3 sites de votre choix. Rapportez vos observations.
+    \item \textbf{Outil :} Utilisez Screaming Frog sur un site de petite taille (50-100 pages). Combien de pages sont indexables vs non-indexables ?
+    \item \textbf{Lecture :} Chapitre ``Budget de Crawl'' du rapport --- r\'{e}sumez les 5 facteurs les plus importants.
+\end{itemize}
+
+
+% ======================================================================
+% TD 03
+% ======================================================================
+\chapter{TD 03 --- SEO On-Page et Optimisation du Contenu}
+
+\section{Objectifs}
+\begin{itemize}
+    \item Ma^{\^\i}triser la recherche de mots-cl\'{e}s et l'intention de recherche
+    \item Savoir optimiser les balises HTML (title, meta description, headings)
+    \item Optimiser les images et le contenu multim\'{e}dia
+    \item Construire un maillage interne efficace
+\end{itemize}
+
+\section{Exercice 1 --- Recherche de mots-cl\'{e}s : Cas pratique (30 min)}
+
+\textbf{Consigne :} Vous \^{e}tes consultant SEO pour une agence web. Votre client est une \textbf{boulangerie artisanale \`{a} Lyon} qui souhaite d\'{e}velopper sa visibilit\'{e} en ligne.
+
+\paragraph{\'{E}tape 1 --- Brainstorming :} Trouvez 20 mots-cl\'{e}s pertinents r\'{e}partis en :
+\begin{itemize}
+    \item 5 mots-cl\'{e}s ``t\^{e}te de r\'{e}seau'' (courts, g\'{e}n\'{e}riques)
+    \item 10 mots-cl\'{e}s ``corps'' (moyens)
+    \item 5 mots-cl\'{e}s ``longue tra^{\^\i}ne''
+\end{itemize}
+
+\paragraph{\'{E}tape 2 --- Analyse d'intention :} Pour chaque mot-cl\'{e}, d\'{e}terminez l'intention :
+\begin{longtable}{lll}
+\toprule
+Mot-cl\'{e} & Intention (I/N/C/T) & Type de contenu \`{a} cr\'{e}er \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+& & \\
+\bottomrule
+\end{longtable}
+
+\paragraph{\'{E}tape 3 --- Difficult\'{e} et volume :} Attribuez une note estim\'{e}e :
+\begin{itemize}
+    \item Volume de recherche : $\bigstar$ \`{a} $\bigstar\bigstar\bigstar\bigstar\bigstar$
+    \item Difficult\'{e} SEO : $\bigstar$ \`{a} $\bigstar\bigstar\bigstar\bigstar\bigstar$
+    \item Potentiel de conversion : $\bigstar$ \`{a} $\bigstar\bigstar\bigstar\bigstar\bigstar$
+\end{itemize}
+
+\paragraph{\'{E}tape 4 --- Carte de contenu :} Proposez une architecture de contenu avec 10 articles de blog + 5 pages permanentes bas\'{e}es sur ces mots-cl\'{e}s.
+
+\section{Exercice 2 --- Les 4 intentions de recherche (20 min)}
+
+\textbf{Consigne :} Classez les requ\^{e}tes suivantes par intention (Informationnelle, Navigationnelle, Commerciale, Transactionnelle).
+
+\begin{longtable}{lll}
+\toprule
+Requ\^{e}te & Intention & Contenu recommand\'{e} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+``comment faire du SEO'' & & \\
+``Facebook login'' & & \\
+``meilleur outil SEO 2026'' & & \\
+``acheter nom de domaine'' & & \\
+``SEMrush vs Ahrefs'' & & \\
+``d\'{e}finition indexation Google'' & & \\
+``formation SEO en ligne pas cher'' & & \\
+``recette pain campagne'' & & \\
+``livraison pizza Paris 15e'' & & \\
+``YouTube'' & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Pourquoi est-il crucial d'adapter le contenu \`{a} l'intention de recherche ?
+    \item Que se passe-t-il si une page transactionnelle ranke sur une requ\^{e}te informationnelle ?
+    \item Comment le parcours utilisateur (user journey) relie-t-il les 4 intentions ?
+    \item Proposez une strat\'{e}gie de contenu pour un site de voyage couvrant les 4 intentions.
+\end{enumerate}
+
+\section{Exercice 3 --- Optimisation des balises Title et Meta Description (20 min)}
+
+\textbf{Consigne :} Optimisez les balises suivantes pour le SEO et le taux de clic (CTR).
+
+\textbf{Original $\rightarrow$ Votre version optimis\'{e}e :}
+
+\begin{longtable}{cp{5cm}p{5cm}}
+\toprule
+\# & Original & Votre optimisation \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & \texttt{\textless title\textgreater Accueil - Mon Site\textless /title\textgreater} & \\
+2 & \texttt{\textless title\textgreater Services | Agence Web\textless /title\textgreater} & \\
+3 & \texttt{\textless title\textgreater Contact\textless /title\textgreater} & \\
+4 & \texttt{\textless title\textgreater Blog - Article 1\textless /title\textgreater} & \\
+5 & \texttt{\textless meta name="description" content="Bienvenue sur notre site"\textgreater} & \\
+6 & \texttt{\textless meta name="description" content="Services de SEO, SEA, SMO"\textgreater} & \\
+7 & \texttt{\textless meta name="description" content="Page de contact"\textgreater} & \\
+\bottomrule
+\end{longtable}
+
+\textbf{R\`{e}gles \`{a} respecter :}
+\begin{itemize}
+    \item Title : 50-60 caract\`{e}res max
+    \item Meta description : 150-160 caract\`{e}res max
+    \item Inclure le mot-cl\'{e} principal
+    \item Appel \`{a} l'action ou valeur ajout\'{e}e
+    \item Unique pour chaque page
+\end{itemize}
+
+\textbf{Questions bonus :}
+\begin{enumerate}
+    \item Google r\'{e}\'{e}crit souvent les meta descriptions. Dans quels cas ?
+    \item Quel est l'impact d'un title non optimis\'{e} sur le CTR ?
+    \item Peut-on avoir le m\^{e}me title sur toutes les pages d'un m\^{e}me site ?
+\end{enumerate}
+
+\section{Exercice 4 --- Structure des headings (Hn) (15 min)}
+
+\textbf{Consigne :} Voici le contenu d'une page. Organisez les headings (H1, H2, H3) correctement.
+
+\textbf{Contenu brut :}
+\begin{lstlisting}
+Titre : Les Meilleures Recettes de Pain au Levain
+Introduction : Faire son pain au levain est une tradition ancestrale...
+Section 1 : Les ingredients
+- Farine : Choisir une farine bio de qualite
+- Eau : Temperature ambiante de preference
+- Levain : Actif et rafraichi
+Section 2 : La preparation
+Etape 1 : Melanger farine et eau
+Etape 2 : Incorporer le levain
+Etape 3 : Petrisage
+Section 3 : La cuisson
+Temperature et duree
+Test de cuisson
+Section 4 : Conservation
+Dans un torchon
+Au congelateur
+Conclusion : Astuces de boulanger
+\end{lstlisting}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item \'{E}crivez la structure HTML compl\`{e}te avec les balises H1-H6.
+    \item Combien de H1 doit-il y avoir sur une page ? Pourquoi ?
+    \item Quelle est la diff\'{e}rence s\'{e}mantique entre H1 et H2 ?
+    \item Google utilise-t-il les headings pour le classement ? Expliquez.
+\end{enumerate}
+
+\section{Exercice 5 --- Optimisation des images (15 min)}
+
+\textbf{Consigne :} Pour chaque image, d\'{e}terminez le texte alternatif (alt) optimal.
+
+\begin{longtable}{lll}
+\toprule
+Image & Contexte & Alt text propos\'{e} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Photo d'un pain au levain & Article ``Recette pain levain'' & \\
+Logo de l'entreprise & Page d'accueil & \\
+Graphique des parts de march\'{e} SEO & Article ``Parts de march\'{e} 2026'' & \\
+Photo du magasin & Page contact & \\
+Infographie ``\'{e}tapes du SEO'' & Article guide SEO & \\
+Photo du g\'{e}rant & Page \'{e}quipe & \\
+Bouton ``Acheter maintenant'' & Page produit & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Google ``voit''-il les images ? Comment ?
+    \item Quelle est la diff\'{e}rence entre le alt text et le title d'une image ?
+    \item Les images d\'{e}coratives doivent-elles avoir un alt text ? Comment le g\'{e}rer ?
+    \item Quel est l'impact des images sur les Core Web Vitals ?
+    \item Formats modernes : citez 3 formats d'image nouvelle g\'{e}n\'{e}ration et leurs avantages SEO.
+\end{enumerate}
+
+\section{Exercice 6 --- Maillage interne (Internal Linking) (25 min)}
+
+\textbf{Consigne :} Vous avez un site avec les pages suivantes. Cr\'{e}ez un maillage interne optimal.
+
+Pages :
+\begin{itemize}
+    \item Accueil (P1)
+    \item Services SEO (P2)
+    \item Blog (P3)
+    \item Article : ``Guide du r\'{e}f\'{e}rencement'' (P4)
+    \item Article : ``Comment faire du netlinking'' (P5)
+    \item Article : ``Optimisation technique SEO'' (P6)
+    \item Article : ``Recherche de mots-cl\'{e}s'' (P7)
+    \item Contact (P8)
+    \item \`{A} propos (P9)
+    \item Tarifs (P10)
+\end{itemize}
+
+\textbf{T\^a}ches :
+\begin{enumerate}
+    \item Dessinez un graphe de liens entre ces pages (chaque page doit avoir 2-5 liens).
+    \item Identifiez la page qui devrait recevoir le plus de liens internes (page pilier).
+    \item Quels textes d'ancrage (anchor text) utilisez-vous pour chaque lien ?
+    \item Quelle page est la plus susceptible d'\^{e}tre orpheline ? Comment l'\'{e}viter ?
+    \item Calculez la profondeur de clics de chaque page depuis l'accueil.
+\end{enumerate}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Qu'est-ce qu'un ``topical cluster'' ? Donnez un exemple avec ce site.
+    \item Combien de liens internes par page recommande-t-on ?
+    \item Quel est l'impact du maillage interne sur le PageRank interne ?
+    \item Faut-il utiliser le m\^{e}me anchor text pour tous les liens vers une m\^{e}me page ?
+\end{enumerate}
+
+\section{Exercice 7 --- Analyse concurrentielle (20 min)}
+
+\textbf{Consigne :} Analysez la page d'un concurrent (ex: ``Meilleure agence SEO Paris'').
+
+\begin{enumerate}
+    \item Quel est son title et sa meta description ?
+    \item Quelle est sa structure de headings ?
+    \item Quels mots-cl\'{e}s cible-t-il ?
+    \item Combien de mots contient sa page ?
+    \item Quels sont ses liens internes et externes ?
+    \item A-t-il des images optimis\'{e}es ?
+    \item Que feriez-vous mieux que lui ?
+\end{enumerate}
+
+\section{Exercice 8 --- Audit On-Page express (15 min)}
+
+\textbf{Consigne :} Utilisez une checklist pour auditer une page web en 15 min.
+
+\begin{longtable}{clp{6cm}}
+\toprule
+Crit\`{e}re & OK/KO & Remarque \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Title pr\'{e}sent et optimis\'{e} & & \\
+Meta description pr\'{e}sente & & \\
+H1 unique et pertinent & & \\
+Structure H2/H3 logique & & \\
+Mots-cl\'{e}s dans le contenu & & \\
+Images avec alt text & & \\
+Liens internes ($\geq$3) & & \\
+Liens externes pertinents & & \\
+Temps de chargement $<$ 3s & & \\
+Mobile-friendly & & \\
+HTTPS & & \\
+Balise canonical & & \\
+Donn\'{e}es structur\'{e}es & & \\
+\bottomrule
+\end{longtable}
+
+\section{Pour aller plus loin}
+
+\begin{itemize}
+    \item \textbf{Outil :} Utilisez l'extension Web Developer Toolbar pour analyser les balises d'une page.
+    \item \textbf{Projet :} Cr\'{e}ez une fiche d'optimisation On-Page pour une page r\'{e}elle de votre choix.
+    \item \textbf{Lecture :} Chapitres ``Recherche de mots-cl\'{e}s'', ``Intention de recherche'', ``Balises HTML'' du rapport.
+    \item \textbf{Veille :} Trouvez 3 exemples de pages bien optimis\'{e}es (top 3 Google) et analysez ce qu'elles font de mieux.
+\end{itemize}
+
+
+% ======================================================================
+% TD 04
+% ======================================================================
+\chapter{TD 04 --- SEO Technique Avanc\'{e} et Off-Page}
+
+\section{Objectifs}
+\begin{itemize}
+    \item Ma^{\^\i}triser les Core Web Vitals et la performance web
+    \item Comprendre le Mobile-First Indexing et les donn\'{e}es structur\'{e}es
+    \item Savoir \'{e}laborer une strat\'{e}gie de netlinking
+    \item Appr\'{e}hender E-E-A-T et le SEO S\'{e}mantique
+\end{itemize}
+
+\section{Exercice 1 --- Diagnostic Core Web Vitals (25 min)}
+
+\textbf{Cas pratique :} Voici les m\'{e}triques Core Web Vitals d'un site e-commerce :
+
+\begin{longtable}{lll}
+\toprule
+M\'{e}trique & Valeur & Statut (Bon/\`{A} am\'{e}liorer/Mauvais) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+LCP & 4.2s & \\
+INP & 180ms & \\
+CLS & 0.35 & \\
+TTFB & 1.8s & \\
+FCP & 2.5s & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Compl\'{e}tez la colonne ``Statut'' avec les seuils Google.
+    \item LCP est mauvais. Citez 5 causes possibles et 5 solutions.
+    \item CLS est mauvais. Expliquez ce qui provoque des ``layout shifts'' et comment les corriger.
+    \item Quel est l'impact des Core Web Vitals sur le classement Google ?
+    \item Quels outils utilisez-vous pour mesurer les Core Web Vitals ?
+\end{enumerate}
+
+\textbf{Calcul :} Un site a un LCP de 4.2s. L'\'{e}quipe technique estime pouvoir r\'{e}duire \`{a} 2.0s. Combien de temps gagnera l'utilisateur ? Quel est l'objectif \`{a} atteindre pour \^{e}tre dans le vert ?
+
+\section{Exercice 2 --- Optimisation de la performance web (20 min)}
+
+\textbf{Consigne :} Pour chaque technique, expliquez son fonctionnement et son impact SEO.
+
+\begin{longtable}{lll}
+\toprule
+Technique & Fonctionnement & Impact SEO ($\bigstar$ \`{a} $\bigstar\bigstar\bigstar\bigstar\bigstar$) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+CDN & & \\
+Lazy Loading & & \\
+Code Splitting & & \\
+Tree Shaking & & \\
+Critical CSS & & \\
+Brotli vs Gzip & & \\
+HTTP/2 vs HTTP/3 & & \\
+Preload / Prefetch & & \\
+Server Push & & \\
+Cache Browser & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Classez ces techniques par priorit\'{e} d'impl\'{e}mentation.
+    \item Quelle est la diff\'{e}rence entre \texttt{preload} et \texttt{prefetch} ?
+    \item Un CDN est-il toujours b\'{e}n\'{e}fique pour le SEO ? Quand \'{e}viter ?
+    \item Comment v\'{e}rifier si un site utilise HTTP/2 ou HTTP/3 ?
+\end{enumerate}
+
+\section{Exercice 3 --- Optimisation Mobile et Mobile-First Indexing (15 min)}
+
+\textbf{Consigne :} R\'{e}pondez aux questions suivantes.
+
+\begin{enumerate}
+    \item Quelle est la diff\'{e}rence entre ``mobile-friendly'' et ``mobile-first'' ?
+    \item Google utilise principalement la version mobile pour l'indexation depuis 2021. Qu'est-ce que cela implique concr\`{e}tement ?
+    \item Auditez un site de votre choix sur mobile (via l'outil Mobile-Friendly Test de Google).
+    \begin{itemize}
+        \item La page est-elle compatible mobile ?
+        \item Quels probl\`{e}mes de rendu sont signal\'{e}s ?
+        \item Les textes sont-ils lisibles sans zoom ?
+        \item Les \'{e}l\'{e}ments cliquables sont-ils assez espac\'{e}s ?
+    \end{itemize}
+    \item Un site desktop-only peut-il \^{e}tre bien class\'{e} sur mobile ? Expliquez.
+    \item Proposez 5 bonnes pratiques pour le Mobile-First Indexing.
+\end{enumerate}
+
+\section{Exercice 4 --- Donn\'{e}es structur\'{e}es (Schema Markup) (25 min)}
+
+\textbf{Consigne :} \'{E}crivez les donn\'{e}es structur\'{e}es JSON-LD pour les cas suivants.
+
+\paragraph{Cas 1 --- Article de blog :}
+\begin{itemize}
+    \item Titre : ``Comment optimiser son SEO en 2026''
+    \item Auteur : Jean Dupont
+    \item Date publication : 2026-01-15
+    \item Description : ``Guide complet des techniques SEO 2026''
+    \item Image : \url{https://exemple.com/image.jpg}
+    \item URL : \url{https://exemple.com/blog/seo-2026}
+\end{itemize}
+
+\paragraph{Cas 2 --- Organisation (entreprise) :}
+\begin{itemize}
+    \item Nom : Agence WebPro
+    \item Logo : \url{https://exemple.com/logo.png}
+    \item URL : \url{https://exemple.com}
+    \item T\'{e}l\'{e}phone : +33 1 23 45 67 89
+    \item Adresse : 12 Rue du Web, 75001 Paris
+    \item Note moyenne : 4.5/5 (bas\'{e}e sur 127 avis)
+\end{itemize}
+
+\paragraph{Cas 3 --- Produit :}
+\begin{itemize}
+    \item Nom : Formation SEO Compl\`{e}te
+    \item Prix : 497\,\texteuro{}
+    \item Devise : EUR
+    \item Disponibilit\'{e} : En stock
+    \item Note : 4.8/5 (89 avis)
+    \item Marque : WebPro Academy
+\end{itemize}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Qu'est-ce qu'un ``rich snippet'' ? Donnez 3 exemples.
+    \item Quels formats de donn\'{e}es structur\'{e}es Google supporte-t-il (JSON-LD, Microdata, RDFa) ?
+    \item Pourquoi JSON-LD est-il recommand\'{e} par Google ?
+    \item Comment tester ses donn\'{e}es structur\'{e}es ? Citez 2 outils.
+    \item Les donn\'{e}es structur\'{e}es sont-elles un facteur de classement direct ?
+\end{enumerate}
+
+\section{Exercice 5 --- Netlinking et strat\'{e}gie de backlinks (30 min)}
+
+\textbf{Consigne :} Analysez le profil de liens d'un site.
+
+\textbf{Profil de liens du site \texttt{exemple.com} :}
+\begin{itemize}
+    \item Total backlinks : 1\,500
+    \item Domaines r\'{e}f\'{e}rents : 45
+    \item Domaines \texttt{.edu} / \texttt{.gouv} : 2
+    \item Domaines \texttt{.fr} : 20
+    \item Domaines \'{e}trangers : 25
+    \item Ratio dofollow/nofollow : 80/20
+    \item Anchor text : ``cliquez ici'' (40\%), ``site web'' (15\%), ``meilleur site'' (10\%), marque (25\%), URL brute (10\%)
+    \item Pages avec le plus de liens : Accueil (800 liens), \texttt{/blog} (300), \texttt{/services} (200)
+\end{itemize}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Calculez le nombre moyen de backlinks par domaine r\'{e}f\'{e}rent. Est-ce bon ou mauvais ?
+    \item Le ratio d'ancres ``cliquez ici'' \`{a} 40\% est-il naturel ? Expliquez.
+    \item Pourquoi avoir seulement 2 domaines \texttt{.edu}/\texttt{.gouv} sur 45 est-il un signal ?
+    \item Que sugg\`{e}re la concentration de 800 liens sur l'accueil ?
+    \item Le site a-t-il un profil de liens naturel ? Quelles actions recommandez-vous ?
+    \item Calculez le Trust Flow estim\'{e} (justification).
+\end{enumerate}
+
+\textbf{Cas pratique :} Proposez une strat\'{e}gie de link building pour ce site :
+\begin{itemize}
+    \item 3 techniques de netlinking
+    \item Types de sites cibles
+    \item Types de contenu \`{a} cr\'{e}er pour attirer des liens
+    \item KPIs \`{a} suivre sur 6 mois
+\end{itemize}
+
+\section{Exercice 6 --- E-E-A-T : \'{E}valuation de cr\'{e}dibilit\'{e} (20 min)}
+
+\textbf{Consigne :} \'{E}valuez le niveau E-E-A-T des sites suivants sur une \'{e}chelle de 1 \`{a} 10.
+
+\begin{longtable}{llllll}
+\toprule
+Site & Exp\'{e}rience & Expertise & Autorit\'{e} & Confiance & Note /10 \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Blog sant\'{e} tenu par un particulier & & & & & \\
+Site gouvernemental (sante.fr) & & & & & \\
+Article Wikipedia sur le SEO & & & & & \\
+Blog d'une agence SEO & & & & & \\
+Avis Google d'un restaurant & & & & & \\
+Publication LinkedIn d'un expert & & & & & \\
+Site marchand avec paiement s\'{e}curis\'{e} & & & & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Qu'est-ce que YMYL (Your Money Your Life) ? Donnez 3 exemples de sites YMYL.
+    \item Comment un site YMYL peut-il am\'{e}liorer son E-E-A-T ?
+    \item Quelle est la diff\'{e}rence entre E-A-T et E-E-A-T ? (le E suppl\'{e}mentaire)
+    \item Google peut-il p\'{e}naliser manuellement un site avec un mauvais E-E-A-T ?
+    \item Proposez une checklist E-E-A-T pour un site de conseils juridiques.
+\end{enumerate}
+
+\section{Exercice 7 --- SEO S\'{e}mantique et Entity SEO (15 min)}
+
+\textbf{Consigne :} Cr\'{e}ez un graphe d'entit\'{e}s pour le sujet ``SEO''.
+
+\begin{enumerate}
+    \item Identifiez 10 entit\'{e}s li\'{e}es au SEO
+    \item Classez-les par cat\'{e}gories (concepts, outils, acteurs, techniques)
+    \item Dessinez les relations entre elles
+\end{enumerate}
+
+\textbf{Exemple de structure :}
+\begin{lstlisting}
+Entite principale : SEO
+  +-- Concepts : Indexation, Crawling, Ranking, PageRank
+  +-- Techniques : Netlinking, On-Page, Technique, Semantique
+  +-- Outils : Google Search Console, SEMrush, Ahrefs, Screaming Frog
+  +-- Acteurs : Google, Bing, Larry Page, Sergey Brin
+  +-- Metriques : Autorite, Pertinence, Confiance
+\end{lstlisting}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Quelle est la diff\'{e}rence entre mot-cl\'{e} et entit\'{e} ?
+    \item Comment Google utilise-t-il le Knowledge Graph pour comprendre les entit\'{e}s ?
+    \item Qu'est-ce que le ``Topic Authority'' et comment le construire ?
+    \item Un site peut-il \^{e}tre une entit\'{e} dans le Knowledge Graph de Google ?
+\end{enumerate}
+
+\section{Exercice 8 --- Audit SEO global : mise en situation (30 min)}
+
+\textbf{Consigne :} Vous intervenez sur le site \texttt{exemple.com}. Voici les donn\'{e}es :
+
+\begin{longtable}{ll}
+\toprule
+M\'{e}trique & Valeur \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Pages totales & 350 \\
+Pages index\'{e}es & 120 \\
+Trafic mensuel & 8\,500 visites \\
+Taux de rebond & 72\% \\
+Vitesse mobile & 4.8s \\
+Core Web Vitals & LCP 5.2s, CLS 0.45, INP 250ms \\
+Backlinks & 320 (12 domaines) \\
+Pages avec balises title & 200 \\
+Pages avec meta description & 85 \\
+Pages HTTPS & 350 \\
+Pages avec donn\'{e}es structur\'{e}es & 0 \\
+Sitemap XML & obsol\`{e}te (300 URLs) \\
+Robots.txt & bloque les images \\
+\bottomrule
+\end{longtable}
+
+\textbf{R\'{e}digez un rapport d'audit structur\'{e} :}
+\begin{enumerate}
+    \item \textbf{Probl\`{e}mes critiques} (\`{a} traiter en urgence)
+    \item \textbf{Probl\`{e}mes importants} (\`{a} traiter dans le mois)
+    \item \textbf{Am\'{e}liorations} (\`{a} planifier dans le trimestre)
+    \item \textbf{Priorisation} avec estimation d'impact ($\bigstar$) et effort ($\bigstar$)
+\end{enumerate}
+
+\section{Pour aller plus loin}
+
+\begin{itemize}
+    \item \textbf{Pratique :} Installez Lighthouse et auditez 3 sites concurrents. Comparez les scores.
+    \item \textbf{Outil :} Cr\'{e}ez un compte Search Console (si vous avez un site) ou explorez le compte de d\'{e}mo.
+    \item \textbf{Projet :} R\'{e}digez une strat\'{e}gie de netlinking compl\`{e}te pour un site fictif (objectifs, techniques, budget).
+    \item \textbf{Lecture :} Chapitres ``Core Web Vitals'', ``Donn\'{e}es structur\'{e}es'', ``Netlinking'', ``E-E-A-T'' du rapport.
+\end{itemize}
+
+
+% ======================================================================
+% TD 05
+% ======================================================================
+\chapter{TD 05 --- SEO Sp\'{e}cialis\'{e}, Mesure et Strat\'{e}gie}
+
+\section{Objectifs}
+\begin{itemize}
+    \item Ma^{\^\i}triser le SEO Local, E-commerce et CMS
+    \item Savoir utiliser Google Search Console et Google Analytics 4
+    \item Comprendre l'impact de l'IA sur le SEO
+    \item \'{E}laborer un plan d'action strat\'{e}gique
+\end{itemize}
+
+\section{Exercice 1 --- SEO Local : Audit de visibilit\'{e} locale (25 min)}
+
+\textbf{Consigne :} Vous g\'{e}rez le SEO d'une pizzeria \`{a} Lyon. Analysez sa visibilit\'{e} locale.
+
+\subsection*{\'{E}tape 1 --- Google Business Profile :}
+\begin{enumerate}
+    \item Cr\'{e}ez une fiche GBP fictive compl\`{e}te (nom, adresse, t\'{e}l\'{e}phone, horaires, cat\'{e}gories, photos)
+    \item Quelles informations sont obligatoires pour appara^{\^\i}tre dans le ``Local Pack'' ?
+    \item Comment g\'{e}rer les avis clients (positifs et n\'{e}gatifs) ?
+    \item Qu'est-ce que les ``Google Posts'' et \`{a} quoi servent-ils ?
+\end{enumerate}
+
+\subsection*{\'{E}tape 2 --- Citations et NAP :}
+\begin{lstlisting}
+Nom : Pizza Mia
+Adresse : 15 Rue de la Republique, 69002 Lyon
+Telephone : 04 72 00 00 00
+Site web : https://pizzamia-lyon.fr
+\end{lstlisting}
+
+\begin{enumerate}
+    \item Citez 5 annuaires o\`{u} la fiche doit \^{e}tre pr\'{e}sente
+    \item Pourquoi la coh\'{e}rence NAP (Name, Address, Phone) est-elle cruciale ?
+    \item Que se passe-t-il si le NAP est diff\'{e}rent sur PagesJaunes et Google ?
+\end{enumerate}
+
+\subsection*{\'{E}tape 3 --- Avis clients :}
+\begin{itemize}
+    \item 45 avis, note moyenne 4,2$\bigstar$
+    \item 3 avis n\'{e}gatifs (1 sur la livraison, 2 sur les prix)
+    \item 42 avis positifs
+\end{itemize}
+
+\begin{enumerate}
+    \item Comment r\'{e}pondre aux avis n\'{e}gatifs ? R\'{e}digez 2 r\'{e}ponses.
+    \item Quel est l'impact des avis sur le classement local ?
+    \item Proposez une strat\'{e}gie pour obtenir plus d'avis positifs.
+\end{enumerate}
+
+\section{Exercice 2 --- Migration SEO : Plan de migration (30 min)}
+
+\textbf{Consigne :} Le site \texttt{ancien-site.com} migre vers \texttt{nouveau-site.com}. Planifiez la migration.
+
+\textbf{Donn\'{e}es du site :}
+\begin{itemize}
+    \item 1\,500 pages index\'{e}es
+    \item 2\,300 backlinks (120 domaines r\'{e}f\'{e}rents)
+    \item Trafic mensuel : 45\,000 visites
+    \item Chiffre d'affaires mensuel : 120\,000\,\texteuro{}
+\end{itemize}
+
+\textbf{\'{E}tapes :}
+\begin{enumerate}
+    \item \textbf{Pr\'{e}-migration (J-30 \`{a} J-1) :}
+    \begin{itemize}
+        \item Quels audits r\'{e}aliser avant la migration ?
+        \item Comment cartographier les URLs anciennes $\rightarrow$ nouvelles ?
+        \item Faut-il contacter les sites qui linkent vers l'ancien site ?
+    \end{itemize}
+
+    \item \textbf{Migration (J0) :}
+    \begin{itemize}
+        \item R\'{e}digez les r\`{e}gles de redirection 301 pour 5 cas concrets :
+        \begin{itemize}
+            \item \texttt{/article/123} $\rightarrow$ \texttt{/blog/article-seo}
+            \item \texttt{/produit.php?id=5} $\rightarrow$ \texttt{/produits/chaussures-running}
+            \item \texttt{/cat/} $\rightarrow$ \texttt{/categorie/}
+            \item \texttt{/page-d-accueil-ancienne.html} $\rightarrow$ \texttt{/}
+            \item \texttt{/blog/} $\rightarrow$ \texttt{/actualites/}
+        \end{itemize}
+        \item Comment g\'{e}rer la p\'{e}riode de transition ?
+    \end{itemize}
+
+    \item \textbf{Post-migration (J+1 \`{a} J+90) :}
+    \begin{itemize}
+        \item Quels KPIs surveiller quotidiennement ?
+        \item Que faire en cas de baisse de trafic de 40\% ?
+        \item Quand soumettre le nouveau sitemap \`{a} Google ?
+        \item Combien de temps faut-il pour r\'{e}cup\'{e}rer le trafic ?
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Calcul :} Le site perd 30\% de son trafic apr\`{e}s migration. Combien de temps pour revenir au niveau initial si la croissance hebdomadaire est de 5\% ?
+
+\section{Exercice 3 --- SEO E-commerce : Fiche produit optimis\'{e}e (25 min)}
+
+\textbf{Consigne :} Optimisez une page produit pour un site e-commerce.
+
+\textbf{Produit :} ``Chaussures de running Trail Ultra-Grip Pro''
+
+\textbf{Caract\'{e}ristiques :}
+\begin{itemize}
+    \item Prix : 149,99\,\texteuro{}
+    \item Marque : RunTech
+    \item Disponible en 5 couleurs, 8 pointures (39-46)
+    \item Mat\'{e}riau : Mesh respirant + semelle Vibram
+    \item Poids : 280g
+    \item Avis : 4,7/5 (234 avis)
+\end{itemize}
+
+\textbf{T\^aches :}
+\begin{enumerate}
+    \item R\'{e}digez le \textbf{title tag} optimal (50-60 car.)
+    \item R\'{e}digez la \textbf{meta description} (150-160 car.)
+    \item Structurez les \textbf{headings} (H1, H2, H3)
+    \item \'{E}crivez la \textbf{description produit} (200-300 mots SEO)
+    \item G\'{e}n\'{e}rez le \textbf{JSON-LD Product} complet
+\end{enumerate}
+
+\textbf{Gestion des variations :}
+\begin{enumerate}
+    \item Comment g\'{e}rer les URLs des 5 couleurs $\times$ 8 pointures = 40 variantes ?
+    \item Balise canonical : o\`{u} doit-elle pointer ?
+    \item Faut-il indexer chaque variante ? Pourquoi ?
+\end{enumerate}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Qu'est-ce qu'une page ``cat\'{e}gorie'' optimis\'{e}e ? Donnez un exemple de structure.
+    \item Comment g\'{e}rer les filtres (prix, couleur, taille) sans cr\'{e}er du contenu dupliqu\'{e} ?
+    \item Quel est l'impact des avis produits sur le SEO ?
+    \item Comment optimiser les fiches produits pour le ``Shopping Graph'' de Google ?
+\end{enumerate}
+
+\section{Exercice 4 --- Google Search Console : Analyse de donn\'{e}es (20 min)}
+
+\textbf{Consigne :} Analysez les rapports GSC suivants et proposez des actions.
+
+\textbf{Rapport de performances (28 jours) :}
+\begin{longtable}{lrl}
+\toprule
+M\'{e}trique & Valeur & Variation vs p\'{e}riode pr\'{e}c\'{e}dente \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Impressions & 850\,000 & +12\% \\
+Clics & 25\,000 & $-8$\% \\
+CTR moyen & 2,9\% & $-1,8$ pts \\
+Position moyenne & 12,4 & $+1,5$ \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Le CTR baisse alors que les impressions augmentent. Quelles sont les causes possibles ?
+    \item La position moyenne passe de 10,9 \`{a} 12,4. Est-ce grave ? Quels mots-cl\'{e}s v\'{e}rifier en priorit\'{e} ?
+    \item Proposez 3 actions pour am\'{e}liorer le CTR.
+    \item Quels types de requ\^{e}tes faut-il analyser en premier ?
+\end{enumerate}
+
+\textbf{Rapport de couverture :}
+\begin{longtable}{lrl}
+\toprule
+Statut & URLs & Action \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Index\'{e}es & 1\,200 & \\
+Avec erreur & 45 & \\
+Valides avec avertissement & 120 & \\
+Exclues & 3\,400 & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Quels types d'erreurs peuvent appara^{\^\i}tre dans ce rapport ?
+    \item Le nombre de pages exclues (3\,400) est \'{e}lev\'{e} par rapport aux index\'{e}es (1\,200). Est-ce normal ?
+    \item Quels outils utiliser pour crawler les pages en erreur et les corriger ?
+\end{enumerate}
+
+\textbf{Rapport de pages mobiles :}
+\begin{itemize}
+    \item 23 pages avec probl\`{e}mes d'utilisation mobile
+    \item 12 pages avec contenu plus large que l'\'{e}cran
+    \item 8 pages avec texte trop petit
+    \item 3 pages avec \'{e}l\'{e}ments cliquables trop proches
+\end{itemize}
+
+\textbf{Action :} Proposez des corrections pour chaque type de probl\`{e}me.
+
+\section{Exercice 5 --- Google Analytics 4 : Configuration et interpr\'{e}tation (20 min)}
+
+\textbf{Consigne :} Configurez GA4 pour un site e-commerce et interpr\'{e}tez les donn\'{e}es.
+
+\textbf{Configuration :}
+\begin{enumerate}
+    \item Quels \'{e}v\'{e}nements doivent \^{e}tre track\'{e}s sur un site e-commerce ? (listez-en 10 minimum)
+    \item Qu'est-ce qu'un ``conversion event'' ? Comment le configurer ?
+    \item Quelle est la diff\'{e}rence entre ``sessions'' et ``users'' dans GA4 ?
+    \item Comment lier GA4 \`{a} Google Search Console ?
+\end{enumerate}
+
+\textbf{Analyse de rapport :}
+\begin{longtable}{lr}
+\toprule
+M\'{e}trique & Valeur \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Utilisateurs & 32\,450 \\
+Nouveaux utilisateurs & 28\,100 \\
+Sessions & 41\,200 \\
+Taux d'engagement & 54,3\% \\
+Dur\'{e}e moyenne d'engagement & 2 min 45s \\
+\'{E}v\'{e}nements cl\'{e}s (achats) & 890 \\
+Revenus & 71\,200\,\texteuro{} \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Calculez le taux de conversion (achats / sessions). Quel diagnostic ?
+    \item 28\,100 nouveaux utilisateurs / 32\,450 total $\Rightarrow$ quel est le taux de retour ?
+    \item Que signifie un ``taux d'engagement'' de 54,3\% ? Est-ce bon ?
+    \item Quel est le revenu moyen par session ? Par acheteur ?
+    \item Proposez 3 axes d'am\'{e}lioration bas\'{e}s sur ces donn\'{e}es.
+\end{enumerate}
+
+\section{Exercice 6 --- KPIs SEO et Tableau de bord (20 min)}
+
+\textbf{Consigne :} Cr\'{e}ez un tableau de bord SEO complet.
+
+\textbf{KPIs \`{a} suivre mensuellement :}
+
+\begin{longtable}{lllll}
+\toprule
+Cat\'{e}gorie & KPI & Cible & Fr\'{e}quence & Outil \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Trafic & & & & \\
+Positions & & & & \\
+Technique & & & & \\
+Conversion & & & & \\
+Netlinking & & & & \\
+Contenu & & & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Compl\'{e}tez le tableau avec au moins 15 KPIs
+    \item Quelle est la diff\'{e}rence entre un KPI de ``vanity'' et un KPI actionnable ?
+    \item Classez les KPIs par priorit\'{e} (P1, P2, P3)
+    \item Proposez un format de reporting mensuel pour un client (1 page max)
+\end{enumerate}
+
+\textbf{Cas pratique :} Un client vous dit ``le trafic a augment\'{e} de 20\% ce mois-ci''. Quels autres KPIs devez-vous v\'{e}rifier avant de valider cette bonne nouvelle ?
+
+\section{Exercice 7 --- Plan d'Action Strat\'{e}gique (30 min)}
+
+\textbf{Consigne :} \'{E}laborez un plan d'action SEO sur 12 mois pour un site de voyage.
+
+\textbf{\'{E}tat des lieux :}
+\begin{itemize}
+    \item Site : blogvoyages.com (200 articles)
+    \item Trafic mensuel : 35\,000 visites
+    \item Domaines r\'{e}f\'{e}rents : 45
+    \item Pages index\'{e}es : 180 / 200
+    \item Core Web Vitals : LCP 3,8s, CLS 0,25, INP 180ms
+    \item Taux de conversion (affiliation) : 1,2\%
+    \item Revenu mensuel : 4\,200\,\texteuro{}
+\end{itemize}
+
+\textbf{Structure du plan :}
+
+\begin{longtable}{lllll}
+\toprule
+Phase & Mois & Actions & KPIs & Budget \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Audit & M1 & & & \\
+Technique & M2-M3 & & & \\
+Contenu & M2-M6 & & & \\
+Netlinking & M4-M9 & & & \\
+Suivi & M10-M12 & & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{\`{A} compl\'{e}ter :}
+\begin{enumerate}
+    \item Priorisez les actions par impact et effort (matrice impact/effort)
+    \item Estimez le budget n\'{e}cessaire (outils, ressources, freelance)
+    \item Projetez le trafic \`{a} M12 (+XX\%)
+    \item Calculez le ROI attendu
+    \item Identifiez les risques et les plans de contingence
+\end{enumerate}
+
+\section{Exercice 8 --- SEO et Intelligence Artificielle (25 min)}
+
+\textbf{Consigne :} Analysez l'impact de l'IA sur le SEO.
+
+\paragraph{1. Search Generative Experience (SGE) / AI Overviews :}
+\begin{itemize}
+    \item Qu'est-ce que SGE et comment change-t-il la SERP ?
+    \item Quel est l'impact sur le CTR des r\'{e}sultats organiques traditionnels ?
+    \item Comment optimiser son contenu pour appara^{\^\i}tre dans les AI Overviews ?
+\end{itemize}
+
+\paragraph{2. ChatGPT et les moteurs de recherche :}
+\begin{itemize}
+    \item ChatGPT remplacera-t-il Google ? Arguments pour et contre.
+    \item Quel est l'impact de l'IA g\'{e}n\'{e}rative sur la recherche de mots-cl\'{e}s ?
+    \item Comment adapter sa strat\'{e}gie de contenu \`{a} l'\`{e}re de l'IA ?
+\end{itemize}
+
+\paragraph{3. Contenu g\'{e}n\'{e}r\'{e} par IA :}
+\begin{itemize}
+    \item Google p\'{e}nalise-t-il le contenu g\'{e}n\'{e}r\'{e} par IA ? Quelle est sa position officielle ?
+    \item Quelles sont les bonnes pratiques pour utiliser l'IA dans la cr\'{e}ation de contenu SEO ?
+    \item Comment d\'{e}tecter un contenu 100\% IA (et pourquoi l'\'{e}viter) ?
+\end{itemize}
+
+\paragraph{4. Outils IA pour le SEO :}
+Citez 5 outils IA utiles pour le SEO et leur cas d'usage :
+\begin{longtable}{lll}
+\toprule
+Outil & Cas d'usage & Alternative gratuite \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+& & \\
+& & \\
+& & \\
+& & \\
+& & \\
+\bottomrule
+\end{longtable}
+
+\paragraph{5. D\'{e}bat (15 min) :} ``L'IA va rendre le SEO obsol\`{e}te'' --- Pour ou contre ?
+
+\section{Exercice 9 --- SEO Vid\'{e}o et Voice Search (15 min)}
+
+\textbf{Consigne :} Optimisez une vid\'{e}o YouTube pour le r\'{e}f\'{e}rencement.
+
+\textbf{Titre de la vid\'{e}o :} ``Comment faire du SEO en 2026 --- Guide complet d\'{e}butant''
+
+\textbf{T\^aches :}
+\begin{enumerate}
+    \item R\'{e}digez un \textbf{titre optimis\'{e}} (inclure mot-cl\'{e} principal, < 60 car.)
+    \item R\'{e}digez la \textbf{description} (200+ mots avec mots-cl\'{e}s, timestamps, liens)
+    \item Cr\'{e}ez un \textbf{script} pour les 30 premi\`{e}res secondes (accroche + mot-cl\'{e})
+    \item Proposez des \textbf{tags} (5-10 tags pertinents)
+    \item R\'{e}digez un \textbf{transcript} avec densit\'{e} de mots-cl\'{e}s naturelle
+\end{enumerate}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Comment optimiser une vid\'{e}o pour appara^{\^\i}tre dans les r\'{e}sultats Google (pas seulement YouTube) ?
+    \item Quel est le r\^{o}le des ``chapitres'' dans le r\'{e}f\'{e}rencement vid\'{e}o ?
+    \item Qu'est-ce que le ``Voice Search'' et comment l'optimisation diff\`{e}re-t-elle du SEO classique ?
+    \item Quels types de requ\^{e}tes sont les plus courants en recherche vocale ?
+\end{enumerate}
+
+\section{Exercice 10 --- Audit de site CMS (15 min)}
+
+\textbf{Consigne :} Comparez l'optimisation SEO de 3 CMS populaires.
+
+\begin{longtable}{lccc}
+\toprule
+Crit\`{e}re SEO & WordPress & Shopify & Webflow \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Permaliens personnalisables & & & \\
+Balises title/meta natifs & & & \\
+Plugin SEO disponibles & & & \\
+Donn\'{e}es structur\'{e}es & & & \\
+Vitesse native & & & \\
+Mobile-friendly & & & \\
+Sitemap XML automatique & & & \\
+Gestion des redirects & & & \\
+Internationalisation & & & \\
+\bottomrule
+\end{longtable}
+
+\textbf{Questions :}
+\begin{enumerate}
+    \item Compl\'{e}tez le tableau ($\bigstar$/$\bigstar\bigstar$/$\bigstar\bigstar\bigstar$)
+    \item Quel CMS recommandez-vous pour un site e-commerce de 500 produits ?
+    \item Quel CMS pour un blog de contenu ?
+    \item Quels sont les plugins SEO incontournables pour WordPress ? Citez-en 3 et leurs avantages.
+    \item Qu'est-ce que le ``bloat'' d'un CMS et quel est son impact sur la performance SEO ?
+\end{enumerate}
+
+\section{Pour aller plus loin}
+
+\begin{itemize}
+    \item \textbf{Pratique :} Cr\'{e}ez une fiche Google Business Profile compl\`{e}te pour un commerce fictif.
+    \item \textbf{Outil :} Installez Google Analytics 4 sur un site de test et explorez les rapports.
+    \item \textbf{Lecture :} Chapitres ``SEO Local'', ``Migration SEO'', ``E-commerce'', ``GSC'', ``GA4'', ``KPIs'', ``Plan d'Action'', ``SEO et IA'' du rapport.
+    \item \textbf{Veille :} Suivez l'actualit\'{e} SGE/AI Overviews de Google --- comment \'{e}volue la SERP ?
+\end{itemize}
+
+\end{document}
