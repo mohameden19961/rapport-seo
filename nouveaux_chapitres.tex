@@ -1,0 +1,2218 @@
+% =============================================================================
+% NOUVEAUX CHAPITRES -- Insertion dans rapport_seo.tex
+% =============================================================================
+%
+% Instructions d'insertion :
+%   Chapitre "Optimisation avancée de la performance web"  -> après ligne 1023
+%   Chapitre "SEO International et Multilingue"             -> après ligne 1184
+%   Chapitre "Strategie de contenu"                        -> après ligne 1355
+%   Chapitre "Migration SEO et Redirection"                 -> après ligne 1398
+%   Chapitre "SEO pour les CMS populaires"                  -> avant ligne 1495
+%   Chapitre "A/B Testing"                                  -> après chapitre CMS
+%   Glossaire                                               -> avant Conclusion (ligne 1726)
+%   Etudes de cas                                           -> après Glossaire
+% =============================================================================
+
+
+% =============================================================================
+% CHAPITRE 32 (après ligne 1023, avant ch:mobilefirst)
+% =============================================================================
+\chapter{Optimisation avancée de la performance web}
+\label{ch:perfweb}
+
+\section{Stratégies CDN (Content Delivery Network)}
+
+Un \keyword{CDN} (Content Delivery Network) est un réseau de serveurs distribués géographiquement qui stocke en cache les ressources statiques d'un site web pour les délivrer depuis le nœud le plus proche de l'utilisateur. L'impact sur le SEO est direct : un CDN réduit considerablement le \important{TTFB} (Time To First Byte) et améliore le \keyword{LCP}.
+
+\begin{mybox}{CDN recommandés pour le SEO}{googleblue}
+\begin{itemize}
+    \item \textbf{Cloudflare} : Gratuit, inclut protection DDoS, HTTP/3, Brotli
+    \item \textbf{KeyCDN} : Performant, paiement à l'usage, zones de cache personnalisables
+    \item \textbf{Fastly} : Cache modifiable par VCL, idéal pour les sites dynamiques
+    \item \textbf{Akamai} : Solution entreprise, couverture mondiale maximale
+    \item \textbf{CloudFront (AWS)} : Intégration native avec l'écosystème AWS
+    \item \textbf{BunnyCDN} : Rapport qualité-prix excellent, interface simple
+\end{itemize}
+\end{mybox}
+
+\subsection{Configuration avancée du CDN}
+
+Une configuration CDN optimale pour le SEO implique :
+
+\begin{enumerate}
+    \item \textbf{Cache des ressources statiques} : CSS, JS, images, polices avec des TTL longs (30 jours minimum)
+    \item \textbf{Purge sélective} : Invalider le cache uniquement pour les ressources modifiées
+    \item \textbf{Origin Shield} : Un cache central qui réduit la charge sur le serveur d'origine
+    \item \textbf{Edge Side Includes (ESI)} : Assemblage de pages au niveau du CDN pour du contenu dynamique
+    \item \textbf{Cache du HTML} : Mise en cache des pages HTML entières avec invalidation intelligente
+    \item \textbf{Règle de cache par type de contenu} : Policy différenciée pour les images, vidéos, documents
+\end{enumerate}
+
+\begin{lstlisting}[style=code,caption={Exemple de configuration des en-têtes de cache avec Cloudflare Workers}]
+// Configuration avancée du cache
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  const response = await fetch(request)
+
+  const cacheControl = {
+    'public': true,
+    'max-age': 31536000,   // 1 an pour les assets versionnes
+    's-maxage': 86400,     // 1 jour au niveau du CDN
+    'stale-while-revalidate': 604800,
+    'stale-if-error': 86400
+  }
+
+  const headers = new Headers(response.headers)
+
+  if (request.url.match(/\.(css|js|png|jpg|webp|svg|woff2?)$/)) {
+    headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+  } else if (request.url.match(/\.html$/)) {
+    headers.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    headers: headers
+  })
+}
+\end{lstlisting}
+
+\section{Strategies de caching}
+
+\subsection{Cache navigateur}
+
+Le \keyword{cache navigateur} stocke les ressources localement sur le poste du visiteur. Les en-têtes HTTP contrôlent ce comportement :
+
+\begin{itemize}
+    \item \texttt{Cache-Control: max-age=31536000} : Ressources immutables (1 an)
+    \item \texttt{Cache-Control: no-cache} : Verification systématique auprès du serveur
+    \item \texttt{Cache-Control: must-revalidate} : Interdiction d'utiliser une ressource perimee
+    \item \texttt{ETag} : Identifiant de version pour validation conditionnelle
+    \item \texttt{Last-Modified} : Date de dernière modification pour validation
+\end{itemize}
+
+\subsection{Cache serveur}
+
+Le \keyword{cache serveur} regroupe plusieurs techniques :
+
+\begin{itemize}
+    \item \textbf{Cache d'opcode} : APCu, OPcache pour le PHP (réduction du temps d'execution de 70\%)
+    \item \textbf{Cache objet} : Redis, Memcached pour les requêtes base de donnees
+    \item \textbf{Cache de page} : Varnish Cache, NGINX FastCGI Cache
+    \item \textbf{Cache de fragment} : Mise en cache partielle des blocs de page (widgets, menus)
+    \item \textbf{Cache SQL} : Mise en cache des requêtes frequentes avec Redis
+\end{itemize}
+
+\begin{lstlisting}[style=code,caption={Configuration NGINX pour le cache serveur FastCGI}]
+proxy_cache_path /var/cache/nginx levels=1:2
+    keys_zone=mycache:10m max_size=1g inactive=60m;
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_cache mycache;
+        proxy_cache_key "$scheme$request_method$host$request_uri";
+        proxy_cache_valid 200 302 60m;
+        proxy_cache_valid 404 1m;
+        proxy_cache_use_stale error timeout updating
+            http_500 http_502 http_503 http_504;
+
+        add_header X-Cache-Status $upstream_cache_status;
+
+        proxy_pass http://backend;
+    }
+
+    # Purge manuelle du cache (administration)
+    location ~ /purge(/.*) {
+        proxy_cache_purge mycache "$scheme$request_method$host$1";
+    }
+}
+\end{lstlisting}
+
+\subsection{Cache applicatif}
+
+Au niveau applicatif, l'utilisation de \keyword{Redis} ou \keyword{Memcached} permet de réduire la charge sur la base de donnees :
+
+\begin{itemize}
+    \item Sessions utilisateur stockees en mémoire
+    \item Resultats de requêtes SQL frequentes mis en cache (TTL ajustable)
+    \item Pages entières pre-rendues et servies depuis le cache
+    \item Files d'attente de tâches asynchrones
+    \item Compteurs et analytics en temps réel
+\end{itemize}
+
+\important{Le cache applicatif peut réduire le temps de réponse du serveur de 200--500 ms a moins de 10 ms.}
+
+\section{Pipeline d'optimisation des images}
+
+Les images représentent en moyenne 50\% du poids total d'une page web. Leur optimisation est cruciale.
+
+\subsection{Formats d'image modernes}
+
+\begin{itemize}
+    \item \textbf{WebP} : Comprèssion 30\% supérieure au JPEG, supporte partout depuis 2024
+    \item \textbf{AVIF} : Comprèssion 50\% supérieure au JPEG, base sur AV1, support croissant
+    \item \textbf{JPEG XL} : Successeur de JPEG, comprèssion sans perte et avec perte, encodage progrèssif
+    \item \textbf{SVG} : Format vectoriel idéal pour logos, icones, illustrations
+\end{itemize}
+
+\subsection{Techniques d'optimisation}
+
+\begin{enumerate}
+    \item \textbf{Comprèssion avec perte contrôlee} : Qualite 80--85\% pour les photos
+    \item \textbf{Responsive images} : Attributs \texttt{srcset} et \texttt{sizes} pour adapter la résolution
+    \item \textbf{Lazy loading natif} : \texttt{loading="lazy"} sur toutes les images hors écran
+    \item \textbf{Dimensions explicites} : Toujours specifier \texttt{width} et \texttt{height} (CLS)
+    \item \textbf{Prechargement des images hero} : \texttt{<link rel="preload">} pour le LCP
+    \item \textbf{Image CDN} : Services comme Cloudinary, Imgix, ou imgproxy
+    \item \textbf{WebP avec fallback} : Element \texttt{<picture>} avec formats multiples
+\end{enumerate}
+
+\begin{lstlisting}[style=htmlcode,caption={Balise picture avec fallback et srcset optimisé}]
+<picture>
+  <source
+    srcset="hero-320.avif 320w,
+            hero-640.avif 640w,
+            hero-1280.avif 1280w,
+            hero-1920.avif 1920w"
+    sizes="(max-width: 320px) 280px,
+           (max-width: 640px) 600px,
+           (max-width: 1280px) 1200px,
+           1920px"
+    type="image/avif">
+  <source
+    srcset="hero-320.webp 320w,
+            hero-640.webp 640w,
+            hero-1280.webp 1280w,
+            hero-1920.webp 1920w"
+    sizes="(max-width: 320px) 280px,
+           (max-width: 640px) 600px,
+           (max-width: 1280px) 1200px,
+           1920px"
+    type="image/webp">
+  <img src="hero-1920.jpg"
+       srcset="hero-320.jpg 320w, hero-640.jpg 640w,
+               hero-1280.jpg 1280w, hero-1920.jpg 1920w"
+       sizes="(max-width: 320px) 280px,
+              (max-width: 640px) 600px,
+              (max-width: 1280px) 1200px,
+              1920px"
+       alt="Description de l'image"
+       width="1920" height="1080"
+       loading="eager"
+       decoding="async"
+       fetchpriority="high">
+</picture>
+\end{lstlisting}
+
+\section{HTTP/2 et HTTP/3}
+
+\subsection{HTTP/2}
+
+Le \keyword{HTTP/2} (2015) apporte des améliorations majeures :
+
+\begin{itemize}
+    \item \textbf{Multiplexing} : Plusieurs requêtes simultanees sur une seule connexion TCP
+    \item \textbf{Server Push} : Envoi proactif de ressources au client (abandonne progrèssivement)
+    \item \textbf{Comprèssion des en-têtes} (HPACK) : Reduction du volume des headers
+    \item \textbf{Binaires} : Encodage binaire plus efficace que textuel
+    \item \textbf{Stream prioritization} : Ordonnancement du chargement des ressources
+\end{itemize}
+
+\subsection{HTTP/3}
+
+Le \keyword{HTTP/3} (2022) utilise \keyword{QUIC} (Quick UDP Internet Connections) au lieu de TCP :
+
+\begin{itemize}
+    \item \textbf{zéro RTT} : Connexion instantanee après la première visite
+    \item \textbf{Supprèssion du Head-of-Line blocking} : Un paquet perdu ne bloque pas les autrès flux
+    \item \textbf{Migration de connexion} : Changement de réseau sans reconnexion
+    \item \textbf{TLS 1.3 intégré} : Chiffrement natif, pas de négociation supplementaire
+    \item \textbf{Meilleure performance mobile} : Gestion optimisée des changements de réseau
+\end{itemize}
+
+\important{L'HTTP/3 peut réduire le temps de connexion initial de 1--3 allers-retours TCP a 0 RTT, soit un gain de 100 a 300 ms.}
+
+\subsection{Migration vers HTTP/3}
+
+\begin{enumerate}
+    \item Verifiez la compatibilite de votre hebergeur / CDN
+    \item Activez HTTP/3 dans la configuration du serveur ou CDN
+    \item Ajoutez l'enregistrement DNS Alt-Svc
+    \item Testez avec \texttt{curl --http3} ou \url{https://http3check.net}
+    \item Surveillez les métriques de performance avant/après
+\end{enumerate}
+
+\section{Server Push et Resource Hints}
+
+\subsection{Resource Hints modernes}
+
+Le \keyword{Server Push} a ete deprecie par Chrome (2022) au profit des Resource Hints plus efficaces :
+
+\begin{itemize}
+    \item \texttt{<link rel="preload">} : Chargement prioritaire d'une ressource critique
+    \item \texttt{<link rel="preconnect">} : Etablissement anticipe d'une connexion
+    \item \texttt{<link rel="dns-prefetch">} : Resolution DNS anticipee
+    \item \texttt{<link rel="prefetch">} : Chargement de la page suivante (navigation predite)
+    \item \texttt{<link rel="prerender">} : Pre-rendu complet de la page suivante (Chrome uniquement)
+    \item \texttt{<link rel="modulepreload">} : Prechargement de modules JavaScript
+\end{itemize}
+
+\begin{lstlisting}[style=htmlcode,caption={Resource Hints stratégiques pour une page optimisée}]
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Preconnexion aux origines tierces critiques -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://analytics.example.com">
+  <link rel="dns-prefetch" href="https://cdn.example.com">
+
+  <!-- Prechargement des ressources LCP -->
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/css/critical.css" as="style">
+  <link rel="preload" href="/images/hero.webp" as="image" fetchpriority="high">
+
+  <!-- Module preload pour les apps JavaScript -->
+  <link rel="modulepreload" href="/js/app.mjs">
+  <link rel="modulepreload" href="/js/vendor.mjs">
+
+  <!-- Prechargement de la page suivante (navigation predict) -->
+  <link rel="prefetch" href="/produits/" as="document">
+</head>
+\end{lstlisting}
+
+\section{Code Splitting et Tree Shaking}
+
+\subsection{Code Splitting}
+
+Le \keyword{Code Splitting} consiste a diviser le JavaScript en bundles charges à la demande :
+
+\begin{itemize}
+    \item \textbf{Entry point splitting} : Un bundle par page ou route
+    \item \textbf{Vendor splitting} : Separation des bibliotheques tierces
+    \item \textbf{Dynamic imports} : Importations asynchrones avec \texttt{import()}
+    \item \textbf{Lazy loading de composants} : Chargement differe des composants React/Vue/Svelte
+\end{itemize}
+
+\begin{lstlisting}[style=code,caption={Code Splitting avec React.lazy et Suspense}]
+import React, { lazy, Suspense } from 'react';
+
+// Ces composants seront charges uniquement quand nécessaires
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const ProductList = lazy(() => import('./pages/ProductList'));
+const Analytics = lazy(() => import('./pages/Analytics'));
+const Settings = lazy(() => import('./pages/Settings'));
+
+function App() {
+  const [page, setPage] = useState('dashboard');
+
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      {page === 'dashboard' && <Dashboard />}
+      {page === 'products' && <ProductList />}
+      {page === 'analytics' && <Analytics />}
+      {page === 'settings' && <Settings />}
+    </Suspense>
+  );
+}
+\end{lstlisting}
+
+\subsection{Tree Shaking}
+
+Le \keyword{Tree Shaking} élimine le code JavaScript mort (non utilise) lors du build :
+
+\begin{itemize}
+    \item \textbf{ES Modules} : Syntaxe \texttt{import/export} statique (requis)
+    \item \textbf{Side effects} : Declaration des effets de bord dans \texttt{package.json}
+    \item \textbf{Dead code elimination} : Supprèssion des fonctions et variables inutilisees
+    \item \textbf{Rollup / Webpack / esbuild} : Outils supportant le tree shaking nativement
+    \item \textbf{Module/nomodule pattern} : Bundle moderne pour navigateurs récents + fallback
+\end{itemize}
+
+\section{Critical CSS}
+
+Le \keyword{Critical CSS} (ou CSS critique) consiste a extraire et inline les styles nécessaires au rendu de la partie visible de la page (above-the-fold) :
+
+\begin{enumerate}
+    \item Identifiez les styles nécessaires au rendu initial
+    \item Inlinez ces styles dans le \texttt{<head>} (balise \texttt{<style>})
+    \item Chargez le CSS complet de manière asynchrone
+    \item Utilisez des outils comme \texttt{Critical} (Addy Osmani) ou Penthouse
+\end{enumerate}
+
+\begin{lstlisting}[style=htmlcode,caption={Critical CSS inline + chargement asynchrone}]
+<head>
+  <!-- Critical CSS inline (première paint) -->
+  <style>
+    /* Styles critiques : header, hero, navigation */
+    header { display: flex; align-items: center; padding: 1rem; }
+    .hero { min-height: 60vh; background: #1a1a2e; }
+    nav { display: flex; gap: 2rem; }
+  </style>
+
+  <!-- Chargement asynchrone du CSS complet -->
+  <link rel="preload" href="/css/styles.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
+</head>
+\end{lstlisting}
+
+\important{Le Critical CSS peut améliorer le First Contentful Paint (FCP) de 30 a 50\%.}
+
+\section{Techniques de Lazy Loading avancées}
+
+\subsection{Lazy loading d'images et iframes}
+
+Le \keyword{lazy loading} natif (\texttt{loading="lazy"}) est supporte par tous les navigateurs modernes :
+
+\begin{itemize}
+    \item \texttt{loading="lazy"} : Chargement differe jusqu'a proximite du viewport
+    \item \texttt{loading="eager"} : Chargement immédiat (par défaut)
+    \item \texttt{decoding="async"} : Decodage asynchrone de l'image
+    \item \texttt{fetchpriority="high" / "low"} : Priorite de chargement
+\end{itemize}
+
+\subsection{Lazy loading avance avec Intersection Observer}
+
+Pour un contrôle plus fin que l'attribut natif :
+
+\begin{lstlisting}[style=code,caption={Lazy loading avec Intersection Observer}]
+const lazyImages = document.querySelectorAll('.lazy-image');
+
+const imageObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.srcset = img.dataset.srcset;
+        img.classList.remove('lazy');
+        observer.unobserve(img);
+      }
+    });
+  },
+  {
+    rootMargin: '200px 0px',
+    threshold: 0.01
+  }
+);
+
+lazyImages.forEach(img => imageObserver.observe(img));
+\end{lstlisting}
+
+\subsection{Lazy loading de contenu}
+
+\begin{itemize}
+    \item \textbf{Lazy loading de composants} : Chargement differe des composants React/Vue
+    \item \textbf{Lazy loading de routes} : Split par route avec React Router / Vue Router
+    \item \textbf{Lazy loading de commentaires} : Chargement au scroll ou au clic
+    \item \textbf{Lazy loading de vidéos} : Remplacement par une vignette, chargement au clic
+    \item \textbf{Infinite scroll} : Pagination asynchrone avec observer de fin de page
+\end{itemize}
+
+\section{Optimisation du TTFB (Time To First Byte)}
+
+\subsection{Facteurs impactant le TTFB}
+
+Le \keyword{TTFB} est le temps entre la requête HTTP et la réception du premier octet. Facteurs d'optimisation :
+
+\begin{enumerate}
+    \item \textbf{Hebergement} : Serveur géographiquement proche des utilisateurs, ressources suffisantes
+    \item \textbf{Base de donnees} : Requetes optimisées, index, cache Redis/Memcached
+    \item \textbf{Application} : Code efficient, opcode cache, pas de boucles inutiles
+    \item \textbf{Serveur web} : NGINX, LiteSpeed, OpenLiteSpeed (plus performants qu'Apache)
+    \item \textbf{CDN} : Cache des pages HTML au niveau du CDN
+    \item \textbf{PHP} : Version 8.x (2x plus rapide que PHP 7.x), OPcache active
+\end{enumerate}
+
+\begin{mybox}{Cibles TTFB recommandées}{googlegreen}
+\begin{itemize}
+    \item \textbf{Excellent} : $<$ 200 ms
+    \item \textbf{Bon} : 200 -- 500 ms
+    \item \textbf{A améliorer} : 500 ms -- 1 s
+    \item \textbf{Critique} : $>$ 1 seconde
+\end{itemize}
+\end{mybox}
+
+\section{Comprèssion : Brotli vs Gzip}
+
+\subsection{Brotli}
+
+Le \keyword{Brotli} est un algorithme de comprèssion developpe par Google, offrant un ratio de comprèssion 20--30\% supérieur a Gzip :
+
+\begin{itemize}
+    \item \textbf{Taux de comprèssion} : ~75--85\% de réduction (vs 60--70\% pour Gzip)
+    \item \textbf{Vitesse de decomprèssion} : Comparable a Gzip cote client
+    \item \textbf{Vitesse de comprèssion} : Plus lent que Gzip (surtout niveau 11)
+    \item \textbf{Support navigateur} : 98\% des navigateurs modernes
+    \item \textbf{Niveaux} : 1--11 (recommandé : niveau 5 pour l'équilibre)
+\end{itemize}
+
+\subsection{Configuration}
+
+\begin{lstlisting}[style=code,caption={Configuration NGINX pour Brotli et Gzip}]
+# Activer Brotli
+brotli on;
+brotli_comp_level 5;
+brotli_static on;  # Sert les fichiers .br pre-comprèsses
+brotli_types text/plain text/css application/json application/javascript
+            application/xml text/xml application/xml+rss text/javascript
+            image/svg+xml application/vnd.ms-fontobject application/x-font-ttf
+            font/opentype application/wasm;
+
+# Fallback Gzip
+gzip on;
+gzip_comp_level 6;
+gzip_types text/plain text/css application/json application/javascript
+           application/xml text/xml application/xml+rss text/javascript
+           image/svg+xml;
+gzip_vary on;
+gzip_proxied any;
+gzip_min_length 1000;
+\end{lstlisting}
+
+\important{La comprèssion Brotli peut réduire le poids des pages HTML/CSS/JS de 20 a 30\% supplementaires par rapport a Gzip.}
+
+\section{Optimisation base de donnees}
+
+\begin{itemize}
+    \item \textbf{Indexation SQL} : Index sur les colonnes utilisees dans les WHERE, JOIN, ORDER BY
+    \item \textbf{Requetes preparees} : Protection contre les injections et meilleures performances
+    \item \textbf{Connection pooling} : Reutilisation des connexions base de donnees
+    \item \textbf{Pagination cote base} : Eviter SELECT sans LIMIT, utiliser les curseurs
+    \item \textbf{Requetes N+1} : Utiliser eager loading (ex: \texttt{with()} en Laravel/Eloquent)
+    \item \textbf{Read replicas} : Repartir les lectures sur des serveurs secondaires
+    \item \textbf{Partitionnement} : Tables partitionnees pour les gros volumes
+    \item \textbf{Nettoyage} : Purger les donnees obsolètes, archives des logs
+\end{itemize}
+
+\begin{lstlisting}[style=code,caption={Optimisation des requêtes N+1 avec Eloquent (Laravel)}]
+// MAUVAIS : N+1 queries
+$posts = Post::all();
+foreach ($posts as $post) {
+    echo $post->author->name; // 1 requête par post !
+}
+
+// BON : Eager loading
+$posts = Post::with(['author', 'comments', 'tags'])->get();
+foreach ($posts as $post) {
+    echo $post->author->name; // Pas de requête supplementaire
+}
+
+// OPTIMAL : Selection des colonnes nécessaires seulement
+$posts = Post::with(['author:id,name,avatar'])
+    ->select(['id', 'title', 'slug', 'author_id', 'published_at'])
+    ->where('published', true)
+    ->orderBy('published_at', 'desc')
+    ->paginate(20);
+\end{lstlisting}
+
+
+% =============================================================================
+% CHAPITRE 33 (après ligne 1184, avant ch:semantic)
+% =============================================================================
+\chapter{SEO International et Multilingue}
+\label{ch:international}
+
+\section{Enjeux du SEO International}
+
+Le \keyword{SEO international} consiste a optimisér un site web pour qu'il soit visible dans différents pays et langues. Contrairement au SEO local, il s'agit de déployer une stratégie cohérente à l'échelle mondiale tout en respectant les spécificités de chaque marché.
+
+\subsection{Les défis du SEO international}
+
+\begin{itemize}
+    \item \textbf{Gestion multilingue} : Contenu duplique entre les versions linguistiques
+    \item \textbf{Gestion multi-pays} : Ciblage géographique et pertinence locale
+    \item \textbf{Infrastructure technique} : Architecture des URLs, DNS, hebergement
+    \item \textbf{Ressources} : Traduction, adaptation culturelle, maintenance
+    \item \textbf{Mesure} : Suivi des performances par pays et par langue
+\end{itemize}
+
+\section{Implementation des balises hreflang}
+
+Les \keyword{balises hreflang} indiquent a Google quelle version linguistique ou régionale d'une page afficher dans les résultats de recherche. Une implémentation correcte est \important{cruciale} pour éviter les pénalités de contenu duplique.
+
+\subsection{Syntaxe hreflang}
+
+\begin{lstlisting}[style=htmlcode,caption={Implementation hreflang dans le <head>}]
+<head>
+  <!-- Version francaise pour la France -->
+  <link rel="alternate" hreflang="fr-FR"
+        href="https://example.com/fr/produits" />
+  <!-- Version francaise pour la Belgique -->
+  <link rel="alternate" hreflang="fr-BE"
+        href="https://example.com/fr-be/produits" />
+  <!-- Version francaise pour la Suisse -->
+  <link rel="alternate" hreflang="fr-CH"
+        href="https://example.com/fr-ch/produits" />
+  <!-- Version anglaise (générique) -->
+  <link rel="alternate" hreflang="en"
+        href="https://example.com/en/products" />
+  <!-- Version anglaise pour les US -->
+  <link rel="alternate" hreflang="en-US"
+        href="https://example.com/en-us/products" />
+  <!-- Page par défaut (x-default) -->
+  <link rel="alternate" hreflang="x-default"
+        href="https://example.com/products" />
+</head>
+\end{lstlisting}
+
+\subsection{Hreflang dans le sitemap}
+
+\begin{lstlisting}[style=htmlcode,caption={Declaration hreflang dans le sitemap XML}]
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://example.com/fr/produits</loc>
+    <xhtml:link rel="alternate" hreflang="fr"
+                href="https://example.com/fr/produits"/>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://example.com/en/products"/>
+    <xhtml:link rel="alternate" hreflang="de"
+                href="https://example.com/de/produkte"/>
+    <xhtml:link rel="alternate" hreflang="es"
+                href="https://example.com/es/productos"/>
+    <xhtml:link rel="alternate" hreflang="x-default"
+                href="https://example.com/products"/>
+  </url>
+</urlset>
+\end{lstlisting}
+
+\subsection{Erreurs frequentes avec hreflang}
+
+\begin{mybox}{Erreurs hreflang a éviter}{googlered}
+\begin{itemize}
+    \item \textbf{Valeurs manquantes} : Pas de lien retour (reciprocite obligatoire)
+    \item \textbf{Codes de langue invalides} : Utiliser ISO 639-1 (fr, en, de) et ISO 3166-1 Alpha 2 (FR, US)
+    \item \textbf{Confirmation dans la page cible} : La page FR doit pointer vers EN et vice-versa
+    \item \textbf{Hreflang sans canonical cohérent} : La balise canonical doit correspondre à l'alternate
+    \item \textbf{Pages bloquees par robots.txt} : Les pages hreflang doivent etre crawlables
+    \item \textbf{Noindex sur les pages alternatives} : Les pages avec hreflang ne doivent pas etre noindex
+    \item \textbf{Hreflang incohérent avec le contenu} : Là langue declaree doit correspondre au contenu réel
+\end{itemize}
+\end{mybox}
+
+\section{Strategie ccTLD vs gTLD}
+
+\subsection{ccTLD (country code Top-Level Domain)}
+
+Les \keyword{ccTLD} sont des domaines de premier niveau spécifiques à un pays (ex: \texttt{.fr}, \texttt{.de}, \texttt{.es}, \texttt{.co.uk}) :
+
+\begin{itemize}
+    \item \textbf{Avantages} : Signal géographique le plus fort pour Google, ancrage local
+    \item \textbf{Inconvenients} : Cout eleve (multiples domaines), maintenance complexe, autorite fragmentee
+    \item \textbf{Ideal pour} : Sites avec équipes locales, contenu très différencié par pays
+\end{itemize}
+
+\subsection{gTLD avec sous-répertoires}
+
+Les \keyword{gTLD} avec sous-répertoires (ex: \texttt{example.com/fr/}, \texttt{example.com/de/}) :
+
+\begin{itemize}
+    \item \textbf{Avantages} : Autorite consolidée sur un seul domaine, maintenance simplifiée, cout réduit
+    \item \textbf{Inconvenients} : Signal géographique plus faible, configuration requise dans GSC
+    \item \textbf{Ideal pour} : Sites avec équipe centralisee, budget limite, SEO international debutant
+\end{itemize}
+
+\subsection{gTLD avec sous-domaines}
+
+Les \keyword{sous-domaines} (ex: \texttt{fr.example.com}, \texttt{de.example.com}) :
+
+\begin{itemize}
+    \item \textbf{Avantages} : Organisation claire, possibilité d'hebergement separe
+    \item \textbf{Inconvenients} : Google traite parfois les sous-domaines comme des sites separes
+    \item \textbf{Ideal pour} : Grandes organisations avec des équipes régionales distinctes
+\end{itemize}
+
+\begin{mybox}{Recommandation stratégique}{teal}
+Pour la plupart des projets, la structure \important{\texttt{example.com/lang/}} (gTLD + sous-répertoire) offre le meilleur équilibre entre autorite, maintenance et signal géographique. Utilisez les ccTLD uniquement si vous avez des équipes locales dédiées et un budget consequent.
+\end{mybox}
+
+\section{Ciblage linguistique dans Google Search Console}
+
+Pour chaque version linguistique, il est nécessaire de configurer le ciblage dans \keyword{Google Search Console} :
+
+\begin{enumerate}
+    \item Ajoutez chaque variante (domaine, sous-domaine ou sous-répertoire) comme propriété separee
+    \item Pour les gTLD : dans Parametrès $\rightarrow$ Ciblage international $\rightarrow$ Pays
+    \item Pour les ccTLD : le ciblage est automatique
+    \item Verifiez le rapport de performance filtre par pays
+    \item Surveillez les imprèssions et clics par pays dans le rapport Performances
+\end{enumerate}
+
+\section{Geotargeting}
+
+Le \keyword{géotargeting} permet d'indiquer a Google le pays cible d'une page :
+
+\begin{itemize}
+    \item \textbf{Google Search Console} : Parametre de ciblage international par pays
+    \item \textbf{hreflang} : Pour les pages dans la meme langue mais destinees à des pays différents
+    \item \textbf{Adresse locale} : Adresse et numero de téléphone local sur la page
+    \item \textbf{Google Business Profile} : Profil par pays si présence physique
+    \item \textbf{Hebergement local} : Serveur situe dans le pays cible
+    \item \textbf{Backlinks locaux} : Liens provenant de sites du pays cible
+\end{itemize}
+
+\section{Considerations culturelles pour le SEO international}
+
+Adapter un site à un marché ne se limite pas à la traduction :
+
+\begin{itemize}
+    \item \textbf{Mots-cles locaux} : Ne pas traduire littéralement -- rechercher les termes réellement utilises
+    \item \textbf{Monnaie et prix} : Affichage dans la devise locale, format de nombre adapte
+    \item \textbf{Unites de mesure} : Systeme métrique vs imperial
+    \item \textbf{Format des dates} : JJ/MM/AAAA vs MM/JJ/AAAA
+    \item \textbf{Couleurs et symboles} : Significations culturelles variables (rouge, vert, chiffres)
+    \item \textbf{Images et visuels} : Représentation inclusive et adaptee culturellement
+    \item \textbf{Reglementation} : RGPD (UE), cookie laws, mentions legales par pays
+\end{itemize}
+
+\section{Gestion du contenu duplique multilingue}
+
+Le contenu duplique entre les versions linguistiques est un \important{défi majeur} du SEO international :
+
+\begin{enumerate}
+    \item \textbf{Contenu traduit professionnellement} : Eviter la traduction automatique pure (Google Translate)
+    \item \textbf{Contenu adapte} : Aller au-délà de la traduction -- adapter les exemples, références
+    \item \textbf{Localisation des URLs} : URLs descriptives dans chaque langue
+    \item \textbf{Balises hreflang} : Indiquer clairement les relations entre les versions
+    \item \textbf{Canonical auto-référençant} : Chaque version pointe vers elle-meme comme canonical
+    \item \textbf{Eviter la traduction automatique non revue} : Google peut pénaliser le contenu de faible qualité
+\end{enumerate}
+
+\begin{lstlisting}[style=htmlcode,caption={Canonical et hreflang combines correctement}]
+<head>
+  <!-- Canonical auto-référençant -->
+  <link rel="canonical" href="https://example.com/fr/produits" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="fr" href="https://example.com/fr/produits" />
+  <link rel="alternate" hreflang="en" href="https://example.com/en/products" />
+  <link rel="alternate" hreflang="de" href="https://example.com/de/produkte" />
+  <link rel="alternate" hreflang="x-default" href="https://example.com/products" />
+
+  <!-- Meta tags linguistiques -->
+  <meta http-equiv="content-language" content="fr-FR">
+</head>
+\end{lstlisting}
+
+\section{URL structure : sous-répertoires vs sous-domaines}
+
+\subsection{Comparaison detaillee}
+
+\begin{itemize}
+    \item \textbf{Sous-repertoires (\texttt{/fr/}, \texttt{/en/})} :
+    \begin{itemize}
+        \item Autorite consolidée sur le domaine principal
+        \item Maintenance plus simple
+        \item Cookies partages entre les langues
+        \item Configuration CDN plus simple
+    \end{itemize}
+    \item \textbf{Sous-domaines (\texttt{fr.}, \texttt{en.})} :
+    \begin{itemize}
+        \item Peuvent etre heberges sur des serveurs différents
+        \item Google les traite parfois comme des sites distincts
+        \item Possibilite de ciblage géographique par serveur
+        \item Plus complexe a maintenir
+    \end{itemize}
+\end{itemize}
+
+\section{SEO technique pour site multilingue}
+
+\begin{enumerate}
+    \item \textbf{Sitemap XML multilingue} : Un seul sitemap avec toutes les variantes où un sitemap par langue
+    \item \textbf{Detection de là langue} : Redirection automatique basee sur Accept-Language (avec option de changement)
+    \item \textbf{Cookies de préférence} : Memoriser le choix de langue de l'utilisateur
+    \item \textbf{Pagination cohérente} : Structure de pagination parallele entre les langues
+    \item \textbf{Vitesse} : CDN adapte à chaque région du monde
+    \item \textbf{Mobile-first} : Test mobile par version linguistique
+\end{enumerate}
+
+\begin{lstlisting}[style=code,caption={Detection de là langue cote serveur avec PHP}]
+<?php
+// Detection de là langue preferee du navigateur
+$langues_acceptees = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+$langues_disponibles = ['fr', 'en', 'de', 'es'];
+
+$langue = 'en'; // Langue par défaut
+
+foreach (explode(',', $langues_acceptees) as $acceptee) {
+    $code = substr($acceptee, 0, 2);
+    if (in_array($code, $langues_disponibles)) {
+        $langue = $code;
+        break;
+    }
+}
+
+// Verifier si l'utilisateur a déjà fait un choix
+if (!isset($_COOKIE['lang'])) {
+    setcookie('lang', $langue, time() + 365*24*3600, '/');
+    header("Location: /$langue" . $_SERVER['REQUEST_URI']);
+    exit;
+}
+?>
+\end{lstlisting}
+
+
+% =============================================================================
+% CHAPITRE 34 (après ligne 1355, avant Partie 6)
+% =============================================================================
+\chapter{Stratégie de contenu et Content Marketing SEO}
+\label{ch:contentstrategy}
+
+\section{Fondamentaux du Content Marketing SEO}
+
+Le \keyword{Content Marketing SEO} est l'art de creer, distribuer et promouvoir du contenu dans le but d'attirer un trafic organique qualifie. Il ne s'agit plus simplement d'ecrire des articles de blog, mais de construire une \important{stratégie editoriale} complete alignee avec les objectifs business.
+
+\subsection{Les piliers du Content Marketing SEO}
+
+\begin{mybox}{Les 4 piliers du Content Marketing SEO}{googleblue}
+\begin{enumerate}
+    \item \textbf{Recherche} : Data-driven, basee sur l'intention de recherche et l'analyse concurrentielle
+    \item \textbf{Creation} : Contenu de qualité répondant aux critères E-E-A-T
+    \item \textbf{Distribution} : Promotion multi-canal pour maximiser la portee
+    \item \textbf{Mesure} : ROI, KPIs, attribution et itération continue
+\end{enumerate}
+\end{mybox}
+
+\section{Planification editoriale}
+
+\subsection{Calendrier editorial}
+
+Le \keyword{calendrier editorial} est un outil indispensable pour structurer la production de contenu :
+
+\begin{itemize}
+    \item \textbf{Periodicite} : Rythme de publication régulier (hebdomadaire, bi-mensuel)
+    \item \textbf{Saisonnalite} : Contenu adapte aux cycles saisonniers du marché
+    \item \textbf{Evenements} : Salons, conferences, actualites du secteur
+    \item \textbf{Etapes du funnel} : Contenu pour chaque étape (TOFU, MOFU, BOFU)
+    \item \textbf{Piliers thématiques} : Couverture cyclique des sujets principaux
+    \item \textbf{Mise à jour} : Planning de rafraichissement du contenu existant
+\end{itemize}
+
+\subsection{Outils de planification}
+
+\begin{itemize}
+    \item \textbf{Trello / Asana} : Kanban pour le suivi de production
+    \item \textbf{Notion} : Base de donnees editoriale complete
+    \item \textbf{CoSchedule} : Calendrier editorial avec intégration réseaux sociaux
+    \item \textbf{ContentKing} : Monitoring et planification de mise à jour
+    \item \textbf{Google Calendar} : Solution simple partagee en équipe
+\end{itemize}
+
+\section{Frameworks de contenu}
+
+\subsection{Hub-and-Spoke (Pilier et clusters)}
+
+Le modèle \keyword{Hub-and-Spoke} (ou Topic Cluster) est le framework le plus efficace pour le SEO :
+
+\begin{itemize}
+    \item \textbf{Page pilier} : Contenu long-form exhaustif sur un sujet principal ($\sim$3000--5000 mots)
+    \item \textbf{Pages clusters} : Articles detailles sur des sous-sujets spécifiques ($\sim$1500--2500 mots)
+    \item \textbf{Liens internes} : Tous les clusters pointent vers le pilier et vice-versa
+    \item \textbf{Couverture sémantique} : Le cluster couvre l'intégralité du champ lexical du sujet
+\end{itemize}
+
+\begin{lstlisting}[style=htmlcode,caption={Structure Hub-and-Spoke pour le SEO}]
+Page Pilier : "Guide complet du SEO en 2026"
+  |
+  |-- Cluster 1 : "Recherche de mots-cles"
+  |     |-- Article : "Outils de keyword research"
+  |     |-- Article : "Long-tail keywords"
+  |     |-- Article : "Intentions de recherche"
+  |
+  |-- Cluster 2 : "SEO technique"
+  |     |-- Article : "Core Web Vitals"
+  |     |-- Article : "Indexation mobile-first"
+  |     |-- Article : "Donnees structureées"
+  |
+  |-- Cluster 3 : "Netlinking"
+  |     |-- Article : "Strategies de link building"
+  |     |-- Article : "Backlinks dofollow vs nofollow"
+  |
+  |-- Cluster 4 : "SEO local"
+        |-- Article : "Google Business Profile"
+        |-- Article : "Citations NAP"
+\end{lstlisting}
+
+\subsection{Skyscraper Technique}
+
+La \keyword{Skyscraper Technique}, popularisee par Brian Dean (Backlinko), repose sur trois étapes :
+
+\begin{enumerate}
+    \item \textbf{Trouver} : Identifiez un contenu performant dans votre niche (beaucoup de backlinks, bon trafic)
+    \item \textbf{Ameliorer} : Creez une version plus complete, mieux structureé, plus visuelle, plus à jour
+    \item \textbf{Promouvoir} : Contactez les sites qui linkent la version originale pour leur proposer votre version amélioree
+\end{enumerate}
+
+\important{La Skyscraper Technique peut générer 2 a 3 fois plus de backlinks que le contenu original.}
+
+\subsection{Content Pillars}
+
+Les \keyword{Content Pillars} sont les 3--5 sujets fondamentaux autour desquels s'articule toute la stratégie de contenu :
+
+\begin{itemize}
+    \item Chaque pilier représente un domaine d'expertise de l'entreprise
+    \item Tous les contenus produits doivent se rattâcher à l'un de ces piliers
+    \item Les piliers doivent correspondre aux mots-cles stratégiques
+\end{itemize}
+
+\section{Methodologie de recherche de sujets}
+
+\subsection{Analyse des SERP}
+
+Avant de creer du contenu, analysez les \keyword{SERP} pour le mot-cle cible :
+
+\begin{enumerate}
+    \item \textbf{Type de contenu} : Blog, landing page, vidéo, e-commerce ?
+    \item \textbf{Format dominant} : Listes, guides, tutoriels, comparatifs ?
+    \item \textbf{Intention de recherche} : Informationnelle, navigationnelle, transactionnelle ?
+    \item \textbf{Featured snippets} : Y a-t-il un extrait optimisable ?
+    \item \textbf{Questions connexes} : "People Also Ask" pour enrichir le contenu
+    \item \textbf{Autorite des concurrents} : Domain Authority des pages classees
+    \item \textbf{Age du contenu} : Contenu récent ou obsolète ? Opportunité de mise à jour
+\end{enumerate}
+
+\subsection{Outils de recherche thématique}
+
+\begin{itemize}
+    \item \textbf{Ahrefs Content Explorer} : Trouver le contenu le plus partage par thématique
+    \item \textbf{SEMrush Topic Research} : Idees de sujets avec score de potentiel
+    \item \textbf{AnswerThePublic} : Questions posees par les utilisateurs
+    \item \textbf{Google Trends} : Tendances et saisonnalité des sujets
+    \item \textbf{AlsoAsked} : Arbre de questions connexes
+    \item \textbf{Google Autocomplete} : Suggestions de recherche en temps réel
+\end{itemize}
+
+\subsection{Gap Analysis (Analyse des ecarts)}
+
+Le \keyword{Content Gap Analysis} identifie les sujets que vos concurrents couvrent mais que vous ne couvrez pas :
+
+\begin{enumerate}
+    \item Lister vos 5 concurrents directs en SEO
+    \item Exporter leurs URLs via Screaming Frog ou Ahrefs
+    \item Analyser leurs mots-cles positionnés
+    \item Comparer avec votre couverture thématique
+    \item Identifier les sujets a forte opportunité (trafic $\times$ difficulte)
+    \item Prioriser selon le potentiel business
+\end{enumerate}
+
+\section{Optimisation des formats de contenu}
+
+\subsection{Contenu long-form ($>$ 2000 mots)}
+
+Le contenu long-form tend a mieux performer dans les SERP :
+
+\begin{itemize}
+    \item \textbf{Guides complets} : Couverture exhaustive d'un sujet
+    \item \textbf{Piliers de contenu} : 3000--5000 mots avec structure en sections
+    \item \textbf{Whitepapers} : Contenu premium pour generation de leads
+    \item \textbf{Etudes de cas} : Resultats concrets, data-driven
+    \item \textbf{Comparatifs} : Analyse detaillee produit vs produit
+\end{itemize}
+
+\subsection{Contenu intermédiaire (1000--2000 mots)}
+
+\begin{itemize}
+    \item Articles de blog standard
+    \item Tutoriels et how-to
+    \item Listes et classements (Listicles)
+    \item News et actualites du secteur
+\end{itemize}
+
+\subsection{Contenu court ($<$ 1000 mots)}
+
+\begin{itemize}
+    \item Fiches produits optimisées
+    \item FAQ structureées (donnees structureées FAQ)
+    \item Glossaires et définitions
+    \item Micro-contenu pour réseaux sociaux
+\end{itemize}
+
+\section{Strategie de distribution de contenu}
+
+Creer du contenu sans le distribuer, c'est comme organiser une fete sans invitér personne.
+
+\subsection{Canaux de distribution}
+
+\begin{enumerate}
+    \item \textbf{Email marketing} : Newsletter vers votre base d'abonnes
+    \item \textbf{Reseaux sociaux} : LinkedIn pour B2B, Instagram/TikTok pour B2C
+    \item \textbf{Communautes} : Reddit, Quora, groupes Facebook, Slack/Discord
+    \item \textbf{Medium / LinkedIn Articles} : Republishing avec canonical
+    \item \textbf{Influenceurs} : Collaboration avec des experts du secteur
+    \item \textbf{Digital PR} : Relations prèsse et publications invitées
+    \item \textbf{Paid promotion} : Contenu sponsorise sur les réseaux
+\end{enumerate}
+
+\section{Repurposing de contenu}
+
+Le \keyword{repurposing} (réutilisation) consiste a adapter un meme contenu sous différents formats :
+
+\begin{itemize}
+    \item Article de blog $\rightarrow$ Video YouTube + Podcast + Infographie + LinkedIn carousel
+    \item Webinaire $\rightarrow$ Serie d'articles + Transcript + Clips vidéo
+    \item Livre blanc $\rightarrow$ Landing page + Email sequence + SlideShare
+    \item Etude de cas $\rightarrow$ Temoignage vidéo + Case study PDF + Post LinkedIn
+    \item Podcast $\rightarrow$ Transcription SEO + Show notes + Clips sociaux
+\end{itemize}
+
+\begin{mybox}{Regle des 7 contacts}{googleyellow}
+Un prospect a besoin de voir votre contenu en moyenne 7 fois avant de passer à l'action. Le repurposing permet de multiplier les points de contact avec un meme message sans effort de création supplementaire.
+\end{mybox}
+
+\section{Mesure du ROI du contenu}
+
+\subsection{KPIs essentiels}
+
+\begin{itemize}
+    \item \textbf{Trafic organique} : Sessions provenant de la recherche Google
+    \item \textbf{Mots-cles positionnés} : Nombre et évolution dans le top 3, top 10
+    \item \textbf{Backlinks génères} : Nombre et qualité des liens entrants
+    \item \textbf{Taux de conversion} : Leads, inscriptions, ventes attribues au contenu
+    \item \textbf{Engagement} : Temps passe, pages par session, scroll depth
+    \item \textbf{Brand awareness} : Recherches de marque, mentions sociales
+    \item \textbf{Share of voice} : Visibilite par rapport aux concurrents
+\end{itemize}
+
+\subsection{Modeles d'attribution}
+
+\begin{itemize}
+    \item \textbf{First-click} : Attribue la conversion au premier point de contact
+    \item \textbf{Last-click} : Attribue la conversion au dernier point de contact
+    \item \textbf{Multi-touch} : Distribue le credit entre tous les points de contact
+    \item \textbf{Data-driven} : Attribution algorithmique basee sur l'impact réel
+\end{itemize}
+
+\section{Analyse concurrentielle de contenu}
+
+\subsection{Methodologie}
+
+\begin{enumerate}
+    \item Identifiez vos concurrents SEO (pas seulement concurrents business)
+    \item Analysez leur top contenu (Ahrefs / SEMrush Top Pages)
+    \item Evaluez pour chaque page : trafic, backlinks, engagement, format
+    \item Comparez avec vos performances
+    \item Identifiez les gaps et opportunités
+    \item Creez un plan d'action priorise
+\end{enumerate}
+
+\begin{lstlisting}[style=code,caption={Structure d'analyse concurrentielle (tableau de benchmark)}]
+# Analyse concurrentielle de contenu
+concurrents = [
+    { "nom": "Concurrent A", "domaine": "concurrent-a.com",
+      "top_pages": [
+        {"url": "/guide-seo", "trafic": 15000, "backlinks": 450,
+         "mots": 3200, "format": "guide"},
+        {"url": "/outils-seo", "trafic": 12000, "backlinks": 280,
+         "mots": 1800, "format": "liste"}
+    ]},
+    { "nom": "Concurrent B", "domaine": "concurrent-b.com",
+      "top_pages": [
+        {"url": "/formations-seo", "trafic": 8000, "backlinks": 120,
+         "mots": 2500, "format": "page-cours"}
+    ]}
+]
+
+# Calcul du score d'opportunité
+def score_opportunité(trafic, backlinks, difficulte):
+    return (trafic * 0.4 + backlinks * 10 * 0.3) / (difficulte + 1) * 100
+\end{lstlisting}
+
+
+% =============================================================================
+% CHAPITRE 35 (après ligne 1398, avant ch:ecommerce)
+% =============================================================================
+\chapter{Migration SEO et Redirection}
+\label{ch:migration}
+
+\section{Introduction aux migrations SEO}
+
+Une \keyword{migration SEO} est tout changement significatif apporte à un site web qui peut impacter sa visibilité dans les moteurs de recherche. Les migrations sont des moments \important{critiques} : une mauvaise execution peut faire perdre des annees de travail SEO en quelques jours.
+
+\subsection{Types de migrations}
+
+\begin{itemize}
+    \item \textbf{Migration de domaine} : Changement de nom de domaine
+    \item \textbf{Migration de protocole} : HTTP $\rightarrow$ HTTPS
+    \item \textbf{Migration de CMS} : Passage d'un CMS à un autre
+    \item \textbf{Migration de structure} : Changement d'URLs, d'architecture de site
+    \item \textbf{Migration de design} : Refonte visuelle majeure
+    \item \textbf{Migration de serveur} : Changement d'hebergement ou de CDN
+    \item \textbf{Migration de plateforme} : Passage d'une plateforme à une autre
+\end{itemize}
+
+\section{Checklist pré-migration}
+
+\subsection{Audit pré-migration (\important{avant})}
+
+\begin{enumerate}
+    \item \textbf{Backup complet} : Base de donnees, fichiers, configuration serveur
+    \item \textbf{Inventaire des URLs} : Crawl complet avec Screaming Frog / Sitebulb
+    \item \textbf{Mapping URL complet} : Table de correspondance ancienne $\rightarrow$ nouvelle URL
+    \item \textbf{Benchmark des performances} : Trafic, positions, conversions (minimum 3 mois)
+    \item \textbf{Rapport Core Web Vitals} : LCP, INP, CLS avant migration
+    \item \textbf{Indexation} : Nombre de pages indexees dans GSC
+    \item \textbf{Backlinks} : Export des backlinks (Ahrefs, Majestic)
+    \item \textbf{Sitemap} : Sitemap XML actuel complet
+    \item \textbf{Robots.txt} : Etat actuel
+    \item \textbf{Redirections existantes} : Inventaire des 301 en place
+\end{enumerate}
+
+\begin{mybox}{Outil recommandé pour le mapping URL}{googleblue}
+Utilisez \textbf{Screaming Frog SEO Spider} avec la fonction "Export All URLs" puis importez le fichier CSV dans un tableur pour creer le mapping colonne par colonne : Ancienne URL $\rightarrow$ Nouvelle URL $\rightarrow$ Type de redirection $\rightarrow$ Statut.
+\end{mybox}
+
+\section{Strategie de redirection : 301 vs 302}
+
+\subsection{HTTP 301 -- Redirection permanente}
+
+Le code \keyword{301} (Moved Permanently) transmet 90--99\% du PageRank (Google) :
+
+\begin{itemize}
+    \item \textbf{Usage} : Changement permanent d'URL
+    \item \textbf{Transmission SEO} : Transmet la majorite de l'autorite et du ranking
+    \item \textbf{Mise à jour de l'index} : Google remplace l'ancienne URL par la nouvelle
+    \item \textbf{Delai} : 1--3 mois pour la transmission complete du PageRank
+\end{itemize}
+
+\subsection{HTTP 302 -- Redirection temporaire}
+
+Le code \keyword{302} (Found / Temporarily Redirect) ne transmet pas l'autorite :
+
+\begin{itemize}
+    \item \textbf{Usage} : Test A/B, page en maintenance, contenu saisonnier
+    \item \textbf{Transmission SEO} : Google conserve l'ancienne URL comme canonique
+    \item \textbf{Attention} : Google interprete parfois les 302 repetes comme des 301
+    \item \textbf{Deconseille pour} : Les migrations permanentes
+\end{itemize}
+
+\subsection{Autrès codes de redirection}
+
+\begin{itemize}
+    \item \textbf{307} : Redirection temporaire, meme méthode HTTP (remplacement moderne du 302)
+    \item \textbf{308} : Redirection permanente, meme méthode HTTP (remplacement moderne du 301)
+    \item \textbf{303} : See Other, utilise après un POST pour éviter la re-soumission
+\end{itemize}
+
+\subsection{Regles de redirection}
+
+\begin{lstlisting}[style=code,caption={Fichier de redirection NGINX pour migration massive}]
+# Mapping des redirections 301 (fichier de configuration NGINX)
+# Ancien site -> Nouveau site
+
+# Pages principales
+rewrite ^/ancien-produit-1$ /nouveau-produit-1 permanent;
+rewrite ^/ancien-produit-2$ /nouveau-produit-2 permanent;
+rewrite ^/catégorie/ancienne-cat$ /nouvelle-catégorie/ permanent;
+
+# Redirection par pattern (catégories avec ID)
+rewrite ^/cat-([0-9]+)/(.*)$ /catégorie/$1/$2 permanent;
+
+# Redirection des articles de blog (date vers slug)
+rewrite ^/blog/([0-9]{4})/([0-9]{2})/(.*)$
+        /blog/$3 permanent;
+
+# Redirection des images
+rewrite ^/images/ancien/(.*)$ /images/$1 permanent;
+\end{lstlisting}
+
+\section{Mapping URL : méthodologie}
+
+Le \keyword{URL mapping} est la pièce maîtrèsse d'une migration réussie :
+
+\subsection{Processus de mapping}
+
+\begin{enumerate}
+    \item Crawlez l'ancien site avec Screaming Frog (export CSV complet)
+    \item Classez les URLs par priorité (trafic, backlinks, conversions)
+    \item Creez la correspondance pour chaque URL vers la nouvelle structure
+    \item Pour les URLs sans équivalent : 301 vers la page parente la plus proche
+    \item Evitez le 301 général vers la home page (considéré comme soft 404)
+    \item Testez les redirections en staging avant le déploiement
+    \item Validez avec un outil de vérification de redirections
+\end{enumerate}
+
+\begin{lstlisting}[style=code,caption={Script de vérification des redirections avec Python}]
+import requests
+
+def check_redirects(csv_file):
+    with open(csv_file, 'r') as f:
+        for line in f:
+            old_url, expected_new_url = line.strip().split(',')
+
+            try:
+                response = requests.get(
+                    old_url,
+                    allow_redirects=True,
+                    timeout=10
+                )
+
+                final_url = response.url.rstrip('/')
+
+                if response.status_code == 200 and final_url == expected_new_url:
+                    print(f"[OK] {old_url} -> {final_url}")
+                elif response.status_code == 404:
+                    print(f"[ERREUR 404] {old_url}")
+                elif response.status_code in [301, 302]:
+                    print(f"[REDIRECT] {old_url} -> {response.headers.get('Location', 'N/A')}")
+                else:
+                    print(f"[STATUS {response.status_code}] {old_url}")
+
+            except Exception as e:
+                print(f"[EXCEPTION] {old_url} : {e}")
+
+check_redirects('url_mapping.csv')
+\end{lstlisting}
+
+\section{Gestion des DNS}
+
+\subsection{Plan de changement DNS}
+
+\begin{enumerate}
+    \item \textbf{TTL bas} : Reduisez le TTL a 300 secondes (5 min) au moins 48h avant
+    \item \textbf{Preparez les enregistrements} : A, CNAME, MX, TXT, DKIM, SPF, DMARC
+    \item \textbf{Changez les DNS} : Tot le matin ou en période de faible trafic
+    \item \textbf{Verifiez la propagation} : \texttt{dig} ou outils en ligne (whatsmydns.net)
+    \item \textbf{Surveillez} : Propagation complete en 24--72h
+    \item \textbf{Retablissez le TTL} : Remettez le TTL à sa valeur normale (3600+)
+\end{enumerate}
+
+\important{Ne changez jamais vos DNS pendant une période de forte activite commerciale (Noel, Black Friday, soldes).}
+
+\section{Test en environnement de staging}
+
+Avant de déployer, il est \important{impératif} de tester dans un environnement isolé :
+
+\begin{enumerate}
+    \item \textbf{Protection du staging} : Mot de passe ou IP restriction pour éviter l'indexation
+    \item \textbf{Test des redirections} : Automatise avec scripts
+    \item \textbf{Test des URLs} : Toutes les pages sont accèssibles sans erreur
+    \item \textbf{Test du sitemap} : Valide et soumis
+    \item \textbf{Test du robots.txt} : Correct, ne bloque pas les ressources essentielles
+    \item \textbf{Test des donnees structureées} : Schema.org valide (Rich Results Test)
+    \item \textbf{Test des balises meta} : Title, description, canonical, hreflang
+    \item \textbf{Test mobile} : Mobile-friendly, responsive
+    \item \textbf{Test de vitesse} : Performance équivalente ou meilleure
+    \item \textbf{Test fonctionnel} : Formulaires, panier, paiement, recherche
+\end{enumerate}
+
+\section{Post-migration : monitoring}
+
+\subsection{Jour de la migration}
+
+\begin{itemize}
+    \item \textbf{Redirection} : Activez les 301 des le basculement DNS
+    \item \textbf{Sitemap} : Soumettez le nouveau sitemap dans GSC
+    \item \textbf{Demande d'indexation} : URLs critiques via GSC "Inspecter une URL"
+    \item \textbf{Annonce} : Informez Google via le changement d'adresse dans GSC
+    \item \textbf{Surveillance en temps réel} : Logs serveur, erreurs 404, 500
+\end{itemize}
+
+\subsection{Suivi a 1 semaine}
+
+\begin{itemize}
+    \item \textbf{Indexation} : Verifiez le nombre de pages indexees
+    \item \textbf{Erreurs 404} : Corrigez les redirections manquantes
+    \item \textbf{Trafic} : Comparez avec la semaine pré-migration
+    \item \textbf{Positions} : Verifiez les mots-cles principaux
+    \item \textbf{Core Web Vitals} : Impact sur les performances
+\end{itemize}
+
+\subsection{Suivi a 1 mois}
+
+\begin{itemize}
+    \item \textbf{Backlinks} : Verifiez la transmission via les nouveaux URLs
+    \item \textbf{Trafic global} : Doit etre a 80--100\% du niveau pré-migration
+    \item \textbf{Conversions} : Doivent revenir au niveau précédent
+    \item \textbf{Rapport de couverture GSC} : Analyser les erreurs
+\end{itemize}
+
+\subsection{Suivi a 3 mois}
+
+\begin{itemize}
+    \item \textbf{Transmission SEO complete} : Le trafic devrait etre stabilise
+    \item \textbf{Si le trafic n'est pas revenu} : Audit des causes possibles
+    \item \textbf{Optimisations post-migration} : Ameliorations continues
+\end{itemize}
+
+\begin{mybox}{Indicateurs cles post-migration}{googlered}
+Surveillez ces métriques quotidiennement pendant les 2 premières semaines :
+\begin{itemize}
+    \item \textbf{404 en hausse} $\rightarrow$ Redirections manquantes
+    \item \textbf{Baisse du crawl Googlebot} $\rightarrow$ Probleme technique
+    \item \textbf{Baisse du CTR} $\rightarrow$ Titrès/descriptions mal migres
+    \item \textbf{Baisse des pages indexees} $\rightarrow$ Noindex ou canonical errone
+    \item \textbf{Augmentation du TTFB} $\rightarrow$ Probleme de performance
+\end{itemize}
+\end{mybox}
+
+\section{Plan de rollback}
+
+Toute migration doit inclure un \important{plan de retour arriere} :
+
+\begin{enumerate}
+    \item \textbf{Snapshot complet} avant la migration (base de donnees + fichiers)
+    \item \textbf{Sauvegarde de l'ancien site} : Serveur complet, intact
+    \item \textbf{Script de rollback} : Pret à être execute en $<$ 30 minutes
+    \item \textbf{Conditions de rollback} : Definir les seuils (ex: -30\% de trafic en 48h)
+    \item \textbf{Communication} : Qui prevenir, comment annoncer le rollback
+    \item \textbf{Test du plan} : Simuler le rollback en staging
+\end{enumerate}
+
+\section{Pieges frequents des migrations}
+
+\begin{mybox}{Top 10 des erreurs de migration}{googlered}
+\begin{enumerate}
+    \item \textbf{Absence de mapping URL} : Redirections génériques vers la home page
+    \item \textbf{Melange 301/302} : Utilisation incorrecte des codes de redirection
+    \item \textbf{Chaines de redirection} : A $\rightarrow$ B $\rightarrow$ C au lieu de A $\rightarrow$ C
+    \item \textbf{Boucles de redirection} : A $\rightarrow$ B $\rightarrow$ A
+    \item \textbf{Noindex accidentel} : Balise noindex oubliée sur le nouveau site
+    \item \textbf{Canonical incorrect} : Canonical pointant vers l'ancienne version
+    \item \textbf{Robots.txt bloquant} : Disallow sur les ressources CSS/JS/images
+    \item \textbf{Changement DNS trop rapide} : TTL insuffisant pour la propagation
+    \item \textbf{Absence de test mobile} : Nouveau site non responsive
+    \item \textbf{Perte des donnees utilisateur} : Comptes, historiques, paniers non migres
+\end{enumerate}
+\end{mybox}
+
+\section{Etude de cas : Migration réussie}
+
+\subsection{Cas pratique : Migration HTTP $\rightarrow$ HTTPS + changement de domaine}
+
+\textbf{Contexte :} Site e-commerce avec 50 000 pages, 200 000 visiteurs/mois.
+
+\textbf{Preparation :}
+\begin{itemize}
+    \item 2 mois de préparation (audit, mapping, tests)
+    \item Redirection 301 individualisee pour chaque URL
+    \item Conservation de la structure d'URL
+    \item TTL DNS réduit a 300s une semaine avant
+\end{itemize}
+
+\textbf{Resultats :}
+\begin{itemize}
+    \item Trafic inchangé a J+7 (--2\%)
+    \item Positions conservees a J+14
+    \item Backlinks transmis a 95\% a M+2
+    \item Amelioration du CTR grâce au cadenas HTTPS (+3\%)
+\end{itemize}
+
+\important{Une migration preparee sur 2 mois avec un mapping URL exhaustif a permis de ne perdre quasiment aucun trafic.}
+
+
+% =============================================================================
+% CHAPITRE 36 (avant Partie 7, avant ligne 1495)
+% =============================================================================
+\chapter{SEO pour les CMS populaires}
+\label{ch:cmsseo}
+
+\section{WordPress SEO}
+
+\keyword{WordPress} est le CMS le plus utilise au monde (43\% des sites web). Sa flexibilite en fait une plateforme de choix pour le SEO.
+
+\subsection{Plugins SEO recommandés}
+
+\begin{itemize}
+    \item \textbf{Yoast SEO} : Le plus repandu, analyse de contenu, breadcrumbs, sitemap
+    \item \textbf{Rank Math SEO} : Gratuit avec fonctionnalites avancées (Schema, redirections, monitoring)
+    \item \textbf{SEOPress} : Alternative francaise, respectueuse des donnees
+    \item \textbf{All in One SEO (AIOSEO)} : Complet, bon pour les sites multi-auteurs
+    \item \textbf{The SEO Framework} : Leger, rapide, sans publicite
+\end{itemize}
+
+\subsection{Configuration essentielle}
+
+\begin{enumerate}
+    \item \textbf{Permalinks} : Structure \texttt{/\%postname\%/} (la plus optimisée pour le SEO)
+    \item \textbf{Sitemap XML} : Activer dans le plugin SEO (désactiver le sitemap par défaut de WordPress)
+    \item \textbf{Breadcrumbs} : Activer les fils d'Ariane avec donnees structureées BreadcrumbList
+    \item \textbf{Tags et catégories} : Ne pas indexer les tags (noindex), optimisér les catégories
+    \item \textbf{Images} : Activer les légendes, textes alternatifs, WebP automatique
+    \item \textbf{Canonical} : Activer l'auto-canonical dans le plugin SEO
+    \item \textbf{HTTPS} : Forcer le HTTPS dans la configuration
+    \item \textbf{Cache} : WP Rocket, W3 Total Cache, ou LiteSpeed Cache
+\end{enumerate}
+
+\subsection{Performance WordPress}
+
+\begin{itemize}
+    \item \textbf{Hebergement} : WP Engine, Kinsta, SiteGround, ou RunCloud
+    \item \textbf{Cache} : Redis pour l'opcode (PHP) et le cache objet
+    \item \textbf{CDN} : Cloudflare APO (Automatic Platform Optimization) pour WordPress
+    \item \textbf{Images} : ShortPixel, Smush, ou Imagify pour la comprèssion
+    \item \textbf{Base de donnees} : Nettoyage régulier (révisions, spams, transients)
+    \item \textbf{CSS/JS} : Minification, concatenation, chargement differe
+\end{itemize}
+
+\begin{lstlisting}[style=code,caption={Configuration wp-config.php pour les performances SEO}]
+<?php
+// Activation du cache objet Redis
+défine('WP_REDIS_HOST', '127.0.0.1');
+défine('WP_REDIS_PORT', 6379);
+défine('WP_CACHE_KEY_SALT', 'monsite_');
+
+// Desactiver les révisions de posts (limiter)
+défine('WP_POST_REVISIONS', 5);
+
+// Forcer HTTPS
+défine('FORCE_SSL_ADMIN', true);
+
+// Comprèssion des scripts
+défine('COMPRESS_SCRIPTS', true);
+défine('COMPRESS_CSS', true);
+
+// Journalisation des erreurs (désactiver en production)
+défine('WP_DEBUG', false);
+défine('WP_DEBUG_LOG', false);
+
+// Limiter les requêtes HTTP
+défine('WP_HTTP_BLOCK_EXTERNAL', true);
+défine('WP_ACCESSIBLE_HOSTS', 'api.wordprèss.org,*.googleapis.com');
+?>
+\end{lstlisting}
+
+\section{Shopify SEO}
+
+\keyword{Shopify} est une plateforme e-commerce SaaS avec des contraintes SEO spécifiques.
+
+\subsection{Forces et faiblesses Shopify SEO}
+
+\begin{mybox}{Shopify SEO}{teal}
+\textbf{Points forts :}
+\begin{itemize}
+    \item Balises title et metà description automatiques
+    \item Sitemap XML génère automatiquement
+    \item Canonical tags automatiques
+    \item CDN intégré (Fastly) pour les images
+    \item HTTPS natif
+\end{itemize}
+\textbf{Points faibles :}
+\begin{itemize}
+    \item Structure d'URL des blogs rigide (\texttt{/blogs/...})
+    \item Personnalisation limitée du robots.txt
+    \item Limitations de la réécriture d'URL
+    \item Pagination complexe avec les filtrès
+    \item Internationalisation couteuse (plans supérieurs)
+\end{itemize}
+\end{mybox}
+
+\subsection{Optimisation des pages produits}
+
+\begin{enumerate}
+    \item \textbf{Title unique} : Eviter les titrès génériques "Product | Store Name"
+    \item \textbf{Metà description} : Rediger des descriptions uniques pour chaque produit
+    \item \textbf{URL personnalisée} : Modifier le handle dans les parametrès du produit
+    \item \textbf{Images} : Texte alternatif, noms de fichiers descriptifs
+    \item \textbf{Avis} : Integrer des avis clients (Loox, Judge.me, Stamped)
+    \item \textbf{Donnees structureées} : Shopify génère le Product schema automatiquement
+    \item \textbf{Variantes} : Gerer les variantes avec les filtrès, éviter les URLs dupliquees
+\end{enumerate}
+
+\subsection{Blog Shopify}
+
+\begin{itemize}
+    \item Les articles sont accèssibles via \texttt{/blogs/[blog-name]/[article-slug]}
+    \item Personnalisation limitée des permaliens
+    \item Suggere : Utiliser un sous-domaine \texttt{blog.monsite.com} pour plus de flexibilite
+\end{itemize}
+
+\begin{lstlisting}[style=htmlcode,caption={Template Liquid Shopify optimisé pour SEO}]
+{%- assign product_title = product.title | escape -%}
+{%- assign store_name = shop.name | escape -%}
+
+<title>{{ product_title }} - {{ store_name }}</title>
+<meta name="description"
+      content="{{ product.description | strip_html | truncate: 155 | escape }}">
+
+<link rel="canonical" href="{{ canonical_url }}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 200 | json }},
+  "image": "{{ product.featured_image | image_url: width: 800 }}",
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "lowPrice": {{ product.price_min | money_without_currency }},
+    "highPrice": {{ product.price_max | money_without_currency }},
+    "availability": "{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+  }
+}
+</script>
+\end{lstlisting}
+
+\section{Webflow SEO}
+
+\keyword{Webflow} combine un CMS visuel avec un hebergement performant.
+
+\subsection{Collections CMS et dynamiques}
+
+\begin{itemize}
+    \item Chaque collection CMS génère des pages dynamiques avec URLs personnalisables
+    \item Possibilite de définir des slugs, champs personnalisés pour le SEO
+    \item Tous les champs (title, description, OG image) sont editables par collection
+    \item Structure d'URL flexible via les parametrès de collection
+\end{itemize}
+
+\subsection{Sitemap et indexation}
+
+\begin{itemize}
+    \item Sitemap XML génère automatiquement
+    \item Possibilite d'exclure des pages du sitemap
+    \item Balises noindex disponibles par page
+    \item Robots.txt personnalisable (limite)
+    \item Redirections 301 configurables dans les parametrès du site
+\end{itemize}
+
+\subsection{Limitations Webflow}
+
+\begin{itemize}
+    \item Pas de plugin SEO (intégré directement dans le CMS)
+    \item Pas de gestion avancée des redirections (limite a 100--500 selon le plan)
+    \item Cout eleve pour les sites multilingues (Localization premium)
+    \item Blog moins flexible que WordPress
+    \item Export des donnees limite
+\end{itemize}
+
+\section{Wix SEO}
+
+\keyword{Wix} a considerablement améliore ses capacites SEO ces dernières annees.
+
+\begin{itemize}
+    \item \textbf{Wix SEO Wiz} : Assistant de configuration SEO guidee
+    \item \textbf{Pages dynamiques} : CMS Wix pour le contenu structure
+    \item \textbf{URLs personnalisables} : Reécriture d'URL disponible
+    \item \textbf{Sitemap XML} : Automatique
+    \item \textbf{Canonical} : Gere automatiquement
+    \item \textbf{Donnees structureées} : Support partiel (via JSON)
+    \item \textbf{Vitesse} : CDN intégré, performances correctes
+    \item \textbf{Limitations} : Pas d'accès serveur, pas de plugins, internationalisation complexe
+\end{itemize}
+
+\section{Custom CMS et frameworks}
+
+\subsection{Bonnes pratiques pour CMS sur mesure}
+
+\begin{enumerate}
+    \item \textbf{URLs proprès} : Slug personnalisable, sans ID, sans parametrès
+    \item \textbf{Sitemap dynamique} : Generation XML automatique à chaque publication
+    \item \textbf{Robots.txt dynamique} : Template avec variables pour l'environnement
+    \item \textbf{Breadcrumbs} : Structure hierarchique avec donnees structureées
+    \item \textbf{Pagination} : Balises rel="prev/next" (bonnes pratiques)
+    \item \textbf{Canonical} : Generation automatique basee sur l'URL canonique
+    \item \textbf{Hreflang} : Si multilingue, intégration dans le template head
+    \item \textbf{Performance} : Cache serveur, CDN, optimisation des assets
+    \item \textbf{API headless} : SSR (Server-Side Rendering) ou SSG (Static Site Generation)
+\end{enumerate}
+
+\subsection{Securite SEO par CMS}
+
+\begin{mybox}{Checklist sécurité SEO}{googlered}
+\begin{itemize}
+    \item \textbf{WordPress} : Mises à jour régulières, plugins limites, pare-feu (Wordfence)
+    \item \textbf{Shopify} : Securite geree par Shopify, vigilance sur les apps tierces
+    \item \textbf{Webflow} : Hebergement securise, attention aux scripts personnalisés
+    \item \textbf{Wix} : Securite gee, limitations des accès developpeur
+    \item \textbf{Custom CMS} : Sanitization des inputs, protection CSRF/XSS, CSP headers
+    \item \textbf{Tous} : HTTPS obligatoire, surveillance des temps d'arret, backup réguliers
+\end{itemize}
+\end{mybox}
+
+\begin{lstlisting}[style=code,caption={En-têtes de sécurité pour un CMS personnalisé (NGINX)}]
+add_header Content-Security-Policy "
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://www.google-analytics.com;
+    frame-src 'self' https://www.youtube.com;
+" always;
+
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+\end{lstlisting}
+
+
+% =============================================================================
+% CHAPITRE 37 (après ch:cmsseo, avant Partie 7)
+% =============================================================================
+\chapter{A/B Testing et Expérimentation SEO}
+\label{ch:seotesting}
+
+\section{Fondamentaux du SEO Split Testing}
+
+Le \keyword{SEO split testing} (ou A/B testing SEO) consiste a tester des modifications sur des pages web pour mesurer leur impact sur le trafic organique et les positions.
+
+\subsection{Pourquoi tester en SEO ?}
+
+\begin{itemize}
+    \item \textbf{Valider les hypotheses} : Remplacer l'intuition par des donnees
+    \item \textbf{Eviter les erreurs couteuses} : Un mauvais changement peut faire perdre des mois de trafic
+    \item \textbf{Comprendre l'algorithme} : Decouvrir ce que Google valorise réellement
+    \item \textbf{Optimiser le ROI} : Investir uniquement dans les changements qui fonctionnent
+\end{itemize}
+
+\section{Methodologie de test}
+
+\subsection{Types de tests SEO}
+
+\begin{itemize}
+    \item \textbf{A/B test (split test)} : Deux versions d'une meme page, reparties sur des URLs similaires
+    \item \textbf{Before/After} : Mesure avant et après un changement (moins fiable)
+    \item \textbf{Test apparie} : Comparaison de pages de catégories similaires
+    \item \textbf{Test temps réel} : Monitoring continu avec ajustements dynamiques
+\end{itemize}
+
+\subsection{Processus de test rigoureux}
+
+\begin{enumerate}
+    \item \textbf{Hypothese} : Formulez clairement ce que vous testez et pourquoi
+    \item \textbf{Selection de l'echantillon} : Pages suffisamment nombreuses et similaires
+    \item \textbf{Duree du test} : Minimum 2--4 semaines (cycles de crawl Google)
+    \item \textbf{Mesure} : Positions, trafic, CTR, imprèssions, conversions
+    \item \textbf{Analyse} : Signification statistique avant conclusion
+    \item \textbf{Deploiement} : Appliquer la version gagnante
+    \item \textbf{Validation} : Confirmer les résultats sur la duree
+\end{enumerate}
+
+\section{Signification statistique en SEO}
+
+La \keyword{signification statistique} est cruciale pour ne pas tirer de conclusions hatives :
+
+\begin{itemize}
+    \item \textbf{Niveau de confiance} : 95\% minimum (p-value $<$ 0.05)
+    \item \textbf{Taille d'echantillon} : Plus le trafic est faible, plus le test doit etre long
+    \item \textbf{PageRank et autorite} : Des pages comparables en termes d'autorite
+    \item \textbf{Saisonnalite} : Tester sur des périodes similaires
+    \item \textbf{Bruit algorithmique} : Les fluctuations normales des SERP peuvent masquer les effets
+\end{itemize}
+
+\begin{mybox}{Calculateur de signification}{googleblue}
+Pour determiner si un résultat est statistiquement significatif :
+\[
+z = \frac{\text{CTR}_{\text{test}} - \text{CTR}_{\text{contrôle}}}
+{\sqrt{\frac{\text{CTR}_{\text{contrôle}}(1 - \text{CTR}_{\text{contrôle}})}{n}}}
+\]
+Ou $n$ est le nombre d'imprèssions. Un $z > 1.96$ indique une signification a 95\%.
+\end{mybox}
+
+\section{Outils de SEO Testing}
+
+\subsection{Outils spécialisés}
+
+\begin{itemize}
+    \item \textbf{SearchPilot} : Outil professionnel de A/B testing SEO
+    \item \textbf{AB Tasty} : CRO + testing SEO avec intégration GA4
+    \item \textbf{VWO (Visual Website Optimizer)} : Testing avec segmentation par source de trafic
+    \item \textbf{Dynamic Yield} : Personalisation et testing SEO
+    \item \textbf{Google Analytics 4} : Experiences A/B natives dans GA4
+    \item \textbf{Cloudflare A/B Testing} : Testing au niveau CDN
+\end{itemize}
+
+\section{Elements a tester en priorité}
+
+\subsection{Title Tags}
+
+Les \keyword{title tags} sont l'élément le plus teste en SEO :
+
+\begin{itemize}
+    \item \textbf{Format} : "Mot-cle principal -- Secondaire | Marque" vs "Marque | Mot-cle principal"
+    \item \textbf{Longueur} : 50--60 caracteres vs plus long
+    \item \textbf{Number} : Titrès avec chiffres vs sans
+    \item \textbf{Emotion} : Mots puissants vs neutrès
+    \item \textbf{Question} : Titrès interrogatifs vs affirmatifs
+    \item \textbf{Annee} : Inclure l'annee en cours vs ne pas l'inclure
+\end{itemize}
+
+\subsection{Meta Descriptions}
+
+\begin{itemize}
+    \item \textbf{Longueur} : 155--160 caracteres vs plus court
+    \item \textbf{CTA} : "Decouvrez" vs "Achetez" vs "Apprenez"
+    \item \textbf{Inclusion de mots-cles} : En debut vs répartis
+    \item \textbf{Structure} : Liste vs paragraphe
+    \item \textbf{Questions} : Description sous forme de question vs affirmation
+\end{itemize}
+
+\subsection{Contenu et structure}
+
+\begin{itemize}
+    \item \textbf{Longueur du contenu} : 1500 mots vs 3000 mots
+    \item \textbf{Format} : Listes vs paragraphes vs guides
+    \item \textbf{H1} : Avec mot-cle exact vs variante sémantique
+    \item \textbf{Sous-titrès} : H2/H3 structures vs contenu non structure
+    \item \textbf{Images} : Avec images vs sans, position des images
+    \item \textbf{CTA} : Position (haut vs bas), formulation
+\end{itemize}
+
+\subsection{Donnees structureées}
+
+\begin{itemize}
+    \item FAQ schema vs pas de FAQ
+    \item HowTo schema pour les tutoriels
+    \item Review schema (etoiles) vs pas d'avis structures
+    \item Article schema enrichi vs basique
+\end{itemize}
+
+\begin{lstlisting}[style=code,caption={Exemple de test A/B sur les title tags (Python)}]
+import numpy as np
+from scipy import stats
+
+def test_title_tag(control_data, variant_data):
+    imprèssions_c, clics_c = control_data
+    imprèssions_v, clics_v = variant_data
+
+    ctr_c = clics_c / imprèssions_c
+    ctr_v = clics_v / imprèssions_v
+
+    # Test de proportion (z-test)
+    p_pool = (clics_c + clics_v) / (imprèssions_c + imprèssions_v)
+    se = np.sqrt(p_pool * (1 - p_pool) * (1/imprèssions_c + 1/imprèssions_v))
+    z = (ctr_v - ctr_c) / se
+    p_value = 2 * (1 - stats.norm.cdf(abs(z)))
+
+    uplift = (ctr_v - ctr_c) / ctr_c * 100
+
+    return {
+        "ctrl_ctr": round(ctr_c * 100, 2),
+        "variant_ctr": round(ctr_v * 100, 2),
+        "uplift": round(uplift, 2),
+        "z_score": round(z, 3),
+        "p_value": round(p_value, 4),
+        "significant": p_value < 0.05
+    }
+
+# Exemple : Test de title avec "2026" vs sans
+résultat = test_title_tag(
+    control_data=[50000, 2500],
+    variant_data=[48000, 2640]
+)
+print(résultat)
+# Sortie : {'ctrl_ctr': 5.0, 'variant_ctr': 5.5,
+#           'uplift': 10.0, 'z_score': 3.556,
+#           'p_value': 0.0004, 'significant': True}
+\end{lstlisting}
+
+\section{Eviter les pieges SEO dans les tests}
+
+\begin{mybox}{Pieges courants du SEO Testing}{googlered}
+\begin{itemize}
+    \item \textbf{Contenu duplique} : Les deux versions d'un test ne doivent pas etre indexees
+    \item \textbf{Canonical incorrect} : Utiliser une balise canonical sur la version de contrôle
+    \item \textbf{Noindex accidentel} : Ne pas noindex la variante
+    \item \textbf{Delai insuffisant} : Google peut mettre 2 a 4 semaines a recrawler une page
+    \item \textbf{Echantillon trop petit} : Moins de 1000 imprèssions par variante = donnees non significatives
+    \item \textbf{Tester plusieurs changements} : Impossible d'isolér la cause
+    \item \textbf{Saisonnalite non prise en compte} : Comparer fevrier avec decembre = biais
+\end{itemize}
+\end{mybox}
+
+\subsection{Methode recommandée : Split par URLs}
+
+\begin{enumerate}
+    \item Identifiez un groupe de pages similaires (ex: 100 fiches produits)
+    \item Divisez aleatoirement en groupe contrôle (50) et groupe test (50)
+    \item Appliquez la modification sur le groupe test uniquement
+    \item Comparez les performances des deux groupes sur 4 semaines
+    \item Assurez-vous que les groupes sont statistiquement équivalents en pré-test
+\end{enumerate}
+
+\section{Cas pratiques de SEO Testing}
+
+\subsection{Cas 1 : Test de longueur de contenu}
+
+\textbf{Hypothese :} Les articles de plus de 2000 mots génèrent 50\% plus de trafic que les articles de 1000 mots.
+
+\textbf{Resultat :} +67\% de trafic pour le groupe B, +42\% de backlinks. Significatif a 99\%.
+
+\subsection{Cas 2 : Test de title tags avec numero}
+
+\textbf{Hypothese :} Les titrès commencant par un chiffre (ex: "10 facons de...") génèrent plus de clics.
+
+\textbf{Resultat :} +23\% de CTR pour les titrès numerotes a position egale.
+
+\subsection{Cas 3 : Test de FAQ Schema}
+
+\textbf{Hypothese :} L'ajout de FAQ schema améliore la visibilité dans les featured snippets.
+
+\textbf{Resultat :} +15\% de featured snippets, +8\% de trafic.
+
+
+% =============================================================================
+% GLOSSAIRE (avant Conclusion, après ch:tendances)
+% =============================================================================
+\chapter*{Glossaire complet des termes SEO}
+\addcontentsline{toc}{chapter}{Glossaire des termes SEO}
+\markboth{GLOSSAIRE DES TERMES SEO}{}
+
+\onehalfspacing
+
+\paragraph*{A/B Testing}
+Methode d'experimentation consistant a comparer deux versions d'une meme page (A et B) pour determiner laquelle génère les meilleures performances SEO (CTR, positions, trafic).
+
+\paragraph*{Authority (Autorite)}
+Mesure de la credibilite et de la confiance qu'un site web inspire aux moteurs de recherche. Elle se construit principalement vià des backlinks de qualité, du contenu expert, et des signaux de marque.
+
+\paragraph*{Backlink}
+Lien hypertexte provenant d'un site externe pointant vers votre site. Les backlinks sont l'un des trois piliers du référencement (avec le contenu et la technique) et constituént un signal de popularite et de confiance pour Google.
+
+\paragraph*{BERT (Bidirectional Encoder Représentations from Transformers)}
+Algorithme de traitement du langage naturel (NLP) introduit par Google en 2019 pour mieux comprendre le contexte des mots dans une phrase. BERT a améliore de 10\% la compréhension des requêtes en langage naturel.
+
+\paragraph*{Black Hat SEO}
+Pratiques SEO contraires aux guidelines de Google visant a manipuler artificiellement le classement. Exemples : cloaking, keyword stuffing, liens achetes, fermes de contenu.
+
+\paragraph*{Breadcrumb (Fil d'Ariane)}
+Navigation secondaire qui montre le chemin hierarchique de la page courante dans l'architecture du site. Exemple : Accueil $>$ Categorie $>$ Sous-catégorie $>$ Produit.
+
+\paragraph*{Cache}
+Mecanisme de stockage temporaire de donnees (pages HTML, images, CSS, JS) pour accelerer les chargements ulterieurs. Existe a plusieurs niveaux : navigateur, serveur, CDN, applicatif.
+
+\paragraph*{Canonical (balise)}
+Balise HTML (\texttt{<link rel="canonical">}) qui indique a Google l'URL officielle d'une page lorsqu'il existe des versions dupliquees.
+
+\paragraph*{CDN (Content Delivery Network)}
+Reseau de serveurs géographiquement répartis qui met en cache et delivre les ressources statiques d'un site depuis le nœud le plus proche de l'utilisateur.
+
+\paragraph*{Citation (SEO local)}
+Mention du nom, de l'adresse et du téléphone (NAP) d'une entreprise sur un annuaire ou site web tiers. La cohérence des citations est un facteur de classement important pour le SEO local.
+
+\paragraph*{CLS (Cumulative Layout Shift)}
+Metrique des Core Web Vitals mesurant la stabilité visuelle d'une page. Un score CLS inferieur a 0,1 est considéré comme bon.
+
+\paragraph*{Crawl Budget}
+Nombre de pages que Googlebot explore sur un site dans un intervalle de temps donne. Influence par la popularite du site, la vitesse de chargement, l'état du serveur et la qualité du contenu.
+
+\paragraph*{Crawling (Exploration)}
+Processus par lequel Googlebot decouvre et parcourt les pages web en suivant des liens. Le crawling est la première étape avant l'indexation.
+
+\paragraph*{CTR (Click-Through Rate)}
+Taux de clic, soit le rapport entre le nombre de clics et le nombre d'imprèssions d'une page dans les SERP.
+
+\paragraph*{Disavow (Desaveu de liens)}
+Outil de Google Search Console permettant de signaler les backlinks toxiques ou non naturels que Google devrait ignorer.
+
+\paragraph*{Domain Authority (DA)}
+Metrique propriétaire de Moz (score de 1 a 100) qui predit la capacite d'un site à se classer dans les SERP.
+
+\paragraph*{E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)}
+Cadre d'évaluation de la qualité du contenu utilise par les Quality Raters de Google. Ajout du premier "E" (Experience) en 2022.
+
+\paragraph*{Entity SEO}
+Approche SEO centree sur les entites (concepts, personnes, lieux, objets) plutot que sur les mots-cles. Exploite le Knowledge Graph de Google.
+
+\paragraph*{Featured Snippet}
+Encadre de réponse directe affiche en position 0 dans les SERP de Google. Provient d'une page web et peut etre un paragraphe, une liste, un tableau où une vidéo.
+
+\paragraph*{Google Bot}
+Robot d'exploration de Google (crawler) qui parcourt le web pour découvrir et indexer les pages. Googlebot respecte les directives du robots.txt.
+
+\paragraph*{Google Search Console (GSC)}
+Outil gratuit de Google qui fournit des donnees sur la présence d'un site dans les résultats de recherche : indexation, trafic, erreurs, Core Web Vitals.
+
+\paragraph*{Hreflang}
+Attribut HTML (\texttt{<link rel="alternate" hreflang="...">}) qui indique a Google les différentes versions linguistiques ou régionales d'une meme page.
+
+\paragraph*{HTTP Status Codes}
+\begin{itemize}
+    \item \textbf{200 OK} : Requete réussie, page accèssible
+    \item \textbf{301 Moved Permanently} : Redirection permanente (transmet l'autorite)
+    \item \textbf{404 Not Found} : Page non trouvee
+    \item \textbf{500 Internal Server Error} : Erreur serveur
+\end{itemize}
+
+\paragraph*{Indexation}
+Processus par lequel Google ajoute une page web à sa base de donnees (index) après l'avoir exploree. Une page non indexee n'apparait pas dans les résultats de recherche.
+
+\paragraph*{INP (Interaction to Next Paint)}
+Metrique des Core Web Vitals (depuis mars 2024) mesurant la réactivité d'une page a toutes les interactions utilisateur. Objectif : moins de 200 ms.
+
+\paragraph*{Internal Link (Lien interne)}
+Lien hypertexte entre deux pages du meme site web. Les liens internes transmettent l'autorite (PageRank), structurent l'architecture du site et aident Google a comprendre la hierarchie des contenus.
+
+\paragraph*{JavaScript SEO}
+Branche du SEO technique qui traite de l'indexation des sites web construits avec JavaScript (React, Vue, Angular, Svelte).
+
+\paragraph*{Keyword Cannibalization (Cannibalisation)}
+Situation problematique ou plusieurs pages d'un meme site sont optimisées pour le meme mot-cle, creant une competition interne qui dilue l'autorite.
+
+\paragraph*{Keyword Research (Recherche de mots-cles)}
+Processus d'identification et d'analyse des termes de recherche utilises par les internautes. Fondation de toute stratégie SEO.
+
+\paragraph*{Knowledge Graph}
+Base de connaissances de Google qui stocke des informations structureées sur des entites et les relations entre elles. Alimente les Knowledge Panels.
+
+\paragraph*{Landing Page}
+Page d'atterrissage concue pour convertir les visiteurs issus d'une campagne marketing ou d'une recherche.
+
+\paragraph*{LCP (Largest Contentful Paint)}
+Metrique des Core Web Vitals mesurant le temps de chargement du plus grand élément visible dans la fenetre d'affichage. Objectif : moins de 2,5 secondes.
+
+\paragraph*{Link Building (Construction de liens)}
+Ensemble de techniques visant a obtenir des backlinks de qualité vers un site web. Strategies : création de contenu viral, Digital PR, guest blogging, skyscraper technique.
+
+\paragraph*{Local SEO}
+Branche du SEO qui vise a optimisér la visibilité d'une entreprise dans les recherches locales. Facteurs cles : Google Business Profile, citations NAP, avis clients.
+
+\paragraph*{Long Tail Keyword (Mot-cle de longue traine)}
+Requete de recherche spécifique et généralement plus longue (3 mots ou plus) avec un volume de recherche plus faible mais un taux de conversion plus eleve.
+
+\paragraph*{Meta Description}
+Balise HTML (\texttt{<meta name="description">}) qui fournit un résumé du contenu d'une page. Influence le CTR en SERP.
+
+\paragraph*{Mobile-First Indexing}
+Methode d'indexation de Google (par défaut depuis 2019) qui utilise la version mobile d'un site pour l'indexation et le classement.
+
+\paragraph*{NAP (Name, Address, Phone)}
+Informations de base d'une entreprise : Nom, Adresse, Telephone. La cohérence du NAP sur tous les annuaires est un facteur de classement important pour le SEO local.
+
+\paragraph*{Nofollow}
+Attribut (\texttt{rel="nofollow"}) indiquant aux moteurs de recherche de ne pas transmettre l'autorite vià un lien.
+
+\paragraph*{Noindex}
+Balise meta (\texttt{<meta name="robots" content="noindex">}) qui demande a Google de ne pas indexer une page.
+
+\paragraph*{On-Page SEO}
+Optimisation des éléments directement visibles et modifiables sur une page web : contenu, balises HTML (title, meta, headings), images, structure, liens internes, donnees structureées.
+
+\paragraph*{Off-Page SEO}
+Ensemble des actions menees en dehors de son propre site pour améliorer son référencement : netlinking, réseaux sociaux, mentions de marque, relations prèsse.
+
+\paragraph*{Orphan Page (Page orpheline)}
+Page web qui n'est liée par aucun lien interne depuis d'autrès pages du meme site. Google a du mal a trouver et indexer ces pages.
+
+\paragraph*{PageRank}
+Algorithme original de Google (1998) qui evalue l'importance d'une page en fonction de la quantité et de la qualité des liens pointant vers elle.
+
+\paragraph*{Penguin / Panda}
+\begin{itemize}
+    \item \textbf{Penguin} (2012) : Penalise les pratiques de netlinking toxique
+    \item \textbf{Panda} (2011) : Penalise le contenu de faible qualité, duplique ou peu pertinent
+\end{itemize}
+
+\paragraph*{Redirect (Redirection)}
+Technique de reacheminement d'une URL vers une autre. Principaux codes : 301 (permanent), 302 (temporaire), 307, 308.
+
+\paragraph*{Rich Snippet (Extrait enrichi)}
+Resultat de recherche améliore affichant des informations supplementaires (etoiles, prix) grâce aux donnees structureées Schema.org.
+
+\paragraph*{Robots.txt}
+Fichier texte à la racine du site qui indique aux robots d'exploration les pages et repertoires à ne pas explorer.
+
+\paragraph*{Schema.org}
+Vocabulaire standardisé de donnees structureées developpe par Google, Microsoft, Yahoo et Yandex. Plus de 800 types disponibles.
+
+\paragraph*{Search Intent (Intention de recherche)}
+Objectif réel d'un utilisateur derriere une requête de recherche. Quatre types principaux : informationnelle, navigationnelle, transactionnelle, commerciale.
+
+\paragraph*{SERP (Search Engine Results Page)}
+Page de résultats d'un moteur de recherche. Les SERP modernes incluent des résultats organiques, des annonces payantes, des featured snippets, des Knowledge Panels.
+
+\paragraph*{Sitemap (Plan du site)}
+Fichier XML listant toutes les pages importantes d'un site web à destination des moteurs de recherche.
+
+\paragraph*{Soft 404}
+Page qui affiche un code HTTP 200 (succès) mais dont le contenu est inexistant ou vide. A corriger avec un vrai 404 où une redirection.
+
+\paragraph*{Technical SEO}
+Branche du SEO qui traite des aspects techniques de l'optimisation : vitesse, indexation, crawling, donnees structureées, architecture du site, mobile, sécurité (HTTPS), JavaScript SEO.
+
+\paragraph*{Title Tag (Balise titre)}
+Balise HTML \texttt{<title>} qui définit le titre d'une page dans les SERP et l'onglet du navigateur. Principal facteur de classement on-page.
+
+\paragraph*{Topical Authority (Autorite thématique)}
+Concept SEO où un site est reconnu par Google comme une référence complete sur un sujet donne. Se construit par la publication de contenu exhaustif et interconnecte.
+
+\paragraph*{Trust Flow}
+Metrique propriétaire de Majestic qui mesure la qualité des backlinks d'un site, basee sur la proximite avec des sites de confiance.
+
+\paragraph*{White Hat SEO}
+Pratiques SEO conformes aux guidelines de Google, centrees sur l'utilisateur, durables et ethiques. Opposition au Black Hat SEO.
+
+\paragraph*{YMYL (Your Money or Your Life)}
+Categorie de pages dont le contenu peut impacter la sante, les finances, la sécurité où le bien-etre des utilisateurs. Ces pages sont soumises à des critères de qualité E-E-A-T plus stricts.
+
+\paragraph*{Zero-Click Search}
+Recherche où l'utilisateur obtient la réponse directement dans les SERP sans cliquer sur un résultat. Les featured snippets, Knowledge Panels et réponses directes contribuent à ce phénomène croissant.
+
+
+% =============================================================================
+% ETUDES DE CAS (après Glossaire, avant Conclusion)
+% =============================================================================
+\chapter{Études de cas et exemples concrets}
+\label{ch:cas}
+
+\section{Introduction}
+
+Cette section prèsente quatre etudes de cas detaillees de projets SEO réels. Chaque cas illustre des défis spécifiques et les solutions mises en oeuvre, avec des résultats mesurables.
+
+\section{Cas n°1 : Migration de site avec récupération de trafic}
+
+\subsection{Contexte}
+
+Un site e-commerce de mode francais (150 000 pages, 800 000 visites mensuelles) a entrepris une migration complete : changement de CMS (PrestaShop vers Magento), changement de nom de domaine, et refonte graphique.
+
+\subsection{Defis}
+
+\begin{itemize}
+    \item 150 000 URLs a mapper avec une structure complètement différente
+    \item 12 ans de backlinks a préserver
+    \item Trafic organique de 500 000 visites/mois à ne pas perdre
+    \item Contenu des fiches produits a migrer avec les donnees structureées
+\end{itemize}
+
+\subsection{Methodologie}
+
+\begin{enumerate}
+    \item \textbf{Phase 1 -- Audit (6 semaines)} :
+    \begin{itemize}
+        \item Crawl complet de l'ancien site (Screaming Frog)
+        \item Export des 150 000 URLs avec statuts HTTP, balises meta
+        \item Analyse des 12 000 backlinks uniques (Ahrefs)
+        \item Benchmark de trafic sur 6 mois (GSC, GA4)
+    \end{itemize}
+    \item \textbf{Phase 2 -- Mapping URL (4 semaines)} :
+    \begin{itemize}
+        \item Table de correspondance exhaustive
+        \item Regle de mapping automatique pour les patterns recurrents
+        \item Gestion manuelle des 500 URLs les plus importantes (80\% du trafic)
+    \end{itemize}
+    \item \textbf{Phase 3 -- Tests en staging (3 semaines)} :
+    \begin{itemize}
+        \item Environnement de staging protégé (IP restriction)
+        \item Validation automatisee des 150 000 redirections
+        \item Test de performance : Lighthouse, GTmetrix, PageSpeed Insights
+    \end{itemize}
+    \item \textbf{Phase 4 -- Migration (48h)} :
+    \begin{itemize}
+        \item Basculement DNS un samedi matin (trafic minimum)
+        \item Activation immédiate des redirections 301
+        \item Soumission du nouveau sitemap dans GSC
+        \item Changement d'adresse dans GSC
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Resultats}
+
+\begin{mybox}{Resultats de la migration}{googlegreen}
+\begin{itemize}
+    \item \textbf{Trafic a J+7} : -8\% (perte temporaire acceptable)
+    \item \textbf{Trafic a J+30} : -2\%
+    \item \textbf{Trafic a J+90} : +15\% (amélioration grâce au nouveau CMS)
+    \item \textbf{Backlinks transmis} : 97\% a M+3
+    \item \textbf{Pages indexees} : 142 000 (95\% du total)
+    \item \textbf{Core Web Vitals} : Amelioration de 40\% (passage en vert)
+    \item \textbf{Erreurs 404} : 0.3\% des requêtes
+\end{itemize}
+\end{mybox}
+
+\subsection{Facteurs cles de succès}
+
+\begin{enumerate}
+    \item Mapping URL exhaustif avec priorisation par trafic
+    \item Tests automatises des redirections avant le déploiement
+    \item Conservation de la structure d'URL pour 80\% des pages
+    \item Equipe dédiée (3 developpeurs, 1 SEO, 1 chef de projet)
+    \item Plan de rollback pret (non active, mais rassurant)
+\end{enumerate}
+
+\section{Cas n°2 : E-commerce et Core Web Vitals}
+
+\subsection{Contexte}
+
+Un site de vente d'electronique (Shopify, 5 000 produits) rencontrait des performances mediocre sur mobile : LCP a 5,8s, CLS a 0,35, INP a 450ms.
+
+\subsection{Diagnostic}
+
+\begin{enumerate}
+    \item \textbf{LCP trop eleve} (5,8s) : Image hero non optimisée, polices Google bloquantes
+    \item \textbf{CLS eleve} (0,35) : Images sans dimensions, bannieres publicitaires sans espace réservé
+    \item \textbf{INP eleve} (450ms) : JavaScript tiers lourd, tâches longues sur le thread principal
+\end{enumerate}
+
+\subsection{Plan d'optimisation}
+
+\subsubsection{LCP (5,8s $\rightarrow$ 1,9s)}
+\begin{itemize}
+    \item Image hero convertie en WebP avec srcset responsive
+    \item Prechargement de l'image hero avec \texttt{fetchpriority="high"}
+    \item Polices Google en display=swap, prechargees
+    \item Critical CSS inline pour le rendu initial
+\end{itemize}
+
+\subsubsection{CLS (0,35 $\rightarrow$ 0,05)}
+\begin{itemize}
+    \item Dimensions explicites sur toutes les images
+    \item Espaces réservés pour les bannieres publicitaires
+    \item \texttt{font-display: swap} sur toutes les polices
+\end{itemize}
+
+\subsubsection{INP (450ms $\rightarrow$ 120ms)}
+\begin{itemize}
+    \item Chargement differe du script de chat
+    \item Pixels analytics charges en async
+    \item Supprèssion des tâches longues $>$ 50ms
+\end{itemize}
+
+\subsection{Resultats}
+
+\begin{mybox}{Amelioration des Core Web Vitals}{googlegreen}
+\begin{tabular}{llll}
+    \toprule
+    \textbf{Metrique} & \textbf{Avant} & \textbf{Après} & \textbf{Amelioration} \\
+    \midrule
+    LCP                & 5,8 s          & 1,9 s          & -67\% \\
+    INP                & 450 ms         & 120 ms         & -73\% \\
+    CLS                & 0,35           & 0,05           & -86\% \\
+    TTFB               & 1,2 s          & 0,4 s          & -67\% \\
+    \bottomrule
+\end{tabular}
+\end{mybox}
+
+\subsection{Impact SEO}
+\begin{itemize}
+    \item Trafic organique : +32\% sur les 3 mois suivants
+    \item Positions moyennes : amélioration de 4,2 positions
+    \item Taux de rebond : -18\%
+    \item Taux de conversion mobile : +22\%
+\end{itemize}
+
+\section{Cas n°3 : Strategie de contenu et Topical Authority}
+
+\subsection{Contexte}
+Un site B2B SaaS (logiciel de gestion de projet) souhaitait devenir une référence SEO sur le thème de la gestion de projet agile. Le site avait 50 articles de blog (1000 mots en moyenne) avec un trafic mensuel de 15 000 visites.
+
+\subsection{Strategie}
+
+\subsubsection{Phase 1 -- Recherche et planification}
+\begin{enumerate}
+    \item Analyse du Topical Authority gap : 30 sujets identifies non couverts
+    \item Analyse concurrentielle des 5 sites les plus visibles
+    \item Creation de 5 piliers thématiques
+    \item Planification de 120 articles clusters (2 articles/semaine sur 12 mois)
+\end{enumerate}
+
+\subsubsection{Phase 2 -- Production de contenu}
+\begin{itemize}
+    \item \textbf{Piliers} : 5 guides complets de 5000--7000 mots chacun
+    \item \textbf{Clusters} : Articles de 2000--3000 mots ciblant un mot-cle longue traine
+    \item \textbf{Maillage interne} : Chaque article cluster pointe vers le pilier et 3--5 articles connexes
+    \item \textbf{Mise à jour} : Rafraichissement mensuel des articles les plus performants
+\end{itemize}
+
+\subsubsection{Phase 3 -- Distribution et netlinking}
+\begin{itemize}
+    \item Publication invitée sur 15 blogs du secteur
+    \item Collaboration avec 10 influenceurs du management de projet
+    \item Webinaires mensuels transformes en articles + vidéos
+    \item Syndication de contenu sur Medium et LinkedIn (avec canonical)
+\end{itemize}
+
+\subsection{Resultats}
+
+\begin{mybox}{Resultats de la stratégie de contenu}{googlegreen}
+\begin{tabular}{llll}
+    \toprule
+    \textbf{Metrique} & \textbf{Mois 0} & \textbf{Mois 12} & \textbf{Evolution} \\
+    \midrule
+    Trafic mensuel     & 15 000          & 128 000          & +753\% \\
+    Mots-cles top 10   & 45              & 340              & +656\% \\
+    Mots-cles top 3    & 8               & 89               & +1012\% \\
+    Backlinks          & 230             & 1 850            & +704\% \\
+    Domain Authority   & 22              & 38               & +16 pts \\
+    Pages indexees     & 50              & 170              & +240\% \\
+    \bottomrule
+\end{tabular}
+\end{mybox}
+
+\subsection{Facteurs cles de succès}
+\begin{enumerate}
+    \item \textbf{Cohérence thématique} : Chaque article renforce l'autorite
+    \item \textbf{Qualite avant quantité} : 2 articles par semaine mais de 2000+ mots
+    \item \textbf{Maillage interne systématique} : Tous les articles sont interconnectes
+    \item \textbf{Patience} : Resultats visibles à partir de M+4, accelaration après M+8
+\end{enumerate}
+
+\section{Cas n°4 : Expansion SEO internationale}
+
+\subsection{Contexte}
+Une plateforme SaaS francaise de gestion de projet (déjà performante en France avec 200 000 visites/mois) souhaitait se developper sur 5 marchés : Allemagne, Espagne, Italie, Royaume-Uni et Belgique neerlandophone.
+
+\subsection{Defis}
+\begin{itemize}
+    \item Site existant avec 300 pages de contenu a traduire et adapter
+    \item Mots-cles très différents selon les marchés
+    \item Budget limite pour 5 marchés simultanes
+\end{itemize}
+
+\subsection{Strategie}
+
+Architecture choisie : sous-répertoires (\texttt{/de/}, \texttt{/es/}, \texttt{/it/}, \texttt{/en-gb/}, \texttt{/nl-be/}) pour consolidér l'autorite.
+
+\subsubsection{Implementation technique}
+\begin{enumerate}
+    \item \textbf{hreflang} : Implementation dans le \texttt{<head>} avec les 6 langues + x-default
+    \item \textbf{Canonical} : Auto-référençant par version linguistique
+    \item \textbf{Detection automatique} : Redirection basee sur Accept-Language
+    \item \textbf{Sitemap multilingue} : URLs de chaque langue declarees
+    \item \textbf{Google Search Console} : 6 propriétés separees configurees
+\end{enumerate}
+
+\subsubsection{Strategie de contenu par marché}
+\begin{itemize}
+    \item \textbf{Traduction prioritaire} : Pages piliers et pages de conversion d'abord
+    \item \textbf{Adaptation culturelle} : Exemples et etudes de cas locaux
+    \item \textbf{Recherche de mots-cles locale} : Par des natifs, pas de simple traduction
+    \item \textbf{Contenu original} : 30\% de contenu spécifique à chaque marché
+\end{itemize}
+
+\subsection{Resultats a 12 mois}
+
+\begin{mybox}{Resultats SEO International}{googlegreen}
+\begin{tabular}{llll}
+    \toprule
+    \textbf{Pays} & \textbf{Trafic M+12} & \% du trafic total & \textbf{Mots-cles top 10} \\
+    \midrule
+    France        & 215 000              & 42\%               & 340 \\
+    Allemagne     & 95 000               & 19\%               & 185 \\
+    UK            & 72 000               & 14\%               & 142 \\
+    Espagne       & 58 000               & 11\%               & 98 \\
+    Italie        & 42 000               & 8\%                & 76 \\
+    Belgique (NL) & 28 000               & 6\%                & 52 \\
+    \midrule
+    \textbf{Total} & \textbf{510 000}    & \textbf{100\%}     & \textbf{893} \\
+    \bottomrule
+\end{tabular}
+\end{mybox}
+
+\subsection{Lecons apprises}
+\begin{enumerate}
+    \item La structure en sous-répertoires préservé l'autorite du domaine principal
+    \item La traduction seule ne suffit pas : l'adaptation culturelle est cle
+    \item Chaque marché à ses proprès mots-cles -- ne jamais traduire littéralement
+    \item L'ordre de déploiement (Allemagne en premier) a ete stratégique (marché le plus accèssible)
+    \item Le contenu original par marché (30\%) a significativement outperforme le contenu traduit
+\end{enumerate}
+
+
+% =============================================================================
+% FIN DES NOUVEAUX CHAPITRES
+% =============================================================================

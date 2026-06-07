@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#673AB7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#512DA8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF5722;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E64A19;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#009688;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00796B;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="500" rx="15" fill="#f8f9fa"/>
+  <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1a1a2e">Donnes structures (Schema Markup) - Les Rich Snippets</text>
+
+  <!-- Schema.org explanation -->
+  <rect x="30" y="70" width="840" height="100" rx="10" fill="#EDE7F6" stroke="#673AB7" stroke-width="1.5"/>
+  <text x="450" y="95" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#673AB7">Qu'est-ce que les donnes structures ?</text>
+  <text x="450" y="118" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">Un vocabulaire standardis (Schema.org) ajout au code HTML pour expliquer le contenu aux moteurs de recherche.</text>
+  <text x="450" y="138" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">Cela permet d'obtenir des rsultats enrichis (Rich Snippets) avec des toiles, prix, images, etc.</text>
+  <text x="450" y="158" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">Format : JSON-LD (recommand), Microdonnes, RDFa</text>
+
+  <!-- Types de Schema -->
+  <rect x="30" y="190" width="260" height="160" rx="10" fill="white" stroke="#673AB7" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="30" y="190" width="260" height="35" rx="10" fill="url(#g1)"/>
+  <rect x="30" y="215" width="260" height="10" fill="url(#g1)"/>
+  <text x="160" y="213" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="white">Article / Blog</text>
+  <text x="160" y="250" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">headline, author, datePublished</text>
+  <text x="160" y="268" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">dateModified, image, publisher</text>
+  <text x="160" y="286" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">description, articleBody</text>
+  <text x="160" y="310" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">Apparition : Top stories, carousel</text>
+
+  <rect x="320" y="190" width="260" height="160" rx="10" fill="white" stroke="#FF5722" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="320" y="190" width="260" height="35" rx="10" fill="url(#g2)"/>
+  <rect x="320" y="215" width="260" height="10" fill="url(#g2)"/>
+  <text x="450" y="213" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="white">Produit / E-commerce</text>
+  <text x="450" y="250" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">name, description, sku, brand</text>
+  <text x="450" y="268" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">offers (price, currency, availability)</text>
+  <text x="450" y="286" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">aggregateRating (ratingValue, reviewCount)</text>
+  <text x="450" y="310" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">Apparition : Prix, stock, toiles</text>
+
+  <rect x="610" y="190" width="260" height="160" rx="10" fill="white" stroke="#009688" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="610" y="190" width="260" height="35" rx="10" fill="url(#g3)"/>
+  <rect x="610" y="215" width="260" height="10" fill="url(#g3)"/>
+  <text x="740" y="213" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="white">Local Business</text>
+  <text x="740" y="250" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">name, address, telephone</text>
+  <text x="740" y="268" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">openingHours, geo (latitude/longitude)</text>
+  <text x="740" y="286" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">aggregateRating, review</text>
+  <text x="740" y="310" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">Apparition : Google Local Pack</text>
+
+  <!-- Exemple JSON-LD -->
+  <rect x="30" y="370" width="840" height="110" rx="10" fill="#263238"/>
+  <text x="450" y="395" text-anchor="middle" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#FBBC05">Exemple de Schema Article en JSON-LD</text>
+  <text x="50" y="418" font-family="Consolas, monospace" font-size="9" fill="#E8F0FE">{</text>
+  <text x="70" y="433" font-family="Consolas, monospace" font-size="9" fill="#E8F0FE">"@context": "https://schema.org",</text>
+  <text x="70" y="448" font-family="Consolas, monospace" font-size="9" fill="#E8F0FE">"@type": "Article",</text>
+  <text x="70" y="463" font-family="Consolas, monospace" font-size="9" fill="#34A853">"headline": "Guide SEO complet",</text>
+  <text x="70" y="478" font-family="Consolas, monospace" font-size="9" fill="#34A853">"author": {"@type": "Person", "name": "Expert SEO"},</text>
+  <text x="70" y="493" font-family="Consolas, monospace" font-size="9" fill="#34A853">"datePublished": "2025-01-15", "publisher": {...}</text>
+  <text x="50" y="508" font-family="Consolas, monospace" font-size="9" fill="#E8F0FE">}</text>
+</svg>

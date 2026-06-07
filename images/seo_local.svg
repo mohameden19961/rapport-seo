@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480">
+  <defs>
+    <linearGradient id="g_local" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34A853;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="480" rx="15" fill="#f8f9fa"/>
+  <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1a1a2e">SEO Local - tre visible dans votre rgion</text>
+
+  <!-- Google Business Profile -->
+  <rect x="30" y="70" width="400" height="370" rx="12" fill="white" stroke="#4285F4" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="30" y="70" width="400" height="45" rx="12" fill="url(#g_local)"/>
+  <rect x="30" y="100" width="400" height="15" fill="url(#g_local)"/>
+  <text x="230" y="100" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="white">Google Business Profile (GBP)</text>
+
+  <text x="60" y="140" font-family="Arial" font-size="12" font-weight="bold" fill="#4285F4">lments essentiels du profil :</text>
+  <text x="60" y="162" font-family="Arial" font-size="10" fill="#333">- Nom, adresse, tlphone (NAP) cohrents</text>
+  <text x="60" y="180" font-family="Arial" font-size="10" fill="#333">- Catgorie d'activit principale</text>
+  <text x="60" y="198" font-family="Arial" font-size="10" fill="#333">- Horaires d'ouverture</text>
+  <text x="60" y="216" font-family="Arial" font-size="10" fill="#333">- Photos et vidos de haute qualit</text>
+  <text x="60" y="234" font-family="Arial" font-size="10" fill="#333">- Rponses aux avis clients</text>
+  <text x="60" y="252" font-family="Arial" font-size="10" fill="#333">- Posts rguliers (actualits, offres)</text>
+  <text x="60" y="270" font-family="Arial" font-size="10" fill="#333">- Questions / Rponses</text>
+
+  <line x1="60" y1="285" x2="400" y2="285" stroke="#ddd" stroke-width="0.5"/>
+
+  <text x="60" y="305" font-family="Arial" font-size="12" font-weight="bold" fill="#4285F4">Facteurs de classement Local :</text>
+  <text x="60" y="327" font-family="Arial" font-size="10" fill="#333">1. Proximit gographique (distance)</text>
+  <text x="60" y="345" font-family="Arial" font-size="10" fill="#333">2. Pertinence (correspondance catgorie)</text>
+  <text x="60" y="363" font-family="Arial" font-size="10" fill="#333">3. Notoriété (avis, citations, backlinks)</text>
+  <text x="60" y="381" font-family="Arial" font-size="10" fill="#333">4. Mots-cls locaux dans le profil</text>
+  <text x="60" y="399" font-family="Arial" font-size="10" fill="#333">5. Comportement utilisateur (clic, appel)</text>
+  <text x="60" y="420" font-family="Arial" font-size="9" fill="#888">Astuce : Vrifiez et mettez jour votre GBP rgulièrement</text>
+
+  <!-- Facteurs SEO Local -->
+  <rect x="460" y="70" width="410" height="370" rx="12" fill="white" stroke="#34A853" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="460" y="70" width="410" height="45" rx="12" fill="#34A853"/>
+  <rect x="460" y="100" width="410" height="15" fill="#34A853"/>
+  <text x="665" y="100" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="white">Stratgies SEO Locales</text>
+
+  <!-- Citations -->
+  <rect x="480" y="130" width="370" height="55" rx="8" fill="#E6F4EA"/>
+  <text x="665" y="150" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#34A853">Citations NAP (Name, Address, Phone)</text>
+  <text x="665" y="170" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Annuaires locaux, Pages Jaunes, 118000,</text>
+  <text x="665" y="183" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Bing Places, Apple Maps, Yelp</text>
+
+  <!-- Avis -->
+  <rect x="480" y="195" width="370" height="55" rx="8" fill="#FEF7E0"/>
+  <text x="665" y="215" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#F9AB00">Gestion des avis clients</text>
+  <text x="665" y="235" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Encourager les avis positifs</text>
+  <text x="665" y="248" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Rpondre professionnellement aux avis ngatifs</text>
+
+  <!-- Contenu local -->
+  <rect x="480" y="260" width="370" height="55" rx="8" fill="#FCE8E6"/>
+  <text x="665" y="280" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#EA4335">Contenu optimis localement</text>
+  <text x="665" y="300" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Crer des pages par ville/quartier</text>
+  <text x="665" y="313" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Blog sur des vnements locaux</text>
+
+  <!-- Backlinks locaux -->
+  <rect x="480" y="325" width="370" height="55" rx="8" fill="#E8F0FE"/>
+  <text x="665" y="345" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#4285F4">Netlinking local</text>
+  <text x="665" y="365" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Partenariats avec entreprises locales</text>
+  <text x="665" y="378" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Sponsoring, associations, mdias locaux</text>
+
+  <text x="570" y="425" font-family="Arial" font-size="9" fill="#888">Le SEO Local est essentiel pour les commerces de proximit</text>
+</svg>

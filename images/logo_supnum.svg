@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="g_logo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#34A853;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FBBC05;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="g_logo2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Cercle extérieur -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#g_logo)" stroke-width="8"/>
+
+  <!-- Cercle intérieur -->
+  <circle cx="200" cy="200" r="150" fill="url(#g_logo2)" opacity="0.9"/>
+
+  <!-- Lettre S stylisée -->
+  <path d="M 160 140 Q 200 110 240 140 Q 260 160 240 190 Q 200 220 160 250 Q 140 280 160 310 Q 200 340 240 310" fill="none" stroke="white" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Points décoratifs -->
+  <circle cx="200" cy="120" r="8" fill="#FBBC05"/>
+  <circle cx="260" cy="200" r="8" fill="#34A853"/>
+  <circle cx="200" cy="280" r="8" fill="#EA4335"/>
+
+  <!-- Éléments tech -->
+  <rect x="130" y="330" width="140" height="6" rx="3" fill="#4285F4" opacity="0.8"/>
+  <rect x="150" y="345" width="100" height="4" rx="2" fill="#34A853" opacity="0.6"/>
+</svg>
