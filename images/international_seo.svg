@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="800" height="38" fill="#2C5F8A"/>
+  <text x="400.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Architecture SEO International (hreflang)</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <rect x="250" y="60" width="260" height="40" rx="5" fill="#2C5F8A"/>
+  <text x="380.0" y="84.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="bold">Domaine: exemple.com</text>
+  <rect x="30" y="130" width="200" height="40" rx="5" fill="#1A73E8"/>
+  <text x="130.0" y="154.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Sous-domaines</text>
+  <text x="40" y="190" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">fr.exemple.com
+de.exemple.com
+es.exemple.com</text>
+  <rect x="290" y="130" width="200" height="40" rx="5" fill="#188038"/>
+  <text x="390.0" y="154.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Sous-repertoires</text>
+  <text x="300" y="190" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">exemple.com/fr/
+exemple.com/de/
+exemple.com/es/</text>
+  <rect x="550" y="130" width="200" height="40" rx="5" fill="#F9AB00"/>
+  <text x="650.0" y="154.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">ccTLD</text>
+  <text x="560" y="190" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">exemple.fr
+exemple.de
+exemple.es</text>
+  <rect x="30" y="260" width="740" height="45" rx="5" fill="#2C5F8A"/>
+  <text x="400.0" y="286.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Implementation hreflang dans le <head></text>
+  <text x="40" y="295" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11"><link rel="alternate" hreflang="fr" href="https://exemple.com/fr/" /></text>
+  <text x="40" y="315" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11"><link rel="alternate" hreflang="de" href="https://exemple.com/de/" /></text>
+  <text x="40" y="335" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11"><link rel="alternate" hreflang="en" href="https://exemple.com/en/" /></text>
+  <text x="40" y="355" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11"><link rel="alternate" hreflang="x-default" href="https://exemple.com/" /></text>
+  <rect x="30" y="390" width="740" height="40" rx="5" fill="#188038"/>
+  <text x="400.0" y="414.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Recommandation: sous-repertoires (preserve l'autorite) + adaptation culturelle du contenu</text>
+</svg>

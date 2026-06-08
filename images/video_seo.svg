@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" width="760" height="480">
+  <rect width="760" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="760" height="38" fill="#2C5F8A"/>
+  <text x="380.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Strategie SEO Video : de la creation a l'indexation</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <text x="30" y="60" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="14">Pipeline d'optimisation du contenu video</text>
+  <rect x="30" y="80" width="130" height="70" rx="5" fill="#1A73E8"/>
+  <text x="95.0" y="119.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Creation video</text>
+  <text x="35" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Script optimise,
+miniature attractive,
+duree engageante</text>
+  <line x1="160" y1="115" x2="210" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="180" y="80" width="130" height="70" rx="5" fill="#188038"/>
+  <text x="245.0" y="119.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Hebergement</text>
+  <text x="185" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">YouTube, Vimeo,
+hebergement propre,
+CDN video</text>
+  <line x1="310" y1="115" x2="360" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="330" y="80" width="130" height="70" rx="5" fill="#F9AB00"/>
+  <text x="395.0" y="119.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Optimisation</text>
+  <text x="335" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Titre, description,
+tags, chapitres,
+transcription</text>
+  <line x1="460" y1="115" x2="510" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="480" y="80" width="130" height="70" rx="5" fill="#D93025"/>
+  <text x="545.0" y="119.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Schema markup</text>
+  <text x="485" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">VideoObject,
+VideoGame,
+Clip, Season</text>
+  <line x1="610" y1="115" x2="660" y2="115" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="630" y="80" width="130" height="70" rx="5" fill="#2C5F8A"/>
+  <text x="695.0" y="119.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Indexation</text>
+  <text x="635" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Video sitemap,
+GSC inspection,
+carrousel video</text>
+  <rect x="30" y="230" width="700" height="50" rx="5" fill="#188038"/>
+  <text x="380.0" y="259.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Les pages video ont 53x plus de chance d'apparaitre en Page 1 de Google (source: Backlinko 2025)</text>
+  <text x="40" y="300" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Youtube est le 2e moteur de recherche mondial</text>
+  <text x="40" y="328" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Les resultats video apparaissent dans 6% des SERP desktop</text>
+  <text x="40" y="356" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Le schema VideoObject est requis pour les rich snippets video</text>
+  <text x="40" y="384" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ La duree ideale : 5-15 min pour le classement</text>
+  <rect x="30" y="425" width="700" height="35" rx="5" fill="#F9AB00"/>
+  <text x="380.0" y="446.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">KPIs: vues, CTR, taux d'engagement, retention, apparition dans le carrousel video</text>
+</svg>

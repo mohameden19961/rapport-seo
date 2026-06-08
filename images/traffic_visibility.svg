@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440">
+  <rect width="760" height="440" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="760" height="38" fill="#2C5F8A"/>
+  <text x="380.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Strategie: du clic a la visibilite totale</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <text x="30" y="60" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="13">Evolution des KPIs SEO avec l'arrivee des AI Overviews:</text>
+  <rect x="30" y="80" width="330" height="40" rx="5" fill="#D93025"/>
+  <text x="195.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">KPIs TRADITIONNELS</text>
+  <rect x="40" y="140" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="195.0" y="159.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">CTR (Click-Through Rate)</text>
+  <rect x="40" y="140" width="310" height="30" rx="5" fill="none" stroke="#D93025" stroke-width="1"/>
+  <rect x="40" y="178" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="195.0" y="197.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Position moyenne</text>
+  <rect x="40" y="178" width="310" height="30" rx="5" fill="none" stroke="#D93025" stroke-width="1"/>
+  <rect x="40" y="216" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="195.0" y="235.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Trafic organique</text>
+  <rect x="40" y="216" width="310" height="30" rx="5" fill="none" stroke="#D93025" stroke-width="1"/>
+  <rect x="40" y="254" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="195.0" y="273.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Taux de rebond</text>
+  <rect x="40" y="254" width="310" height="30" rx="5" fill="none" stroke="#D93025" stroke-width="1"/>
+  <rect x="400" y="80" width="330" height="40" rx="5" fill="#188038"/>
+  <text x="565.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">KPIs MODERNES (2026)</text>
+  <rect x="410" y="140" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="565.0" y="159.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Share of Voice total</text>
+  <rect x="410" y="140" width="310" height="30" rx="5" fill="none" stroke="#188038" stroke-width="1"/>
+  <rect x="410" y="178" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="565.0" y="197.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Taux de citation AI</text>
+  <rect x="410" y="178" width="310" height="30" rx="5" fill="none" stroke="#188038" stroke-width="1"/>
+  <rect x="410" y="216" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="565.0" y="235.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Visibilite beyond-click</text>
+  <rect x="410" y="216" width="310" height="30" rx="5" fill="none" stroke="#188038" stroke-width="1"/>
+  <rect x="410" y="254" width="310" height="30" rx="5" fill="#F0F0F0"/>
+  <text x="565.0" y="273.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">GEO Score</text>
+  <rect x="410" y="254" width="310" height="30" rx="5" fill="none" stroke="#188038" stroke-width="1"/>
+  <line x1="370" y1="160" x2="400" y2="160" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="370" y="150" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="20">-></text>
+  <rect x="80" y="330" width="600" height="40" rx="5" fill="#F9AB00"/>
+  <text x="380.0" y="354.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Objectif: mesurer l'impact total (clic + organique), pas seulement les clics</text>
+  <text x="80" y="395" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Outils: BrightEdge AI Visibility, Semrush AI Overview Tracker, GSC + Search Analytics</text>
+</svg>

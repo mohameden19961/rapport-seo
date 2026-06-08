@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" width="760" height="480">
+  <rect width="760" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="760" height="38" fill="#2C5F8A"/>
+  <text x="380.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Strategies de Link Building</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <rect x="30" y="80" width="130" height="60" rx="5" fill="#1A73E8"/>
+  <text x="95.0" y="114.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Skyscraper</text>
+  <text x="32" y="160" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Creer mieux que le meilleur</text>
+  <rect x="190" y="80" width="130" height="60" rx="5" fill="#1A73E8"/>
+  <text x="255.0" y="114.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Broken Link</text>
+  <text x="192" y="160" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Remplacer les liens morts</text>
+  <rect x="350" y="80" width="130" height="60" rx="5" fill="#1A73E8"/>
+  <text x="415.0" y="114.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">HARO</text>
+  <text x="352" y="160" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Repondre aux journalistes</text>
+  <rect x="510" y="80" width="130" height="60" rx="5" fill="#1A73E8"/>
+  <text x="575.0" y="114.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Guest Posting</text>
+  <text x="512" y="160" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Publication invitee</text>
+  <rect x="670" y="80" width="130" height="60" rx="5" fill="#1A73E8"/>
+  <text x="735.0" y="114.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Digital PR</text>
+  <text x="672" y="160" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Relations presse web</text>
+  <rect x="100" y="210" width="560" height="45" rx="5" fill="#2C5F8A"/>
+  <text x="380.0" y="236.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Qualite des backlinks: criteres d'evaluation</text>
+  <rect x="30" y="280" width="140" height="40" rx="5" fill="#188038"/>
+  <text x="100.0" y="304.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">DA/DR eleve</text>
+  <rect x="190" y="280" width="140" height="40" rx="5" fill="#188038"/>
+  <text x="260.0" y="304.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Pertinence thematique</text>
+  <rect x="350" y="280" width="140" height="40" rx="5" fill="#188038"/>
+  <text x="420.0" y="304.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Trafic du site source</text>
+  <rect x="510" y="280" width="140" height="40" rx="5" fill="#188038"/>
+  <text x="580.0" y="304.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Lien contextuel dofollow</text>
+  <rect x="30" y="360" width="700" height="50" rx="5" fill="#D93025"/>
+  <text x="380.0" y="389.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Attention: evitez les fermes de liens, les echanges massifs, les PBN - penalites Google garanties</text>
+  <text x="30" y="440" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Outils: Ahrefs, Majestic, Moz Link Explorer, Semrush Backlink Analytics</text>
+</svg>

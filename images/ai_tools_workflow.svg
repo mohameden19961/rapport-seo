@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" width="760" height="500">
+  <rect width="760" height="500" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="760" height="38" fill="#2C5F8A"/>
+  <text x="380.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Workflow SEO augmente par l'IA</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <rect x="30" y="80" width="130" height="80" rx="5" fill="#1A73E8"/>
+  <text x="95.0" y="124.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Recherche IA</text>
+  <text x="35" y="185" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">ChatGPT/Gemini
+Analyse intention
+Clusters thematiques</text>
+  <line x1="160" y1="120" x2="210" y2="120" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="180" y="80" width="130" height="80" rx="5" fill="#188038"/>
+  <text x="245.0" y="124.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Redaction IA</text>
+  <text x="185" y="185" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Claude 4
+Generation optimisee
+Revision humaine</text>
+  <line x1="310" y1="120" x2="360" y2="120" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="330" y="80" width="130" height="80" rx="5" fill="#F9AB00"/>
+  <text x="395.0" y="124.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Optimisation</text>
+  <text x="335" y="185" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Neuronwriter/Frase
+Validation NLP
+Couverture concept.</text>
+  <line x1="460" y1="120" x2="510" y2="120" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="480" y="80" width="130" height="80" rx="5" fill="#D93025"/>
+  <text x="545.0" y="124.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Technique</text>
+  <text x="485" y="185" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Screaming Frog AI
+Audit automatique
+Recommandations</text>
+  <line x1="610" y1="120" x2="660" y2="120" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="630" y="80" width="130" height="80" rx="5" fill="#2C5F8A"/>
+  <text x="695.0" y="124.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Mesure IA</text>
+  <text x="635" y="185" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">BrightEdge/Semrush
+Citations AI
+Suivi LLM</text>
+  <rect x="30" y="240" width="700" height="50" rx="5" fill="#2C5F8A"/>
+  <text x="380.0" y="269.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">L'IA est un assistant - pas un substitut. Relisez toujours le contenu genere.</text>
+  <text x="40" y="310" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Gain de temps: -60% sur la recherche et la redaction</text>
+  <text x="40" y="338" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Qualite amelioree: suggestions NLP basees sur les concurrents top 10</text>
+  <text x="40" y="366" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Scalabilite: production de contenu 5x plus rapide</text>
+  <text x="40" y="394" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Couverture: analyse de milliers de pages en quelques minutes</text>
+  <rect x="30" y="430" width="700" height="40" rx="5" fill="#D93025"/>
+  <text x="380.0" y="454.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Attention: Google penalise le contenu genere par IA sans valeur ajoutee (Helpful Content Update)</text>
+</svg>

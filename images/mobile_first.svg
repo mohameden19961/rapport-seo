@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" width="760" height="480">
+  <rect width="760" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="760" height="38" fill="#2C5F8A"/>
+  <text x="380.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Mobile-First Indexing Workflow</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <rect x="30" y="100" width="140" height="60" rx="5" fill="#1A73E8"/>
+  <text x="100.0" y="134.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Googlebot Smartphone</text>
+  <text x="35" y="180" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Crawle la version mobile</text>
+  <line x1="170" y1="130" x2="230" y2="130" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="200" y="100" width="140" height="60" rx="5" fill="#1A73E8"/>
+  <text x="270.0" y="134.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Rendu mobile</text>
+  <text x="205" y="180" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Execute JS pour version mobile</text>
+  <line x1="340" y1="130" x2="400" y2="130" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="370" y="100" width="140" height="60" rx="5" fill="#1A73E8"/>
+  <text x="440.0" y="134.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Analyse du contenu</text>
+  <text x="375" y="180" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Version mobile = reference</text>
+  <line x1="510" y1="130" x2="570" y2="130" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="540" y="100" width="140" height="60" rx="5" fill="#1A73E8"/>
+  <text x="610.0" y="134.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Indexation</text>
+  <text x="545" y="180" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Indexe la version mobile</text>
+  <line x1="680" y1="130" x2="740" y2="130" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="710" y="100" width="140" height="60" rx="5" fill="#1A73E8"/>
+  <text x="780.0" y="134.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Classement</text>
+  <text x="715" y="180" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Mobile-first = facteur cle</text>
+  <rect x="30" y="240" width="700" height="55" rx="5" fill="#188038"/>
+  <text x="380.0" y="271.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="bold">Pre-requis techniques: responsive design, viewport configure, polices lisibles, boutons adaptes</text>
+  <text x="30" y="320" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="12">~ Google utilise la version mobile pour le classement depuis 2019</text>
+  <text x="30" y="345" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="12">~ La version desktop n'est pas classee separement</text>
+  <text x="30" y="370" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="12">~ Testez avec l'outil Mobile-Friendly de Google</text>
+  <text x="30" y="395" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="12">~ Core Web Vitals mesures sur la version mobile</text>
+</svg>
