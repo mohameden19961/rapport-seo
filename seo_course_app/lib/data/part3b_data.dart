@@ -1,0 +1,232 @@
+import '../models/course_models.dart';
+
+final List<Chapter> part3bChapters = [
+  Chapter(
+    number: 14,
+    title: 'Optimisation avancee de la performance web',
+    icon: '1F680',
+    partTitle: 'Le SEO On-Page \u2014 Optimisation du Contenu',
+    objectives: [
+      CourseContent.heading('Objectifs pedagogiques'),
+      CourseContent.text("Maitriser les techniques avancees de performance web"),
+      CourseContent.text("Comprendre l'impact des Critical Rendering Path"),
+      CourseContent.text("Implementer des strategies de cache et de prechargement"),
+    ],
+    sections: [
+      Section(title: 'Le Critical Rendering Path', contents: [
+        CourseContent.text("Le Critical Rendering Path (CRP) est le parcours que le navigateur suit pour transformer le code HTML, CSS et JavaScript en pixels a l'ecran. Optimiser ce chemin est essentiel pour ameliorer le temps de chargement percu."),
+        CourseContent.bullet("Minimiser le CSS et JavaScript bloquant le rendu"),
+        CourseContent.bullet("Inline CSS critique directement dans le <head>"),
+        CourseContent.bullet("Utiliser async et defer pour le JavaScript"),
+        CourseContent.bullet("Optimiser l'ordre de chargement des ressources"),
+        CourseContent.codeBlock("<!-- Script non bloquant -->\n<script src=\"analytics.js\" async></script>\n<script src=\"app.js\" defer></script>", language: 'html'),
+      ]),
+      Section(title: 'Strategies de cache et CDN', contents: [
+        CourseContent.text("La mise en cache est essentielle pour reduire les temps de chargement et la charge serveur. Les strategies de cache doivent etre adaptees au type de contenu."),
+        CourseContent.bullet("Cache navigateur : utiliser Cache-Control et Expires headers"),
+        CourseContent.bullet("Cache serveur : Redis, Varnish, CDN"),
+        CourseContent.bullet("Service Workers : pour les Progressive Web Apps (PWA)"),
+        CourseContent.bullet("CDN : Cloudflare, Fastly, AWS CloudFront"),
+        CourseContent.note("Un CDN avec edge caching peut reduire les temps de chargement de 50 a 70% pour les utilisateurs eloignes du serveur d'origine."),
+      ]),
+    ],
+    takeaways: [
+      CourseContent.text("L'optimisation du Critical Rendering Path est la cle pour des temps de chargement rapides"),
+      CourseContent.text("Les strategies de cache (navigateur, serveur, CDN) sont complementaires"),
+      CourseContent.text("Le prechargement des ressources critiques ameliore le LCP"),
+      CourseContent.text("Les PWA avec Service Workers offrent des performances proches du natif"),
+    ],
+  ),
+  Chapter(
+    number: 15,
+    title: 'Le Mobile-First Indexing',
+    icon: '1F4F1',
+    partTitle: 'Le SEO On-Page \u2014 Optimisation du Contenu',
+    objectives: [
+      CourseContent.heading('Objectifs pedagogiques'),
+      CourseContent.text("Comprendre le Mobile-First Indexing de Google"),
+      CourseContent.text("Optimiser l'experience mobile pour le SEO"),
+      CourseContent.text("Implementer le responsive design efficace"),
+    ],
+    sections: [
+      Section(title: 'Le Mobile-First Indexing', contents: [
+        CourseContent.text("Depuis mars 2021, Google utilise principalement la version mobile du contenu pour l'indexation et le classement. Cela signifie que si votre site mobile a moins de contenu que la version desktop, vous perdrez en visibilite."),
+        CourseContent.bullet("Le contenu doit etre identique (ou meilleur) sur mobile et desktop"),
+        CourseContent.bullet("Les donnees structurees doivent etre presentes sur les deux versions"),
+        CourseContent.bullet("Les metadonnees (title, meta description) doivent etre equivalentes"),
+        CourseContent.bullet("Les images doivent etre optimisees pour le mobile"),
+        CourseContent.text("Pour verifier si votre site est compatible avec le Mobile-First Indexing, utilisez le test d'optimisation mobile dans Google Search Console."),
+      ]),
+      Section(title: 'Design responsive et experience mobile', contents: [
+        CourseContent.text("Le responsive design n'est plus optionnel. Google exige que les sites offrent une experience de qualite sur tous les appareils."),
+        CourseContent.bullet("Taille des polices lisibles (minimum 16px pour le texte)"),
+        CourseContent.bullet("Espaces tactiles suffisants (minimum 48x48px pour les boutons)"),
+        CourseContent.bullet("Pas de contenu masque specifiquement sur mobile"),
+        CourseContent.bullet("Pop-ups et interstitiels non intrusifs"),
+        CourseContent.bullet("Temps de chargement optimise (Core Web Vitals mobile)"),
+        CourseContent.important("Google evalue d'abord la version mobile. Si votre site mobile est deficient, votre classement desktop sera egalement affecte."),
+      ]),
+    ],
+    takeaways: [
+      CourseContent.text("Le Mobile-First Indexing est effectif depuis mars 2021 pour tous les sites"),
+      CourseContent.text("Le contenu mobile doit etre identique ou meilleur que la version desktop"),
+      CourseContent.text("Les Core Web Vitals mobiles sont un facteur de classement specifique"),
+      CourseContent.text("Le responsive design est la methode recommandee par Google"),
+    ],
+    exercises: [
+      CourseContent.text("Testez l'optimisation mobile de votre site avec l'outil Google et identifiez les problemes."),
+      CourseContent.text("Comparez le contenu mobile et desktop de votre site pour verifier la parite Mobile-First."),
+    ],
+  ),
+  Chapter(
+    number: 16,
+    title: 'Les donnees structurees',
+    icon: '1F4CA',
+    partTitle: 'Le SEO On-Page \u2014 Optimisation du Contenu',
+    objectives: [
+      CourseContent.heading('Objectifs pedagogiques'),
+      CourseContent.text("Maitriser Schema.org et les donnees structurees"),
+      CourseContent.text("Implementer les types de donnees structurees cles"),
+      CourseContent.text("Maximiser l'impact sur les SERP avec les rich snippets"),
+    ],
+    sections: [
+      Section(title: 'Schema.org et les formats', contents: [
+        CourseContent.text("Schema.org est un vocabulaire standardise de donnees structurees maintenu par Google, Microsoft, Yahoo et Yandex. Il permet d'annoter le contenu des pages web pour aider les moteurs de recherche a comprendre leur signification."),
+        CourseContent.text("Les trois formats supportes sont : JSON-LD (recommande), Microdata, et RDFa. Google recommande JSON-LD car il est plus facile a implementer et ne modifie pas le code HTML visible."),
+        CourseContent.codeBlock("{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Article\",\n  \"headline\": \"Guide des donnees structurees\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Auteur SEO\"\n  },\n  \"datePublished\": \"2024-01-15\",\n  \"image\": \"https://exemple.com/image.jpg\",\n  \"description\": \"Guide complet des donnees structurees pour le SEO\"\n}", language: 'json'),
+      ]),
+      Section(title: 'Types de donnees structurees essentiels', contents: [
+        CourseContent.text("Certains types de donnees structurees ont un impact particulierement fort sur l'affichage dans les SERP :"),
+        CourseContent.bullet("FAQPage : affichage des questions-reponses directement dans les SERP"),
+        CourseContent.bullet("HowTo : instructions etape par etape avec possibilite d'epingle"),
+        CourseContent.bullet("Product : prix, disponibilite, evaluations dans les SERP"),
+        CourseContent.bullet("Review : etoiles d'avis (fort impact sur le CTR)"),
+        CourseContent.bullet("LocalBusiness : horaires, adresse, telephone, avis"),
+        CourseContent.bullet("Event : dates, lieu, billetterie"),
+        CourseContent.note("Utilisez l'outil de Test de Resultats Enrichis de Google pour valider votre implementation."),
+      ]),
+    ],
+    takeaways: [
+      CourseContent.text("JSON-LD est le format recommande par Google pour les donnees structurees"),
+      CourseContent.text("Les rich snippets (etoiles, FAQ, prix) augmentent significativement le CTR"),
+      CourseContent.text("Les donnees structurees aident Google a comprendre le contexte du contenu"),
+    ],
+    exercises: [
+      CourseContent.text("Implementez des donnees structurees de type Article sur une page et validez avec le test de Google."),
+      CourseContent.text("Creez un guide de deploiement des donnees structurees pour un site e-commerce."),
+    ],
+  ),
+  Chapter(
+    number: 17,
+    title: 'Le JavaScript SEO',
+    icon: '1F4BB',
+    partTitle: 'Le SEO On-Page \u2014 Optimisation du Contenu',
+    objectives: [
+      CourseContent.heading('Objectifs pedagogiques'),
+      CourseContent.text("Comprendre les defis du JavaScript pour le SEO"),
+      CourseContent.text("Maitriser les techniques de rendu JavaScript"),
+      CourseContent.text("Optimiser les applications web modernes pour l'indexation"),
+    ],
+    sections: [
+      Section(title: 'Le rendu JavaScript et ses defis', contents: [
+        CourseContent.text("Google crawle et indexe le contenu genere par JavaScript, mais le processus est plus complexe que pour le HTML statique. Googlebot passe par deux etapes : le crawling initial (HTML brut) et le rendu (execution JavaScript), ce qui peut prendre plusieurs jours de retard sur le contenu statique."),
+        CourseContent.bullet("Delai de rendu : le contenu JS peut mettre plusieurs jours a etre indexe"),
+        CourseContent.bullet("Ressources limitees : Googlebot alloue un budget de rendu par page"),
+        CourseContent.bullet("Dependances : Googlebot doit charger et executer tout le JS pour voir le contenu"),
+        CourseContent.bullet("Erreurs : les erreurs JS peuvent empecher completement l'indexation"),
+      ]),
+      Section(title: 'Strategies de rendu', contents: [
+        CourseContent.text("Trois approches principales existent pour le rendu des applications JavaScript :"),
+        CourseContent.heading('SSR (Server-Side Rendering)'),
+        CourseContent.text("Le HTML est genere sur le serveur et envoye au client. Googlebot recoit directement le contenu complet. Frameworks : Next.js, Nuxt.js, Remix."),
+        CourseContent.heading('SSG (Static Site Generation)'),
+        CourseContent.text("Le HTML est genere au moment du build. Solution ideale pour le SEO car le contenu est statique et instantanement accessible."),
+        CourseContent.heading('Dynamic Rendering (Prerendering)'),
+        CourseContent.text("Rendu effectue dynamiquement pour Googlebot uniquement. Solution de transition, non recommandee comme strategie permanente."),
+        CourseContent.important("Si votre contenu depend du JavaScript pour s'afficher, utilisez le SSR ou le SSG. Le CSR (Client-Side Rendering) pur presente des risques SEO importants."),
+      ]),
+    ],
+    takeaways: [
+      CourseContent.text("Google execute JavaScript mais avec un delai et des limitations"),
+      CourseContent.text("Le SSR/SSG sont les meilleures strategies pour le SEO des applications JavaScript"),
+      CourseContent.text("Le Dynamic Rendering est une solution de transition acceptable"),
+    ],
+    exercises: [
+      CourseContent.text("Analysez le rendu d'une application JavaScript avec l'URL Inspection Tool de Google Search Console."),
+      CourseContent.text("Comparez les performances SEO d'une page CSR vs SSR pour un meme contenu."),
+    ],
+  ),
+  Chapter(
+    number: 18,
+    title: 'SEO International et Multilingue',
+    icon: '1F30D',
+    partTitle: 'Le SEO On-Page \u2014 Optimisation du Contenu',
+    objectives: [
+      CourseContent.heading('Objectifs pedagogiques'),
+      CourseContent.text("Comprendre les enjeux du SEO international"),
+      CourseContent.text("Maitriser les balises hreflang"),
+      CourseContent.text("Gerer le contenu multilingue et multi-regional"),
+    ],
+    sections: [
+      Section(title: 'Les defis du SEO international', contents: [
+        CourseContent.text("Le SEO international consiste a optimiser un site web pour differents pays et langues. Les defis incluent la gestion du contenu duplique (traductions), l'identification geographique, et l'adaptation culturelle."),
+        CourseContent.bullet("Structure d'URL : ccTLD (.fr, .de), sous-domaine (fr.exemple.com), sous-repertoire (exemple.com/fr/)"),
+        CourseContent.bullet("Parametres de geolocalisation : GSC parametre pays, hreflang, indicateurs geographiques"),
+        CourseContent.bullet("Adaptation culturelle : au-dela de la traduction, adapter le contenu aux attentes locales"),
+      ]),
+      Section(title: 'Les balises hreflang', contents: [
+        CourseContent.text("Les balises hreflang indiquent a Google quelle version linguistique ou regionale d'une page afficher en fonction de la langue et de la localisation de l'utilisateur."),
+        CourseContent.codeBlock("<link rel=\"alternate\" hreflang=\"fr\" href=\"https://exemple.com/fr/\" />\n<link rel=\"alternate\" hreflang=\"en\" href=\"https://exemple.com/en/\" />\n<link rel=\"alternate\" hreflang=\"de\" href=\"https://exemple.com/de/\" />\n<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://exemple.com/\" />", language: 'html'),
+        CourseContent.bullet("Toujours inclure une balise auto-referenceante (la page se reference elle-meme)"),
+        CourseContent.bullet("Inclure une balise x-default pour la page par defaut"),
+        CourseContent.bullet("Les balises doivent etre reciproques : si A pointe vers B, B doit pointer vers A"),
+      ]),
+    ],
+    takeaways: [
+      CourseContent.text("La structure d'URL (ccTLD, sous-domaine, sous-repertoire) impacte le ciblage geographique"),
+      CourseContent.text("Les balises hreflang sont essentielles pour le SEO multilingue"),
+      CourseContent.text("L'adaptation culturelle va au-dela de la simple traduction"),
+    ],
+    exercises: [
+      CourseContent.text("Implementez les balises hreflang pour un site multilingue en francais, anglais et allemand."),
+      CourseContent.text("Auditez la configuration internationale d'un site existant et corrigez les erreurs hreflang."),
+    ],
+  ),
+  Chapter(
+    number: 19,
+    title: 'Le SEO Semantique et Entity SEO',
+    icon: '1F9E0',
+    partTitle: 'Le SEO On-Page \u2014 Optimisation du Contenu',
+    objectives: [
+      CourseContent.heading('Objectifs pedagogiques'),
+      CourseContent.text("Comprendre le SEO semantique et Entity SEO"),
+      CourseContent.text("Maitriser le concept d'autorite thematique"),
+      CourseContent.text("Optimiser le contenu pour la comprehension semantique"),
+    ],
+    sections: [
+      Section(title: 'Du keyword matching a la comprehension semantique', contents: [
+        CourseContent.text("Le SEO semantique represente l'evolution de l'optimisation basee sur les mots-cles vers une optimisation centree sur les concepts et les entites. Google ne cherche plus simplement a faire correspondre des mots, mais a comprendre le sens profond d'un contenu et ses relations avec d'autres concepts."),
+        CourseContent.text("Une entite est un concept ou une chose unique et bien definie (personne, lieu, organisation, concept). Google utilise le Knowledge Graph pour relier les entites entre elles et comprendre leur contexte."),
+        CourseContent.important("Le SEO semantique transforme l'approche : on n'optimise plus pour un mot-cle mais pour un sujet complet."),
+      ]),
+      Section(title: "L'autorite thematique (Topic Authority)", contents: [
+        CourseContent.text("L'autorite thematique est un concept cle du SEO moderne. Google evalue la profondeur et la qualite de la couverture d'un sujet par un site web. Plus un site produit un contenu complet et coherent sur un sujet, plus Google le considere comme une autorite."),
+        CourseContent.bullet("Creer un contenu exhaustif couvrant tous les aspects d'un sujet"),
+        CourseContent.bullet("Utiliser le maillage interne pour relier les contenus connexes"),
+        CourseContent.bullet("Developper des clusters thematiques autour de pages piliers"),
+        CourseContent.bullet("Integrer les entites pertinentes et leurs relations"),
+        CourseContent.bullet("Obtenir des liens entrants depuis des sites d'autorite sur le meme sujet"),
+      ]),
+    ],
+    takeaways: [
+      CourseContent.text("Le SEO semantique remplace progressivement l'optimisation par mots-cles"),
+      CourseContent.text("Les entites sont les briques de la comprehension semantique de Google"),
+      CourseContent.text("L'autorite thematique se construit par la profondeur et la coherence du contenu"),
+      CourseContent.text("Les clusters thematiques (pillar + cluster pages) sont l'architecture ideale"),
+    ],
+    exercises: [
+      CourseContent.text("Identifiez les entites principales d'une page web de votre secteur et leurs relations dans le Knowledge Graph."),
+      CourseContent.text("Concevez un cluster thematique complet autour d'un sujet central avec une page pilier et 5-10 articles satellites."),
+    ],
+  ),
+];

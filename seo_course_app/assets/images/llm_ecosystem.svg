@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 480" width="750" height="480">
+  <rect width="750" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="750" height="38" fill="#2C5F8A"/>
+  <text x="375.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Ecosysteme des LLMs de recherche (2026)</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <rect x="30" y="70" width="120" height="60" rx="5" fill="#10A37F"/>
+  <text x="90.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">ChatGPT Search</text>
+  <text x="50" y="150" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">Part: 22%</text>
+  <rect x="170" y="70" width="120" height="60" rx="5" fill="#1A73E8"/>
+  <text x="230.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Google Gemini</text>
+  <text x="190" y="150" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">Part: 35%</text>
+  <rect x="310" y="70" width="120" height="60" rx="5" fill="#D97706"/>
+  <text x="370.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Claude</text>
+  <text x="330" y="150" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">Part: 12%</text>
+  <rect x="450" y="70" width="120" height="60" rx="5" fill="#6366F1"/>
+  <text x="510.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Perplexity AI</text>
+  <text x="470" y="150" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">Part: 15%</text>
+  <rect x="590" y="70" width="120" height="60" rx="5" fill="#0078D4"/>
+  <text x="650.0" y="104.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Bing Copilot</text>
+  <text x="610" y="150" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">Part: 10%</text>
+  <rect x="250" y="200" width="250" height="45" rx="5" fill="#2C5F8A"/>
+  <text x="375.0" y="226.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="bold">Sources de donnees</text>
+  <line x1="375" y1="245" x2="375" y2="270" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="80" y="270" width="120" height="40" rx="5" fill="#CCCCCC"/>
+  <text x="140.0" y="294.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Index Google</text>
+  <rect x="220" y="270" width="120" height="40" rx="5" fill="#CCCCCC"/>
+  <text x="280.0" y="294.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Index Bing</text>
+  <rect x="360" y="270" width="120" height="40" rx="5" fill="#CCCCCC"/>
+  <text x="420.0" y="294.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Crawl temps reel</text>
+  <rect x="500" y="270" width="120" height="40" rx="5" fill="#CCCCCC"/>
+  <text x="560.0" y="294.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Partenariats</text>
+  <rect x="640" y="270" width="120" height="40" rx="5" fill="#CCCCCC"/>
+  <text x="700.0" y="294.0" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10" font-weight="bold">Index proprietaire</text>
+  <rect x="50" y="360" width="650" height="50" rx="5" fill="#F9AB00"/>
+  <text x="375.0" y="389.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="bold">Pour etre cite: autorite thematique, structure FAQ, donnees fraiches, schema markup</text>
+  <text x="50" y="440" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Source: DataReportal Digital Search 2026, Similarweb LLM Traffic Q1 2026</text>
+</svg>

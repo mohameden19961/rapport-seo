@@ -1,0 +1,36 @@
+name: seo_course_app
+description: Guide Complet et Approfondi - Indexation et Référencement Web
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.2.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.10+1
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  syncfusion_flutter_pdfviewer: ^33.2.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  adaptive_icon_background: "#0A1628"
+  adaptive_icon_foreground: "assets/images/icon.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/rapport_seo.pdf

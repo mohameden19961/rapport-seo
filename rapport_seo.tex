@@ -73,9 +73,10 @@
     filecolor=magenta,
     urlcolor=googleblue,
     citecolor=googleblue,
-    pdfauthor={Expert SEO},
+    pdfauthor={abdy mohameden},
     pdftitle={Guide Complet : Indexation et Référencement Web SEO},
     pdfsubject={SEO, Indexation, Referencement Web},
+    pdfcreator={github.com/mohameden19961},
 }
 
 % ========== HEADER/FOOTER ==========
@@ -197,6 +198,7 @@
 }
 
 \usepackage{tabularx}
+\usepackage{adjustbox}
 \usepackage[most]{tcolorbox}
 
 \newtcolorbox{mybox}[2]{
@@ -956,6 +958,7 @@ Par exemple, un utilisateur français cherchant « randonnée GR20 » peut recev
 Google Lens illustre la puissance de MUM : prenez une photo de vos chaussures de randonnée usées, et MUM peut identifier le modèle, trouver des tutoriels vidéo de réparation (en allemand), vérifier la disponibilité en magasin (en polonais), et vous proposer un guide d'achat — le tout sans que vous ayez à formuler chaque étape.
 
 \begin{mybox}{Comparaison des algorithmes d'IA de Google}{teal}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{|p{4cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
 \hline
 \textbf{Critère} & \textbf{RankBrain (2015)} & \textbf{BERT (2019)} & \textbf{MUM (2021)} \\
@@ -973,6 +976,7 @@ Fonction & Embedding de requêtes & Compréhension contextuelle & Raisonnement c
 Impact & Requêtes inédites & Nuances/prépositions & Requêtes complexes multi-sources \\
 \hline
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \subsection{Implications pour le SEO}
@@ -1306,6 +1310,7 @@ La balise \keyword{meta robots} est une directive insérée dans l'en-tête \tex
 Google supporte les directives suivantes pour la balise meta robots :
 
 \begin{mybox}{Directives Meta Robots complètes}{googlegreen}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{|p{3.5cm}|p{4cm}|p{3.5cm}|p{3cm}|}
 \hline
 \textbf{Directive} & \textbf{Description} & \textbf{Valeur par défaut} & \textbf{Google} \\
@@ -1337,6 +1342,7 @@ Google supporte les directives suivantes pour la balise meta robots :
 \texttt{nositelinkssearchbox} & Pas de boîte de recherche site & — & Oui \\
 \hline
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \subsection{Exemples avancés de directives combinées}
@@ -1730,6 +1736,7 @@ analyze_logs('/var/log/nginx/access.log')
 \textbf{Résultats après 3 mois :}
 
 \begin{mybox}{Résultats de l'optimisation}{googlegreen}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{|p{5cm}|p{3cm}|p{3cm}|p{3cm}|}
 \hline
 \textbf{Métrique} & \textbf{Avant} & \textbf{Après} & \textbf{Évolution} \\
@@ -1747,6 +1754,7 @@ Erreurs 404 & 8\% & 1,2\% & -85\% \\
 Temps réponse serveur & 600ms & 180ms & -70\% \\
 \hline
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \section{Bonnes pratiques pour maximiser le crawl budget}
@@ -7117,6 +7125,7 @@ Utiliser Ahrefs, Majestic ou SEMrush pour analyser~:
 Un rapport d'audit professionnel doit structurer les constats par catégories et les prioriser selon leur impact potentiel et leur effort de mise en œuvre.
 
 \begin{mybox}{Matrice de priorisation (Impact vs Effort)}{googlered}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{lll}
 \toprule
 \textbf{Quadrant} & \textbf{Action} & \textbf{Exemple} \\
@@ -7127,6 +7136,7 @@ Impact faible, Effort faible & Quick wins & Optimiser alt text, liens cassés \\
 Impact faible, Effort élevé & À éviter / reporter & Refonte design complète \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \subsection{Script d'automatisation pour audits récurrents}
@@ -7239,6 +7249,7 @@ Le framework \keyword{OKR} (Objectives and Key Results) aligne les objectifs SEO
 
 La planification budgétaire est essentielle pour obtenir l'adhésion des parties prenantes~:
 
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{llr}
 \toprule
 \textbf{Poste} & \textbf{Description} & \textbf{Budget mensuel} \\
@@ -7250,6 +7261,7 @@ Link Building & Digital PR, outreach, guest posting & 1\,000--5\,000~€ \\
 Formation & Certifications, conférences, workshops & 300--1\,000~€ \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 
 \important{Le ROI SEO doit être estimé dès le départ~: ROI = (Valeur du trafic organique généré -- Coût total) / Coût total × 100.}
 
@@ -7468,6 +7480,7 @@ L'émergence des AI Overviews a un impact direct et mesurable sur le \keyword{CT
 \subsection{Données chiffrées sur l'impact des AI Overviews}
 
 \begin{mybox}{Impact des AI Overviews sur le CTR — Données 2025-2026}{googlered}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{ll}
     \toprule
     \textbf{Métrique} & \textbf{Valeur} \\
@@ -7481,6 +7494,7 @@ L'émergence des AI Overviews a un impact direct et mesurable sur le \keyword{CT
     Part des requêtes informationnelles affectées & 78\% \\
     \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \textit{Sources~: Étude Google Search Statistics 2026, rapport SparkToro 2025, analyse Semrush State of Search 2026.}
@@ -7531,6 +7545,7 @@ Le \keyword{GEO (Generative Engine Optimization)}, également appelé \keyword{G
 Contrairement au SEO traditionnel qui optimise pour un classement dans une liste de résultats, le GEO optimise pour être sélectionné comme source par un modèle de langage. Cette distinction est fondamentale~:
 
 \begin{mybox}{SEO vs. GEO : différences clés}{purple}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{lll}
     \toprule
     \textbf{Critère} & \textbf{SEO traditionnel} & \textbf{GEO} \\
@@ -7543,6 +7558,7 @@ Contrairement au SEO traditionnel qui optimise pour un classement dans une liste
     Fréquence de mise à jour & Continue & Indépendante (dépend du modèle) \\
     \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \subsection{Les facteurs de classement dans les réponses IA}
@@ -7701,6 +7717,7 @@ Les facteurs de classement Google 2026 se divisent en 3 categories :
 L'IA ne transforme pas seulement les moteurs de recherche, elle révolutionne aussi la boîte à outils du SEO. Voici les outils majeurs par catégorie~:
 
 \begin{mybox}{Outils IA pour le SEO — Panorama 2026}{purple}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{lll}
     \toprule
     \textbf{Catégorie} & \textbf{Outil} & \textbf{Fonction} \\
@@ -7715,6 +7732,7 @@ L'IA ne transforme pas seulement les moteurs de recherche, elle révolutionne au
     Analyse vidéo & VidIQ AI & Optimisation SEO vidéo par IA \\
     \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \subsection{Workflow SEO augmenté par l'IA}
@@ -7829,6 +7847,7 @@ L'évolution la plus marquante de 2024-2026 est l'émergence des \keyword{LLMs (
 \subsection{Panorama des LLMs de recherche en 2026}
 
 \begin{mybox}{Les LLMs de recherche — Comparatif 2026}{googleblue}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{lllll}
     \toprule
     \textbf{Moteur IA} & \textbf{Modèle} & \textbf{Source des données} & \textbf{Marché} & \textbf{Monétisation} \\
@@ -7842,6 +7861,7 @@ L'évolution la plus marquante de 2024-2026 est l'émergence des \keyword{LLMs (
     DeepSeek & DeepSeek-R1 & Index propriétaire & 2\% & Gratuit \\
     \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{mybox}
 
 \textit{Sources~: DataReportal Digital Search 2026, étude Similarweb LLM Traffic Q1 2026.}

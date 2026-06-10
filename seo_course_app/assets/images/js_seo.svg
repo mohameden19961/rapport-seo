@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" width="760" height="480">
+  <rect width="760" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="760" height="38" fill="#2C5F8A"/>
+  <text x="380.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">JavaScript SEO : Rendu et Indexation</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <text x="30" y="60" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="14">Les 3 strategies de rendu JavaScript comparees:</text>
+  <rect x="30" y="85" width="200" height="65" rx="5" fill="#188038"/>
+  <text x="130.0" y="121.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="bold">SSR</text>
+  <text x="40" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Server-Side
+Rendering</text>
+  <text x="40" y="200" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">Le serveur genere
+l'HTML complet.
+Indexation immediate.
+Recommande pour le SEO.</text>
+  <rect x="290" y="85" width="200" height="65" rx="5" fill="#1A73E8"/>
+  <text x="390.0" y="121.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="bold">SSG</text>
+  <text x="300" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Static Site
+Generation</text>
+  <text x="300" y="200" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">HTML genere a la
+construction. Tres rapide.
+Excellent pour le SEO.</text>
+  <rect x="550" y="85" width="200" height="65" rx="5" fill="#D93025"/>
+  <text x="650.0" y="121.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="bold">CSR</text>
+  <text x="560" y="175" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Client-Side
+Rendering</text>
+  <text x="560" y="200" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="9">HTML genere dans le
+navigateur. Risque
+SEO eleve. A eviter.</text>
+  <rect x="30" y="260" width="700" height="45" rx="5" fill="#2C5F8A"/>
+  <text x="380.0" y="286.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Bonnes pratiques JavaScript SEO</text>
+  <text x="40" y="320" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Utilisez le rendu cote serveur (SSR) ou la generation statique (SSG)</text>
+  <text x="40" y="345" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Evitez le contenu injecte par JavaScript pour les elements essentiels</text>
+  <text x="40" y="370" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Testez le rendu avec l'outil d'inspection d'URL de GSC</text>
+  <text x="40" y="395" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Utilisez la technique du pre-rendering pour les sites CSR existants</text>
+  <text x="40" y="420" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Chargez les ressources JS de maniere asynchrone (async/defer)</text>
+</svg>

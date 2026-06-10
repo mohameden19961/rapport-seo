@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="800" height="38" fill="#2C5F8A"/>
+  <text x="400.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">Processus d'optimisation GEO</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <rect x="50" y="100" width="130" height="70" rx="5" fill="#1A73E8"/>
+  <text x="115.0" y="139.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Analyse semantique</text>
+  <text x="55" y="195" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Identifier les questions et intentions</text>
+  <line x1="180" y1="135" x2="250" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="200" y="100" width="130" height="70" rx="5" fill="#1A73E8"/>
+  <text x="265.0" y="139.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Structure du contenu</text>
+  <text x="205" y="195" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Headings, listes, tableaux FAQ</text>
+  <line x1="330" y1="135" x2="400" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="350" y="100" width="130" height="70" rx="5" fill="#1A73E8"/>
+  <text x="415.0" y="139.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Donnees structurees</text>
+  <text x="355" y="195" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Schema.org (Article, FAQ, HowTo)</text>
+  <line x1="480" y1="135" x2="550" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="500" y="100" width="130" height="70" rx="5" fill="#1A73E8"/>
+  <text x="565.0" y="139.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Audit de citation</text>
+  <text x="505" y="195" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Verifier l'apparition dans les LLMs</text>
+  <line x1="630" y1="135" x2="700" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="650" y="100" width="130" height="70" rx="5" fill="#1A73E8"/>
+  <text x="715.0" y="139.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold">Optimisation continue</text>
+  <text x="655" y="195" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="10">Mettre a jour et surveiller</text>
+  <rect x="50" y="280" width="700" height="50" rx="5" fill="#188038"/>
+  <text x="400.0" y="309.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="12" font-weight="bold">Contenu optimise -> Selectionne par le LLM -> Cite dans AI Overviews / ChatGPT / Gemini</text>
+  <text x="50" y="360" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="13">Facteurs cles du GEO:</text>
+  <text x="50" y="385" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Autorite thematique (E-E-A-T)  ~ Structure claire et non ambigue</text>
+  <text x="50" y="405" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Sources citees et donnees chiffrees  ~ Fraicheur du contenu  ~ Schema markup</text>
+</svg>

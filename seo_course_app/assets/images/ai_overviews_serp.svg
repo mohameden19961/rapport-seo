@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" width="700" height="500">
+  <rect width="700" height="500" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="700" height="38" fill="#2C5F8A"/>
+  <text x="350.0" y="26" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="bold">AI Overviews dans les SERP Google</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#555"/></marker></defs>
+  <text x="30" y="68" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="14">Structure d'une page de resultats Google avec AI Overviews</text>
+  <rect x="50" y="85" width="600" height="40" rx="5" fill="#1A73E8"/>
+  <text x="350.0" y="109.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="bold">Requete utilisateur</text>
+  <line x1="350" y1="125" x2="350" y2="150" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="50" y="150" width="600" height="120" rx="5" fill="#188038"/>
+  <text x="350.0" y="214.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="bold">AI Overview (reponse generee par Gemini 2.0)</text>
+  <text x="70" y="185" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Resume synthetise de 3 a 8 sources avec citations</text>
+  <text x="70" y="205" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Liens vers les sources citees (22% de CTR moyen)</text>
+  <text x="70" y="225" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Questions de suivi suggerees par l'IA</text>
+  <text x="70" y="250" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="11">~ Capture 35-60% du trafic des requetes informationnelles</text>
+  <line x1="350" y1="270" x2="350" y2="295" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="50" y="295" width="600" height="40" rx="5" fill="#D93025"/>
+  <text x="350.0" y="319.0" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Resultat organique position 1 (CTR: ~12%)</text>
+  <line x1="350" y1="335" x2="350" y2="355" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="50" y="355" width="600" height="35" rx="5" fill="#F9AB00"/>
+  <text x="350.0" y="376.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Resultat organique position 2 (CTR: ~6%)</text>
+  <rect x="50" y="400" width="600" height="35" rx="5" fill="#F9AB00"/>
+  <text x="350.0" y="421.5" text-anchor="middle" fill="#FFFFFF" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Resultat organique position 3 (CTR: ~3%)</text>
+  <rect x="50" y="445" width="600" height="35" rx="5" fill="#F0F0F0"/>
+  <text x="350.0" y="466.5" text-anchor="middle" fill="#222" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="bold">Resultats organiques suivants...</text>
+</svg>

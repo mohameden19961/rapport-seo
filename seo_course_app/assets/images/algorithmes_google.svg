@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550" width="900" height="550">
+  <defs>
+    <linearGradient id="g_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="550" rx="15" fill="#f8f9fa"/>
+  <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1a1a2e">Histoire des principales mises jour de l'algorithme Google</text>
+
+  <rect x="30" y="70" width="840" height="450" rx="12" fill="#1a1a2e" filter="url(#shadow)"/>
+
+  <!-- Ligne du temps -->
+  <line x1="80" y1="130" x2="820" y2="130" stroke="#FBBC05" stroke-width="3"/>
+
+  <!-- Panda 2011 -->
+  <circle cx="120" cy="130" r="12" fill="#EA4335"/>
+  <text x="120" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#EA4335">Panda</text>
+  <text x="120" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2011</text>
+  <text x="120" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Qualit du contenu</text>
+  <text x="120" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Contenu faible qualit</text>
+
+  <!-- Penguin 2012 -->
+  <circle cx="230" cy="130" r="12" fill="#34A853"/>
+  <text x="230" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#34A853">Penguin</text>
+  <text x="230" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2012</text>
+  <text x="230" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Qualit des backlinks</text>
+  <text x="230" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Spam de liens</text>
+
+  <!-- Hummingbird 2013 -->
+  <circle cx="340" cy="130" r="12" fill="#4285F4"/>
+  <text x="340" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#4285F4">Hummingbird</text>
+  <text x="340" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2013</text>
+  <text x="340" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Comprhension sémantique</text>
+  <text x="340" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Recherche conversationnelle</text>
+
+  <!-- RankBrain 2015 -->
+  <circle cx="450" cy="130" r="12" fill="#FBBC05"/>
+  <text x="450" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#FBBC05">RankBrain</text>
+  <text x="450" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2015</text>
+  <text x="450" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">IA / Machine Learning</text>
+  <text x="450" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Comprhension des requêtes</text>
+
+  <!-- Mobilegeddon 2015 -->
+  <circle cx="560" cy="130" r="12" fill="#FF5722"/>
+  <text x="560" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#FF5722">Mobilegeddon</text>
+  <text x="560" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2015</text>
+  <text x="560" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Compatibilité mobile</text>
+  <text x="560" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Design responsive</text>
+
+  <!-- BERT 2019 -->
+  <circle cx="670" cy="130" r="12" fill="#9C27B0"/>
+  <text x="670" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#9C27B0">BERT</text>
+  <text x="670" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2019</text>
+  <text x="670" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">NLP / Contexte</text>
+  <text x="670" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Traitement du langage</text>
+
+  <!-- MUM 2021 -->
+  <circle cx="770" cy="130" r="12" fill="#00BCD4"/>
+  <text x="770" y="160" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#00BCD4">MUM</text>
+  <text x="770" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">2021</text>
+  <text x="770" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Multitâche / Multimodal</text>
+  <text x="770" y="203" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Compréhension avancée</text>
+
+  <!-- Détails des impacts -->
+  <rect x="60" y="230" width="780" height="270" rx="10" fill="#263238"/>
+  <text x="450" y="258" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#FBBC05">Impact de chaque mise jour sur le SEO</text>
+
+  <rect x="80" y="275" width="360" height="100" rx="6" fill="#1a1a2e"/>
+  <text x="260" y="295" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#EA4335">Panda (2011)</text>
+  <text x="260" y="312" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Contenu dupliqu pénalisé</text>
+  <text x="260" y="328" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Contenu faible ou "thin content"</text>
+  <text x="260" y="344" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Trop de publicités (above the fold)</text>
+  <text x="260" y="360" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Contenu non original</text>
+
+  <rect x="460" y="275" width="360" height="100" rx="6" fill="#1a1a2e"/>
+  <text x="640" y="295" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#34A853">Penguin (2012)</text>
+  <text x="640" y="312" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Liens artificiels pénalisés</text>
+  <text x="640" y="328" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Anchor text suroptimisé</text>
+  <text x="640" y="344" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Fermes à liens (link farms)</text>
+  <text x="640" y="360" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">-净linking toxique</text>
+
+  <rect x="80" y="385" width="360" height="100" rx="6" fill="#1a1a2e"/>
+  <text x="260" y="405" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#9C27B0">BERT (2019)</text>
+  <text x="260" y="422" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Compréhension du contexte</text>
+  <text x="260" y="438" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Importance de l'écriture naturelle</text>
+  <text x="260" y="454" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Prpositions et nuances comptent</text>
+  <text x="260" y="470" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Contenu conversationnel favorisé</text>
+
+  <rect x="460" y="385" width="360" height="100" rx="6" fill="#1a1a2e"/>
+  <text x="640" y="405" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#00BCD4">MUM (2021)</text>
+  <text x="640" y="422" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Compréhension multimodale (texte, image, vidéo)</text>
+  <text x="640" y="438" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Traitement multilingue</text>
+  <text x="640" y="454" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Réponses complexes sans clics</text>
+  <text x="640" y="470" text-anchor="middle" font-family="Arial" font-size="9" fill="#ccc">- Contenu expert et complet valorisé</text>
+</svg>
