@@ -645,6 +645,44 @@ Cette progressivité permet à chaque étudiant de trouver des exercices adapté
 \part{Les Fondamentaux des Moteurs de Recherche}
 \label{part:fondamentaux}
 
+\section*{Définition d'un moteur de recherche}
+\addcontentsline{toc}{section}{Définition d'un moteur de recherche}
+
+Un \keyword{moteur de recherche} est un système logiciel conçu pour effectuer des recherches d'informations sur le World Wide Web. Son objectif principal est de trouver, organiser et restituer les pages web les plus pertinentes en réponse à une requête formulée par un utilisateur. Les résultats, appelés \keyword{SERP} (Search Engine Results Page), sont classés par ordre de pertinence selon des algorithmes complexes.
+
+\subsection*{Les composants fondamentaux}
+
+Tout moteur de recherche repose sur trois composants essentiels :
+
+\begin{enumerate}
+    \item \textbf{Le robot d'exploration (crawler)} : Un programme automatisé, aussi appelé \keyword{spider} ou \keyword{bot}, qui parcourt le web de manière systématique en suivant les liens hypertextes d'une page à l'autre. Googlebot, le crawler de Google, explore des milliards de pages chaque jour.
+    \item \textbf{L'index} : Une base de données gigantesque et structurée contenant les informations extraites des pages web explorées. L'\keyword{index inversé} est la structure de données fondamentale : il associe chaque mot-clé à la liste des documents qui le contiennent, permettant des recherches en temps réel sur des milliards de pages.
+    \item \textbf{L'algorithme de classement (ranking)} : Un ensemble de règles et de calculs qui détermine l'ordre d'affichage des résultats pour une requête donnée. PageRank, l'algorithme fondateur de Google, fut le premier à exploiter la structure des liens pour évaluer l'autorité des pages.
+\end{enumerate}
+
+\subsection*{Fonctionnement général}
+
+Le processus se déroule en quatre étapes séquentielles :
+
+\begin{enumerate}
+    \item \textbf{Exploration (crawling)} : Le robot télécharge les pages web et extrait les liens qu'elles contiennent pour découvrir de nouvelles URLs.
+    \item \textbf{Indexation (indexing)} : Le contenu de chaque page est analysé, traité et stocké dans l'index. Le moteur analyse le texte, les balises HTML, les images, les liens et les données structurées.
+    \item \textbf{Traitement de la requête} : Lorsqu'un utilisateur effectue une recherche, le moteur analyse sa requête pour comprendre l'intention (informationnelle, navigationnelle, transactionnelle).
+    \item \textbf{Classement (ranking)} : Les pages pertinentes sont extraites de l'index et classées selon des centaines de critères pour produire la SERP finale.
+\end{enumerate}
+
+\subsection*{Objectifs et finalités}
+
+Les moteurs de recherche poursuivent trois objectifs fondamentaux :
+
+\begin{itemize}
+    \item \textbf{Pertinence} : Fournir des résultats qui correspondent précisément à l'intention de recherche de l'utilisateur. Google évalue la pertinence à travers la correspondance lexicale, la sémantique et les signaux comportementaux.
+    \item \textbf{Qualité} : Classer les pages de haute qualité (contenu fiable, bien structuré, faisant autorité) en tête des résultats. Le cadre \keyword{E-E-A-T} (Experience, Expertise, Authoritativeness, Trustworthiness) est le référentiel utilisé par Google pour évaluer la qualité.
+    \item \textbf{Performance} : Restituer les résultats en quelques millisecondes. L'index inversé et l'infrastructure distribuée de Google permettent un temps de réponse moyen inférieur à 0,2 seconde.
+\end{itemize}
+
+Aujourd'hui, les moteurs de recherche ne se limitent plus aux pages web. Ils indexent et restituent des images (Google Images), des vidéos (YouTube), des actualités (Google News), des produits (Google Shopping), des lieux (Google Maps), et intègrent des réponses directes générées par intelligence artificielle (AI Overviews). Ils sont devenus la porte d'entrée principale du web, traitant collectivement plus de 8,5 milliards de requêtes par jour dans le monde.
+
 % ========== CHAPITRE 1 ==========
 \level{1}
 \begin{objectives}
